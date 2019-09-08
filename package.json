@@ -1,0 +1,25 @@
+{
+  "name": "generator-codename-angus",
+  "version": "0.1.0",
+  "description": "An opinionated generator for front-end projects.",
+  "main": "generators/app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Oscar Marcelo (https://oscarmarcelo.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscarmarcelo/codename-angus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oscarmarcelo/codename-angus/issues"
+  },
+  "homepage": "https://github.com/oscarmarcelo/codename-angus#readme",
+  "dependencies": {
+    "yeoman-generator": "^4.0.2"
+  }
+}
