@@ -1,0 +1,81 @@
+{
+  "name": "<%= package %>",
+  "version": "<%= version %>",
+  "description": "<%= description %>",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp",
+    "dist": "gulp dist",
+    <%_ if (views === 'php') { -%>
+    "up": "docker-compose up -d",
+    "down": "docker-compose down",
+    "logs": "docker logs <%= package %>_php -f",
+    "start": "npm run up && npm run logs",
+    <%_ } -%>
+    <%_ if (type === 'website') { -%>
+    "deploy": "gulp dist && gulp deploy"
+    <%_ } -%>
+  },
+  "author": {
+    "name": "<%= author %>"<% if (email) { %>,
+    "email": "<%= email %>"<% } %><% if (website) { %>,
+    "url": "<%= website %>"<% } -%>
+  },
+  "homepage": "<% if (homepage) { %><%= homepage %><% } else { %>https://github.com/<%= username %>/<%= package %>#readme<% } %>",
+  "license": "<%# Managed by generator-license %>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<%= username %>/<%= package %>.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<%= username %>/<%= package %>/issues"
+  },
+  <%_ if (private) { -%>
+  "private": true,
+  <%_ } -%>
+  "dependencies": {},
+  "devDependencies": {},
+  "browserslist": [
+    <%_ if (type === 'website') { -%>
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 iOS versions"
+    <%_ } -%>
+    <%_ if (type === 'electron') { -%>
+    "Electron <% electronVersion %>"
+    <%_ } -%>
+  ]<% if (typeof babel !== 'undefined' && babel) { %>,
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ],
+    "only": [
+      "./src/**/*"
+    ]
+  }<% } %><% if (typeof xo !== 'undefined' && xo) { %>,
+  "xo": {
+    "space": 2,
+    "envs": [
+      <%_ if (type === 'website') { -%>
+      "node",
+      <%_ } -%>
+      "browser"
+    ],
+    "rules": {
+      "no-multiple-empty-lines": [
+        1,
+        {
+          "max": 2
+        }
+      ]
+    },
+    "ignores": [
+      "build/**",
+      "dist/**"
+    ]
+  }
+  <%_ } -%>
+}

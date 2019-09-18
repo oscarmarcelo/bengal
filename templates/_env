@@ -1,0 +1,3 @@
+SERVER_HOST=<%= serverHost %>
+SERVER_USER=<%= serverUser %>
+SERVER_PATH=<%= serverPath %>
