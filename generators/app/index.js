@@ -3,6 +3,7 @@ const slugify = require('slugify');
 const license = require('generator-license');
 const chalk = require('chalk');
 const getPort = require('get-port');
+const {sync: rmSync} = require('rimraf');
 
 const utils = require('./utils');
 
@@ -266,6 +267,9 @@ module.exports = class extends Generator {
 
 
   end() {
+    // Remove Yeoman Storage file. Not needed for the project.
+    rmSync('.yo-rc.json');
+
     this.log(utils.say(
       chalk.green('Configuration is ready!') + '\n\n' +
       'You can start by committing these newly added files.\n\n' +
