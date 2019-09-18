@@ -1,3 +1,5 @@
+const {join} = require('path');
+
 const Generator = require('yeoman-generator');
 const slugify = require('slugify');
 const license = require('generator-license');
@@ -274,6 +276,126 @@ module.exports = class extends Generator {
       year: this.answers.year,
       license: this.answers.license
     });
+  }
+
+
+  writing() {
+    this.sourceRoot(join(__dirname, '../../templates'));
+
+    this.fs.copy(
+      this.templatePath('_editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('_gitignore'),
+      this.destinationPath('.gitignore'),
+      this.answers
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('_package.json'),
+      this.destinationPath('package.json'),
+      this.answers
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('gulpfile.esm.js/(index|config).js'),
+      this.destinationPath('gulpfile.esm.js'),
+      this.answers
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('gulpfile.esm.js/tasks/(styles|views|copy|browser|watch).js'),
+      this.destinationPath('gulpfile.esm.js/tasks'),
+      this.answers
+    );
+
+    if (this.answers.sass || this.answers.symbols) {
+      this.fs.copyTpl(
+        this.templatePath('gulpfile.esm.js/utils.js'),
+        this.destinationPath('gulpfile.esm.js/utils.js'),
+        this.answers
+      );
+    }
+
+    if (this.answers.symbols) {
+      this.fs.copyTpl(
+        this.templatePath('gulpfile.esm.js/tasks/symbols.js'),
+        this.destinationPath('gulpfile.esm.js/tasks/symbols.js'),
+        this.answers
+      );
+    }
+
+    if (this.answers.images) {
+      this.fs.copyTpl(
+        this.templatePath('gulpfile.esm.js/tasks/images.js'),
+        this.destinationPath('gulpfile.esm.js/tasks/images.js'),
+        this.answers
+      );
+    }
+
+    if (this.answers.fonts) {
+      this.fs.copyTpl(
+        this.templatePath('gulpfile.esm.js/tasks/fonts.js'),
+        this.destinationPath('gulpfile.esm.js/tasks/fonts.js'),
+        this.answers
+      );
+    }
+
+    if (this.answers.scripts) {
+      this.fs.copyTpl(
+        this.templatePath('gulpfile.esm.js/tasks/scripts.js'),
+        this.destinationPath('gulpfile.esm.js/tasks/scripts.js'),
+        this.answers
+      );
+    }
+
+    if (this.answers.type === 'website') {
+      this.fs.copy(
+        this.templatePath('gulpfile.esm.js/tasks/deploy.js'),
+        this.destinationPath('gulpfile.esm.js/tasks/deploy.js')
+      );
+
+      if (this.answers.robots === false) {
+        this.fs.copy(
+          this.templatePath('src/robots.txt'),
+          this.destinationPath('src/robots.txt')
+        );
+      }
+
+      if (this.answers.views === 'php') {
+        this.fs.copy(
+          this.templatePath('_dockerignore'),
+          this.destinationPath('.dockerignore')
+        );
+
+        this.fs.copyTpl(
+          this.templatePath('_docker-compose.yml'),
+          this.destinationPath('docker-compose.yml'),
+          this.answers
+        );
+
+        this.fs.copyTpl(
+          this.templatePath('docker/**/*'),
+          this.destinationPath('docker'),
+          this.answers
+        );
+      }
+
+      this.fs.copy(
+        this.templatePath('_env.template'),
+        this.destinationPath('.env.template')
+      );
+
+      if (this.answers.serverHost && this.answers.serverUser && this.answers.serverPath) {
+        this.fs.copyTpl(
+          this.templatePath('_env'),
+          this.destinationPath('.env'),
+          this.answers
+        );
+      }
+    }
   }
 
 
