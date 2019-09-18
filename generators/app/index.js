@@ -266,6 +266,17 @@ module.exports = class extends Generator {
   }
 
 
+  configuring() {
+    this.composeWith(require.resolve('generator-license'), {
+      name: this.answers.author,
+      email: this.answers.email,
+      website: this.answers.website,
+      year: this.answers.year,
+      license: this.answers.license
+    });
+  }
+
+
   end() {
     // Remove Yeoman Storage file. Not needed for the project.
     rmSync('.yo-rc.json');
