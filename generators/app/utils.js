@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const yosay = require('yosay');
 
 const counters = {
   h1: 0,
@@ -23,3 +24,8 @@ module.exports.h2 = (text, hideMarginTop) => {
   `  ${chalk.red(counters.h1 + '.' + counters.h2)}${chalk.dim('.')} ${chalk.yellowBright.bold(text)}\n` +
   chalk.yellow.dim('────────────────────────────────────────');
 };
+
+module.exports.say = text =>
+  yosay(text, {
+    maxLength: 35
+  });

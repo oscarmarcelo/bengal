@@ -8,6 +8,14 @@ const utils = require('./utils');
 
 
 module.exports = class extends Generator {
+  initializing() {
+    this.log(utils.say(
+      chalk.red(`Welcome to ${chalk.yellow.bold('Codename Angus')}!`) + '\n\n' +
+      'Let me start by asking a few questions about your project.'
+    ));
+  }
+
+
   async prompting() {
     this.answers = {};
 
@@ -245,6 +253,23 @@ module.exports = class extends Generator {
         }
       ]));
     }
+
+    this.log(
+      '\n' +
+      utils.say(
+        chalk.green('All questions asked!') + '\n\n' +
+        'Preparing files now.'
+      ) +
+      '\n'
+    );
   }
 
+
+  end() {
+    this.log(utils.say(
+      chalk.green('Configuration is ready!') + '\n\n' +
+      'You can start by committing these newly added files.\n\n' +
+      chalk.yellow(' Good work! ') // FIXME: Spacings is for a workaround of an issue on chalk not coloring the first letter.
+    ));
+  }
 };
