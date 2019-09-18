@@ -399,6 +399,70 @@ module.exports = class extends Generator {
   }
 
 
+  install() {
+    // Force an extra empty line between `writing` and `install` logs, for consistency.
+    this.log('\n');
+
+    const devDependencies = [
+      'esm',
+      'gulp',
+      'gulp-notify',
+      'gulp-postcss',
+      'autoprefixer',
+      'browser-sync',
+      'cssnano'
+    ];
+
+    if (this.answers.sass || this.answers.symbols) {
+      devDependencies.push('slash');
+    }
+
+    if (this.answers.symbols || this.answers.images || this.answers.scripts || this.answers.views === 'pug') {
+      devDependencies.push('gulp-plumber');
+    }
+
+    if (this.answers.sass) {
+      devDependencies.push('gulp-sass', 'gulp-rename');
+    }
+
+    if (this.answers.symbols || this.answers.images) {
+      devDependencies.push('gulp-imagemin');
+    }
+
+    if (this.answers.symbols) {
+      devDependencies.push('gulp-svg-sprite', 'merge-stream', 'walk-sync');
+    }
+
+    if (this.answers.overflow) {
+      devDependencies.push('gulp-cheerio');
+    }
+
+    if (this.answers.scripts) {
+      devDependencies.push('gulp-uglify-es');
+    }
+
+    if (this.answers.babel) {
+      devDependencies.push('@babel/core', '@babel/preset-env', 'gulp-babel');
+    }
+
+    if (this.answers.views === 'pug') {
+      devDependencies.push('gulp-pug');
+    }
+
+    if (this.answers.type === 'website') {
+      devDependencies.push('dotenv', 'gulp-rsync');
+    }
+
+    if (this.answers.xo) {
+      devDependencies.push('xo');
+    }
+
+    this.npmInstall(devDependencies, {
+      'save-dev': true
+    });
+  }
+
+
   end() {
     // Remove Yeoman Storage file. Not needed for the project.
     rmSync('.yo-rc.json');
