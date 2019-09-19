@@ -1,0 +1,15 @@
+@import abstracts
+
+
+@import base/custom-properties
+<% if (fonts) { -%>
+@import base/font-face
+<% } -%>
+@import base/animations
+@import base/base
+@import base/typography
+<% if (symbols) { -%>
+@import base/svg
+<% } -%>
+
+@import base/utilities

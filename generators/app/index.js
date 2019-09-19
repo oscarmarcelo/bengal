@@ -396,6 +396,35 @@ module.exports = class extends Generator {
         );
       }
     }
+
+    if (this.answers.sass) {
+      this.fs.copyTpl(
+        [
+          this.templatePath('src/styles/**/*'),
+          '!**/base/_(font-face|svg).sass'
+        ],
+        this.destinationPath('src/styles'),
+        this.answers
+      );
+
+      if (this.answers.symbols) {
+        this.fs.copyTpl(
+          this.templatePath('src/styles/base/_svg.sass'),
+          this.destinationPath('src/styles/base/_svg.sass'),
+          this.answers
+        );
+      }
+
+      if (this.answers.fonts) {
+        this.fs.copyTpl(
+          this.templatePath('src/styles/base/_font-face.sass'),
+          this.destinationPath('src/styles/base/_font-face.sass'),
+          this.answers
+        );
+      }
+    } else {
+      this.fs.write(this.destinationPath('src/styles/main.css'), '');
+    }
   }
 
 
@@ -466,6 +495,9 @@ module.exports = class extends Generator {
   end() {
     // Remove Yeoman Storage file. Not needed for the project.
     rmSync(this.destinationPath('.yo-rc.json'));
+
+    // Remove placeholder files used to create directories.
+    rmSync(this.destinationPath('src/**/_placeholder'));
 
     this.log(utils.say(
       chalk.green('Configuration is ready!') + '\n\n' +

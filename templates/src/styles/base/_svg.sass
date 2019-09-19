@@ -1,0 +1,15 @@
+/*
+ * ========================================================
+ * base/svg
+ * ========================================================
+ */
+
+<% if (overflow) { -%>
+// 1. Let SVG showing content outside of its bounding box.
+//    Used in conjunction with the same attribute in the symbol itself.
+<% } -%>
+svg
+  <%_ if (overflow) { -%>
+  overflow: visible // [1]
+  <%_ } -%>
+  fill: currentColor
