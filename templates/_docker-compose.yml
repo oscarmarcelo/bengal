@@ -9,6 +9,8 @@ services:
     volumes:
       - ./build:/var/www/<%= package %>/html
       - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+    logging:
+      driver: none
     networks:
       - <%= package %>
 

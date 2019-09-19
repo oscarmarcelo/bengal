@@ -7,10 +7,7 @@
     "build": "gulp",
     "dist": "gulp dist",
     <%_ if (views === 'php') { -%>
-    "up": "docker-compose up -d",
-    "down": "docker-compose down",
-    "logs": "docker logs <%= package %>_php -f",
-    "start": "npm run up && npm run logs",
+    "start": "docker-compose up",
     <%_ } -%>
     <%_ if (type === 'website') { -%>
     "deploy": "gulp dist && gulp deploy"
