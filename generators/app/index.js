@@ -465,7 +465,7 @@ module.exports = class extends Generator {
 
   end() {
     // Remove Yeoman Storage file. Not needed for the project.
-    rmSync('.yo-rc.json');
+    rmSync(this.destinationPath('.yo-rc.json'));
 
     this.log(utils.say(
       chalk.green('Configuration is ready!') + '\n\n' +
