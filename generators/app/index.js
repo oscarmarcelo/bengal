@@ -518,6 +518,9 @@ module.exports = class extends Generator {
     // Remove placeholder files used to create directories.
     rmSync(this.destinationPath('src/**/_placeholder'));
 
+    // Create a Git repository.
+    this.spawnCommandSync('git', ['init', '--quiet']);
+
     this.log(utils.say(
       chalk.green('Configuration is ready!') + '\n\n' +
       'You can start by committing these newly added files.\n\n' +
