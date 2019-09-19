@@ -425,6 +425,13 @@ module.exports = class extends Generator {
     } else {
       this.fs.write(this.destinationPath('src/styles/main.css'), '');
     }
+
+    if (this.answers.scripts) {
+      this.fs.copy(
+        this.templatePath('src/scripts/**/*'),
+        this.destinationPath('src/scripts')
+      );
+    }
   }
 
 
