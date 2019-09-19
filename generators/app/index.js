@@ -42,6 +42,12 @@ module.exports = class extends Generator {
         ]
       },
       {
+        name: 'project',
+        message: 'Project Name:',
+        default: this.appname.replace(/(?:^|\s)\S/g, match => match.toUpperCase()),
+        validate: answer => answer.length > 0 ? true : 'Project Name is required!'
+      },
+      {
         name: 'package',
         message: 'Package Name:',
         default: slugify(this.appname),
@@ -432,6 +438,12 @@ module.exports = class extends Generator {
         this.destinationPath('src/scripts')
       );
     }
+
+    this.fs.copyTpl(
+      this.templatePath(`src/views/${this.answers.views}/**/*`),
+      this.destinationPath('src/views'),
+      this.answers
+    );
   }
 
 
