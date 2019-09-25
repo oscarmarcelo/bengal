@@ -13,7 +13,7 @@ const utils = require('./utils');
 module.exports = class extends Generator {
   initializing() {
     this.log(utils.say(
-      chalk.red(`Welcome to ${chalk.yellow.bold('Codename Angus')}!`) + '\n\n' +
+      chalk.red(`Welcome to ${chalk.yellow.bold('Bengal')}!`) + '\n\n' +
       'Let me start by asking a few questions about your project.'
     ));
   }
