@@ -4,7 +4,6 @@
   "description": "A scaffolding generator for front-end projects.",
   "main": "generators/app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "release": "np"
   },
   "files": [
