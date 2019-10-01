@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "scaffold",
+    "boilerplate",
+    "template"
   ],
   "author": "Oscar Marcelo (https://oscarmarcelo.com)",
   "license": "MIT",
