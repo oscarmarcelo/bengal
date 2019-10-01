@@ -13,6 +13,7 @@
     "deploy": "gulp dist && gulp deploy"
     <%_ } -%>
   },
+  "keywords": [],
   "author": {
     "name": "<%= author %>"<% if (email) { %>,
     "email": "<%= email %>"<% } %><% if (website) { %>,
