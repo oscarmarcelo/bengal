@@ -4,7 +4,8 @@
   "description": "An opinionated generator for front-end projects.",
   "main": "generators/app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "np"
   },
   "keywords": [
     "yeoman-generator",
@@ -32,6 +33,7 @@
     "yosay": "^2.0.2"
   },
   "devDependencies": {
+    "np": "^5.1.0",
     "xo": "^0.24.0"
   },
   "xo": {
