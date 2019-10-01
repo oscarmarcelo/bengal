@@ -1,7 +1,7 @@
 {
   "name": "generator-bengal",
   "version": "0.1.0",
-  "description": "An opinionated generator for front-end projects.",
+  "description": "A scaffolding generator for front-end projects.",
   "main": "generators/app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
