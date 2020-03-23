@@ -17,7 +17,7 @@
   "author": {
     "name": "<%= author %>"<% if (email) { %>,
     "email": "<%= email %>"<% } %><% if (website) { %>,
-    "url": "<%= website %>"<% } -%>
+    "url": "<%= website %>"<% } %>
   },
   "homepage": "<% if (homepage) { %><%= homepage %><% } else { %>https://github.com/<%= username %>/<%= package %>#readme<% } %>",
   "license": "<%# Managed by generator-license %>",
@@ -43,7 +43,7 @@
     "last 2 iOS versions"
     <%_ } -%>
     <%_ if (type === 'electron') { -%>
-    "Electron <% electronVersion %>"
+    "Electron <%= electronVersion %>"
     <%_ } -%>
   ]<% if (typeof babel !== 'undefined' && babel) { %>,
   "babel": {
@@ -74,6 +74,5 @@
       "build/**",
       "dist/**"
     ]
-  }
-  <%_ } -%>
+  }<% } %>
 }

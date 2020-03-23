@@ -29,7 +29,7 @@ export default series(
 );
 
 export const dist = parallel(styles.dist<% if (scripts) { %>, scripts.dist<% } %>, copy);
-
 <% if (type === 'website') { -%>
+
 export {deploy};
 <% } -%>

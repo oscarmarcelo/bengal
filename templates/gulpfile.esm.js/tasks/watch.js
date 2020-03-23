@@ -33,23 +33,23 @@ export default done => {
   <%_ if (symbols) { -%>
   // When symbols update, compile symbols and reload browser.
   watch(config.src.symbols, series(symbols, reload));
-  <%_ } -%>
 
+  <%_ } -%>
   <%_ if (images) { -%>
   // When images update, optimize images and reload browser.
   watch(config.src.images, series(images, reload));
-  <%_ } -%>
 
+  <%_ } -%>
   <%_ if (fonts) { -%>
   // When fonts update, copy fonts.
   watch(config.src.fonts, fonts);
-  <%_ } -%>
 
+  <%_ } -%>
   <%_ if (scripts) { -%>
   // When scripts update, compile scripts and reload browser.
   watch(config.src.scripts, series(scripts, reload));
-  <%_ } -%>
 
+  <%_ } -%>
   // When views update, <% if (views === 'pug') { %>compile<% } else { %>copy<% } %> views and reload browser.
   watch(config.src.views, series(views, reload));
 
