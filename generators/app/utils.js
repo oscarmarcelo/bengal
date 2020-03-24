@@ -13,7 +13,7 @@ module.exports.h1 = (text, hideMarginTop) => {
 
   return `${hideMarginTop ? '' : '\n'}\n` +
   `  ${chalk.red(counters.h1)}${chalk.dim('.')} ${chalk.yellowBright.bold(text)}\n` +
-  chalk.yellow.dim('════════════════════════════════════════════════════════');
+  chalk.yellow.dim('═'.repeat(56));
 };
 
 
@@ -22,7 +22,7 @@ module.exports.h2 = (text, hideMarginTop) => {
 
   return `${hideMarginTop ? '' : '\n'}\n` +
   `  ${chalk.red(counters.h1 + '.' + counters.h2)}${chalk.dim('.')} ${chalk.yellowBright.bold(text)}\n` +
-  chalk.yellow.dim('────────────────────────────────────────');
+  chalk.yellow.dim('─'.repeat(40));
 };
 
 module.exports.say = text =>
