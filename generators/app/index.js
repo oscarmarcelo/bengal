@@ -141,7 +141,7 @@ module.exports = class extends Generator {
       {
         type: 'confirm',
         name: 'overflow',
-        message: 'Do symbols overflow viewbox?',
+        message: 'Should symbols overflow viewbox?',
         when: answers => answers.symbols
       },
       {
@@ -524,7 +524,7 @@ module.exports = class extends Generator {
     this.log(utils.say(
       chalk.green('Configuration is ready!') + '\n\n' +
       'You can start by committing these newly added files.\n\n' +
-      chalk.yellow(' Good work! ') // FIXME: Spacings is for a workaround of an issue on chalk not coloring the first letter.
+      chalk.yellow(' Good work! ') // FIXME: Spacings is for a workaround of an issue on chalk not coloring X letters when `\n` is present X+1 times before them.
     ));
   }
 };
