@@ -22,6 +22,7 @@ export const path = (...path) =>
 <% if (symbols) { -%>
 
 
+
 /**
  * @function getDirs
  * @description Get directories from a path.
