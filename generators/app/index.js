@@ -4,6 +4,7 @@ const Generator = require('yeoman-generator');
 const slugify = require('slugify');
 const license = require('generator-license');
 const chalk = require('chalk');
+const figures = require('figures');
 const getPort = require('get-port');
 const {sync: rmSync} = require('rimraf');
 
@@ -127,6 +128,64 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'sass',
         message: 'Use Sass?'
+      },
+      {
+        type: 'checkbox',
+        name: 'sevenOnePattern',
+        message: '7-1 Pattern directories:',
+        choices: [
+          {
+            type: 'separator',
+            line: `${figures.circleFilled} ${chalk.reset('Abstracts')} ${chalk.dim('(Added if there are nested folders selected)')}`
+          },
+          {
+            name: '├ Settings',
+            value: 'abstracts/settings',
+            short: 'Abstracts/Settings',
+            checked: true
+          },
+          {
+            name: '├ Functions',
+            value: 'abstracts/functions',
+            short: 'Abstracts/Functions',
+            checked: true
+          },
+          {
+            name: '└ Mixins',
+            value: 'abstracts/mixins',
+            short: 'Abstracts/Mixins',
+            checked: true
+          },
+          {
+            name: 'Base',
+            value: 'base',
+            checked: true
+          },
+          {
+            name: 'Components',
+            value: 'components',
+            checked: true
+          },
+          {
+            name: 'Layout',
+            value: 'layout',
+            checked: true
+          },
+          {
+            name: 'Pages',
+            value: 'pages'
+          },
+          {
+            name: 'Themes',
+            value: 'themes'
+          },
+          {
+            name: 'Vendors',
+            value: 'vendors'
+          }
+        ],
+        when: answers => answers.sass,
+        pageSize: 10
       }
     ]));
 
@@ -405,31 +464,118 @@ module.exports = class extends Generator {
 
     if (this.answers.sass) {
       this.fs.copyTpl(
-        [
-          this.templatePath('src/styles/**/*'),
-          '!**/base/_(font-face|svg).sass'
-        ],
-        this.destinationPath('src/styles'),
+        this.templatePath('src/styles/main.sass'),
+        this.destinationPath('src/styles/main.sass'),
         this.answers
       );
 
-      if (this.answers.symbols) {
-        this.fs.copyTpl(
-          this.templatePath('src/styles/base/_svg.sass'),
-          this.destinationPath('src/styles/base/_svg.sass'),
-          this.answers
-        );
-      }
+      if (this.answers.sevenOnePattern) {
+        if (this.answers.sevenOnePattern.includes('abstracts/settings') || this.answers.sevenOnePattern.includes('abstracts/functions') || this.answers.sevenOnePattern.includes('abstracts/mixins')) {
+          this.fs.copyTpl(
+            this.templatePath('src/styles/abstracts/_index.sass'),
+            this.destinationPath('src/styles/abstracts/_index.sass'),
+            this.answers
+          );
+        }
 
-      if (this.answers.fonts) {
-        this.fs.copyTpl(
-          this.templatePath('src/styles/base/_font-face.sass'),
-          this.destinationPath('src/styles/base/_font-face.sass'),
-          this.answers
-        );
+        if (this.answers.sevenOnePattern.includes('abstracts/settings')) {
+          this.fs.copy(
+            this.templatePath('src/styles/abstracts/settings/_index.scss'),
+            this.destinationPath('src/styles/abstracts/settings/_index.scss')
+          );
+
+          if (this.answers.sevenOnePattern.includes('base')) {
+            this.fs.copy(
+              this.templatePath('src/styles/abstracts/settings/_base.scss'),
+              this.destinationPath('src/styles/abstracts/settings/_base.scss')
+            );
+          }
+
+          if (this.answers.sevenOnePattern.includes('components')) {
+            this.fs.copy(
+              this.templatePath('src/styles/abstracts/settings/_components.scss'),
+              this.destinationPath('src/styles/abstracts/settings/_components.scss')
+            );
+          }
+        }
+
+        if (this.answers.sevenOnePattern.includes('abstracts/functions')) {
+          this.fs.copy(
+            this.templatePath('src/styles/abstracts/functions/**/*'),
+            this.destinationPath('src/styles/abstracts/functions')
+          );
+        }
+
+        if (this.answers.sevenOnePattern.includes('abstracts/mixins')) {
+          this.fs.copy(
+            this.templatePath('src/styles/abstracts/mixins/**/*'),
+            this.destinationPath('src/styles/abstracts/mixins')
+          );
+        }
+
+        if (this.answers.sevenOnePattern.includes('base')) {
+          this.fs.copyTpl(
+            [
+              this.templatePath('src/styles/base/**/*'),
+              '!**/base/_(svg|font-face).sass'
+            ],
+            this.destinationPath('src/styles/base'),
+            this.answers
+          );
+
+          if (this.answers.symbols) {
+            this.fs.copyTpl(
+              this.templatePath('src/styles/base/_svg.sass'),
+              this.destinationPath('src/styles/base/_svg.sass'),
+              this.answers
+            );
+          }
+
+          if (this.answers.fonts) {
+            this.fs.copy(
+              this.templatePath('src/styles/base/_font-face.sass'),
+              this.destinationPath('src/styles/base/_font-face.sass')
+            );
+          }
+        }
+
+        if (this.answers.sevenOnePattern.includes('components')) {
+          this.fs.copy(
+            this.templatePath('src/styles/components/**/*'),
+            this.destinationPath('src/styles/components')
+          );
+        }
+
+        if (this.answers.sevenOnePattern.includes('layout')) {
+          this.fs.copy(
+            this.templatePath('src/styles/layout/**/*'),
+            this.destinationPath('src/styles/layout')
+          );
+        }
+
+        if (this.answers.sevenOnePattern.includes('pages')) {
+          this.fs.copy(
+            this.templatePath('src/styles/pages/**/*'),
+            this.destinationPath('src/styles/pages')
+          );
+        }
+
+        if (this.answers.sevenOnePattern.includes('themes')) {
+          this.fs.copy(
+            this.templatePath('src/styles/themes/**/*'),
+            this.destinationPath('src/styles/themes')
+          );
+        }
+
+        if (this.answers.sevenOnePattern.includes('vendors')) {
+          this.fs.copy(
+            this.templatePath('src/styles/vendors/**/*'),
+            this.destinationPath('src/styles/vendors')
+          );
+        }
       }
     } else {
-      this.fs.write(this.destinationPath('src/styles/main.css'), '');
+      this.fs.write(this.destinationPath('src/styles/main.css'), ''); // TODO: Consider having a template file instead.
     }
 
     if (this.answers.scripts) {

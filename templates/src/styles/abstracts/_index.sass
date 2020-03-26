@@ -1,11 +1,21 @@
 // ========================================================
 // abstracts/index
 // ========================================================
+<% if (sevenOnePattern.includes('abstracts/settings')) { -%>
 
 @import settings/index
+<% if (sevenOnePattern.includes('base')) { -%>
 @import settings/base
+<% } -%>
+<% if (sevenOnePattern.includes('components')) { -%>
 @import settings/components
+<% } -%>
+<% } -%>
+<% if (sevenOnePattern.includes('abstracts/functions')) { -%>
 
 @import functions/index
+<% } -%>
+<% if (sevenOnePattern.includes('abstracts/mixins')) { -%>
 
 @import mixins/index
+<% } -%>
