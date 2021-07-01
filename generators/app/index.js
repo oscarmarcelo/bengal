@@ -601,6 +601,7 @@ module.exports = class extends Generator {
       'esm',
       'gulp',
       'gulp-notify',
+      'postcss',
       'gulp-postcss',
       'autoprefixer',
       'browser-sync',
