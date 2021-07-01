@@ -1,6 +1,7 @@
 import {src, dest} from 'gulp';
 <% if (sass) { -%>
-import sass from 'gulp-sass';
+import sass from 'gulp-dart-sass';
+import dartSass from 'sass';
 <% } -%>
 import {default as notify<% if (sass) { %>, onError<% } %>} from 'gulp-notify';
 import postcss from 'gulp-postcss';
@@ -14,6 +15,12 @@ import cssnano from 'cssnano';
 import config from '../config';
 <% if (sass) { -%>
 import {dirToFile} from '../utils';
+<% } -%>
+
+
+
+<% if (sass) { -%>
+sass.compiler = dartSass;
 <% } -%>
 
 
@@ -32,10 +39,7 @@ import {dirToFile} from '../utils';
 export const build = () =>
   src(config.src.styles)
     <%_ if (sass) { -%>
-    .pipe(sass({
-      outputStyle: 'expanded',
-      precision: 10
-    }))
+    .pipe(sass())
     .on('error', onError({
       title: 'Error in styles',
       message: '<%%= error.message %>'

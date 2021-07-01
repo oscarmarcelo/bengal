@@ -1,3 +1,9 @@
+<% if (sevenOnePattern.includes('abstracts/settings')) { -%>
+@use "abstracts" as *
+
+
+
+<% } -%>
 /*
  * ========================================================
  * base/custom-properties
@@ -5,8 +11,14 @@
  */
 
 \:root
-  // - General
+  // General
   // ----------------------------
+  <%_ if (sevenOnePattern.includes('abstracts/settings')) { -%>
   --color-text: #{$color-text}
   --color-background: #{$color-background}
   --color-primary: #{$color-primary}
+  <%_ } else { -%>
+  --color-text: #000
+  --color-background: #fff
+  --color-primary: #f00
+  <%_ } -%>

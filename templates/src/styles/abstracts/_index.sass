@@ -3,19 +3,19 @@
 // ========================================================
 <% if (sevenOnePattern.includes('abstracts/settings')) { -%>
 
-@import settings/index
+@forward "settings"
 <% if (sevenOnePattern.includes('base')) { -%>
-@import settings/base
+@forward "settings/base"
 <% } -%>
 <% if (sevenOnePattern.includes('components')) { -%>
-@import settings/components
+@forward "settings/components"
 <% } -%>
 <% } -%>
 <% if (sevenOnePattern.includes('abstracts/functions')) { -%>
 
-@import functions/index
+@forward "functions"
 <% } -%>
 <% if (sevenOnePattern.includes('abstracts/mixins')) { -%>
 
-@import mixins/index
+@forward "mixins"
 <% } -%>

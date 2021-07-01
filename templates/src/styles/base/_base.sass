@@ -1,3 +1,9 @@
+<% if (sevenOnePattern.includes('abstracts/settings')) { -%>
+@use "abstracts" as *
+
+
+
+<% } -%>
 /*
  * ========================================================
  * base/base
@@ -16,17 +22,25 @@
 
 html
   box-sizing: border-box
+  <%_ if (sevenOnePattern.includes('abstracts/settings')) { -%>
   font: $fw-body #{$fs-body}/#{$lh-body} $font-stack
+  <%_ } else {-%>
+  font: 400 16px/1.5 system-ui, -apple-system, sans-serif
+  <%_ } -%>
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  <%# TODO: Remove definition check when Maro is added to generator %>
+  <%# TODO: Remove definition check when Maro is added to generator. Also, this check is creating an empty line. %>
   <%_ if (typeof maro !== 'undefined' && maro) { -%>
   +prefix(text-size-adjust, 100%, webkit ms) // [1]
   <%_ } else { -%>
   -webkit-text-size-adjust: 100% // [1]
   -ms-text-size-adjust: 100% // [1]
   <%_ } -%>
+  <%_ if (sevenOnePattern.includes('abstracts/settings')) { -%>
   -webkit-tap-highlight-color: rgba($black, 0) // [2]
+  <%_ } else {-%>
+  -webkit-tap-highlight-color: rgba(#000, 0) // [2]
+  <%_ } -%>
 
 body
   color: var(--color-text)

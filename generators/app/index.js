@@ -616,7 +616,7 @@ module.exports = class extends Generator {
     }
 
     if (this.answers.sass) {
-      devDependencies.push('gulp-sass', 'gulp-rename');
+      devDependencies.push('sass', 'gulp-dart-sass', 'gulp-rename');
     }
 
     if (this.answers.symbols || this.answers.images) {

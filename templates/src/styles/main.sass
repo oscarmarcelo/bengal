@@ -1,21 +1,16 @@
 <% if (sevenOnePattern && sevenOnePattern.length > 0) { -%>
-<% if (sevenOnePattern.includes('abstracts/settings') || sevenOnePattern.includes('abstracts/functions') || sevenOnePattern.includes('abstracts/mixins')) { -%>
-@import abstracts/index
-
-
-<% } -%>
 <% if (sevenOnePattern.includes('base')) { -%>
-@import base/custom-properties
+@use "base/custom-properties"
 <% if (fonts) { -%>
-@import base/font-face
+@use "base/font-face"
 <% } -%>
-@import base/animations
-@import base/base
-@import base/typography
+@use "base/animations"
+@use "base/base"
+@use "base/typography"
 <% if (symbols) { -%>
-@import base/svg
+@use "base/svg"
 <% } -%>
 
-@import base/utilities
+@use "base/utilities"
 <% } -%>
 <% } -%>
