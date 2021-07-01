@@ -306,18 +306,31 @@ module.exports = class extends Generator {
     this.log(utils.h2('Deploy'));
 
     if (this.answers.type === 'website') {
+      let directory;
+
+      try {
+        const url = new URL(this.answers.homepage);
+
+        directory = url.hostname + (url.pathname === '/' ? '' : url.pathname);
+      } catch (_) {
+        directory = this.answers.package;
+      }
+
       Object.assign(this.answers, await this.prompt([
         {
           name: 'serverHost',
-          message: 'Server Host:'
+          message: 'Server Host:',
+          store: true
         },
         {
           name: 'serverUser',
-          message: 'Server Username:'
+          message: 'Server Username:',
+          store: true
         },
         {
           name: 'serverPath',
-          message: 'Server Path:'
+          message: 'Server Path:',
+          default: `/var/www/${directory}`
         }
       ]));
     }
