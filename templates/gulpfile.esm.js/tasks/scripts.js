@@ -3,8 +3,8 @@ import plumber from 'gulp-plumber';
 <% if (babel) { -%>
 import babel from 'gulp-babel';
 <% } -%>
-import {default as notify, onError} from 'gulp-notify';
-import {default as uglify} from 'gulp-uglify-es';
+import notify, {onError} from 'gulp-notify';
+import uglify from 'gulp-uglify-es';
 
 import config from '../config';
 

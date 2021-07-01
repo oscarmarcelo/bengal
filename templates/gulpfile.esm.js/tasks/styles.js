@@ -3,7 +3,7 @@ import {src, dest} from 'gulp';
 import sass from 'gulp-dart-sass';
 import dartSass from 'sass';
 <% } -%>
-import {default as notify<% if (sass) { %>, onError<% } %>} from 'gulp-notify';
+import notify<% if (sass) { %>, {onError}<% } %> from 'gulp-notify';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 <% if (sass) { -%>

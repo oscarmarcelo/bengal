@@ -5,7 +5,7 @@ import cheerio from 'gulp-cheerio';
 <% } -%>
 import imagemin from 'gulp-imagemin';
 import svgSprite from 'gulp-svg-sprite';
-import {default as notify, onError} from 'gulp-notify';
+import notify, {onError} from 'gulp-notify';
 import merge from 'merge-stream';
 
 import config from '../config';

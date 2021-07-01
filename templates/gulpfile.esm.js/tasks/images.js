@@ -1,7 +1,7 @@
 import {src, lastRun, dest} from 'gulp';
 import plumber from 'gulp-plumber';
 import imagemin from 'gulp-imagemin';
-import {default as notify, onError} from 'gulp-notify';
+import notify, {onError} from 'gulp-notify';
 
 import config from '../config';
 
