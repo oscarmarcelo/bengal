@@ -357,7 +357,7 @@ module.exports = class extends Generator {
   }
 
 
-  writing() {
+  async writing() {
     this.sourceRoot(join(__dirname, '../../templates'));
 
     this.fs.copy(
@@ -376,6 +376,89 @@ module.exports = class extends Generator {
       this.destinationPath('package.json'),
       this.answers
     );
+
+    await this.addDevDependencies([
+      'esm',
+      'gulp',
+      'gulp-notify',
+      'postcss',
+      'gulp-postcss',
+      'autoprefixer',
+      'browser-sync',
+      'cssnano'
+    ]);
+
+    if (this.answers.sass || this.answers.symbols) {
+      await this.addDevDependencies({
+        slash: '^3.0.0' // TODO: Update to latest version when the templates support native ESM.
+      });
+    }
+
+    if (this.answers.symbols || this.answers.images || this.answers.scripts || this.answers.views === 'pug') {
+      await this.addDevDependencies('gulp-plumber');
+    }
+
+    if (this.answers.sass) {
+      await this.addDevDependencies([
+        'sass',
+        'gulp-dart-sass',
+        'gulp-rename'
+      ]);
+    }
+
+    if (this.answers.symbols || this.answers.images) {
+      await this.addDevDependencies('gulp-imagemin');
+    }
+
+    if (this.answers.symbols) {
+      await this.addDevDependencies([
+        'gulp-svg-sprite',
+        'merge-stream',
+        'walk-sync'
+      ]);
+    }
+
+    if (this.answers.overflow) {
+      await this.addDevDependencies('gulp-cheerio');
+    }
+
+    if (this.answers.scripts) {
+      await this.addDevDependencies('gulp-uglify-es');
+    }
+
+    if (this.answers.babel) {
+      await this.addDevDependencies([
+        '@babel/core',
+        '@babel/preset-env',
+        'gulp-babel'
+      ]);
+    }
+
+    if (this.answers.views === 'pug') {
+      await this.addDevDependencies('gulp-pug');
+    }
+
+    if (this.answers.type === 'website') {
+      await this.addDevDependencies([
+        'dotenv',
+        'gulp-rsync'
+      ]);
+    }
+
+    if (this.answers.xo) {
+      await this.addDevDependencies({
+        xo: '^0.39.1' // TODO: Update to latest version when the templates support native ESM.
+      });
+    }
+
+    const devDependencies = this.packageJson.get('devDependencies');
+    const orderedDevDependencies = {};
+
+    for (const key of Object.keys(devDependencies).sort()) {
+      orderedDevDependencies[key] = devDependencies[key];
+    }
+
+    this.packageJson.set('devDependencies', orderedDevDependencies);
 
     this.fs.copyTpl(
       this.templatePath('gulpfile.esm.js/(index|config).js'),
@@ -603,71 +686,6 @@ module.exports = class extends Generator {
       this.destinationPath('src/views'),
       this.answers
     );
-  }
-
-
-  install() {
-    // Force an extra empty line between `writing` and `install` logs, for consistency.
-    this.log('\n');
-
-    const devDependencies = [
-      'esm',
-      'gulp',
-      'gulp-notify',
-      'postcss',
-      'gulp-postcss',
-      'autoprefixer',
-      'browser-sync',
-      'cssnano'
-    ];
-
-    if (this.answers.sass || this.answers.symbols) {
-      devDependencies.push('slash');
-    }
-
-    if (this.answers.symbols || this.answers.images || this.answers.scripts || this.answers.views === 'pug') {
-      devDependencies.push('gulp-plumber');
-    }
-
-    if (this.answers.sass) {
-      devDependencies.push('sass', 'gulp-dart-sass', 'gulp-rename');
-    }
-
-    if (this.answers.symbols || this.answers.images) {
-      devDependencies.push('gulp-imagemin');
-    }
-
-    if (this.answers.symbols) {
-      devDependencies.push('gulp-svg-sprite', 'merge-stream', 'walk-sync');
-    }
-
-    if (this.answers.overflow) {
-      devDependencies.push('gulp-cheerio');
-    }
-
-    if (this.answers.scripts) {
-      devDependencies.push('gulp-uglify-es');
-    }
-
-    if (this.answers.babel) {
-      devDependencies.push('@babel/core', '@babel/preset-env', 'gulp-babel');
-    }
-
-    if (this.answers.views === 'pug') {
-      devDependencies.push('gulp-pug');
-    }
-
-    if (this.answers.type === 'website') {
-      devDependencies.push('dotenv', 'gulp-rsync');
-    }
-
-    if (this.answers.xo) {
-      devDependencies.push('xo');
-    }
-
-    this.npmInstall(devDependencies, {
-      'save-dev': true
-    });
   }
 
 
