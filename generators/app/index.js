@@ -65,7 +65,15 @@ module.exports = class extends Generator {
       },
       {
         name: 'homepage',
-        message: 'Homepage:'
+        message: 'Homepage:',
+        validate: answer => {
+          try {
+            return Boolean(answer.trim() === '' || new URL(answer));
+          } catch {
+            return 'URL is not valid!';
+          }
+        },
+        filter: answer => answer.trim()
       },
       {
         type: 'confirm',
