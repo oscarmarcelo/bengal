@@ -312,7 +312,7 @@ module.exports = class extends Generator {
         const url = new URL(this.answers.homepage);
 
         directory = url.hostname + (url.pathname === '/' ? '' : url.pathname);
-      } catch (_) {
+      } catch {
         directory = this.answers.package;
       }
 
