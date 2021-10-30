@@ -1,5 +1,5 @@
-const chalk = require('chalk');
-const yosay = require('yosay');
+import chalk from 'chalk';
+import yosay from 'yosay';
 
 const counters = {
   h1: 0,
@@ -7,7 +7,7 @@ const counters = {
 };
 
 
-module.exports.h1 = (text, hideMarginTop) => {
+export const h1 = (text, hideMarginTop) => {
   counters.h1++;
   counters.h2 = 0;
 
@@ -17,7 +17,7 @@ module.exports.h1 = (text, hideMarginTop) => {
 };
 
 
-module.exports.h2 = (text, hideMarginTop) => {
+export const h2 = (text, hideMarginTop) => {
   counters.h2++;
 
   return `${hideMarginTop ? '' : '\n'}\n` +
@@ -25,7 +25,7 @@ module.exports.h2 = (text, hideMarginTop) => {
   chalk.yellow.dim('─'.repeat(40));
 };
 
-module.exports.say = text =>
+export const say = text =>
   yosay(text, {
     maxLength: 35
   });

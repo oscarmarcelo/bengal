@@ -1,17 +1,20 @@
-const {join} = require('path');
+import {join} from 'node:path';
+import {createRequire} from 'node:module';
+import {fileURLToPath} from 'node:url';
 
-const Generator = require('yeoman-generator');
-const slugify = require('slugify');
-const license = require('generator-license');
-const chalk = require('chalk');
-const figures = require('figures');
-const getPort = require('get-port');
-const {sync: rmSync} = require('rimraf');
+import Generator from 'yeoman-generator';
+import slugify from 'slugify';
+import license from 'generator-license';
+import chalk from 'chalk';
+import figures from 'figures';
+import getPort from 'get-port';
+import rimraf from 'rimraf';
 
-const utils = require('./utils');
+import * as utils from './utils.js';
 
+const {sync: rmSync} = rimraf;
 
-module.exports = class extends Generator {
+export default class extends Generator {
   initializing() {
     this.log(utils.say(
       chalk.red(`Welcome to ${chalk.yellow.bold('Bengal')}!`) + '\n\n' +
@@ -355,7 +358,7 @@ module.exports = class extends Generator {
 
 
   configuring() {
-    this.composeWith(require.resolve('generator-license'), {
+    this.composeWith(createRequire(import.meta.url).resolve('generator-license'), {
       name: this.answers.author,
       email: this.answers.email,
       website: this.answers.website,
@@ -366,7 +369,7 @@ module.exports = class extends Generator {
 
 
   async writing() {
-    this.sourceRoot(join(__dirname, '../../templates'));
+    this.sourceRoot(join(fileURLToPath(new URL('.', import.meta.url)), '../../templates'));
 
     this.fs.copy(
       this.templatePath('_editorconfig'),
