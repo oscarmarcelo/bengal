@@ -12,13 +12,17 @@ import rimraf from 'rimraf';
 
 import * as utils from './utils.js';
 
+
+
 const {sync: rmSync} = rimraf;
 
-export default class extends Generator {
+
+
+export default class Bengal extends Generator {
   initializing() {
     this.log(utils.say(
-      chalk.red(`Welcome to ${chalk.yellow.bold('Bengal')}!`) + '\n\n' +
-      'Let me start by asking a few questions about your project.'
+      chalk.red(`Welcome to ${chalk.yellow.bold('Bengal')}!`) + '\n\n'
+      + 'Let me start by asking a few questions about your project.',
     ));
   }
 
@@ -36,35 +40,35 @@ export default class extends Generator {
         choices: [
           {
             name: 'Website',
-            value: 'website'
+            value: 'website',
           },
           {
             name: 'Electron App',
             value: 'electron',
-            disabled: 'Coming Soon' // TODO: Implement Electron flow.
-          }
-        ]
+            disabled: 'Coming Soon', // TODO: Implement Electron flow.
+          },
+        ],
       },
       {
         name: 'project',
         message: 'Project Name:',
         default: this.appname.replace(/(?:^|\s)\S/g, match => match.toUpperCase()),
-        validate: answer => answer.length > 0 ? true : 'Project Name is required!'
+        validate: answer => answer.length > 0 ? true : 'Project Name is required!',
       },
       {
         name: 'package',
         message: 'Package Name:',
         default: slugify(this.appname),
-        validate: answer => answer.length > 0 ? true : 'Package Name is required!'
+        validate: answer => answer.length > 0 ? true : 'Package Name is required!',
       },
       {
         name: 'description',
-        message: 'Description:'
+        message: 'Description:',
       },
       {
         name: 'version',
         message: 'Version:',
-        default: '1.0.0'
+        default: '1.0.0',
       },
       {
         name: 'homepage',
@@ -76,13 +80,13 @@ export default class extends Generator {
             return 'URL is not valid!';
           }
         },
-        filter: answer => answer.trim()
+        filter: answer => answer.trim(),
       },
       {
         type: 'confirm',
         name: 'private',
-        message: 'Private:'
-      }
+        message: 'Private:',
+      },
     ]));
 
     this.log(utils.h1('Author'));
@@ -92,24 +96,24 @@ export default class extends Generator {
         name: 'author',
         message: 'Author:',
         default: this.user.git.name(),
-        validate: answer => answer.length > 0 ? true : 'Author name is required!'
+        validate: answer => answer.length > 0 ? true : 'Author name is required!',
       },
       {
         name: 'username',
         message: 'GitHub Username:',
         store: true,
-        validate: answer => answer.length > 0 ? true : 'GitHub Username is required!'
+        validate: answer => answer.length > 0 ? true : 'GitHub Username is required!',
       },
       {
         name: 'email',
         message: 'Email:',
-        default: this.user.git.email()
+        default: this.user.git.email(),
       },
       {
         name: 'website',
         message: 'Website:',
-        store: true
-      }
+        store: true,
+      },
     ]));
 
     this.log(utils.h1('License'));
@@ -121,13 +125,13 @@ export default class extends Generator {
         message: 'License:',
         default: 'ISC',
         choices: license.licenses,
-        pageSize: license.licenses.length
+        pageSize: license.licenses.length,
       },
       {
         name: 'year',
         message: 'Year(s):',
-        default: new Date().getFullYear()
-      }
+        default: new Date().getFullYear(),
+      },
     ]));
 
     this.log(utils.h1('Tasks'));
@@ -138,7 +142,7 @@ export default class extends Generator {
       {
         type: 'confirm',
         name: 'sass',
-        message: 'Use Sass?'
+        message: 'Use Sass?',
       },
       {
         type: 'checkbox',
@@ -147,57 +151,57 @@ export default class extends Generator {
         choices: [
           {
             type: 'separator',
-            line: `${figures.circleFilled} ${chalk.reset('Abstracts')} ${chalk.dim('(Added if there are nested folders selected)')}`
+            line: `${figures.circleFilled} ${chalk.reset('Abstracts')} ${chalk.dim('(Added if there are nested folders selected)')}`,
           },
           {
             name: '├ Settings',
             value: 'abstracts/settings',
             short: 'Abstracts/Settings',
-            checked: true
+            checked: true,
           },
           {
             name: '├ Functions',
             value: 'abstracts/functions',
             short: 'Abstracts/Functions',
-            checked: true
+            checked: true,
           },
           {
             name: '└ Mixins',
             value: 'abstracts/mixins',
             short: 'Abstracts/Mixins',
-            checked: true
+            checked: true,
           },
           {
             name: 'Base',
             value: 'base',
-            checked: true
+            checked: true,
           },
           {
             name: 'Components',
             value: 'components',
-            checked: true
+            checked: true,
           },
           {
             name: 'Layout',
             value: 'layout',
-            checked: true
+            checked: true,
           },
           {
             name: 'Pages',
-            value: 'pages'
+            value: 'pages',
           },
           {
             name: 'Themes',
-            value: 'themes'
+            value: 'themes',
           },
           {
             name: 'Vendors',
-            value: 'vendors'
-          }
+            value: 'vendors',
+          },
         ],
         when: answers => answers.sass,
-        pageSize: 10
-      }
+        pageSize: 10,
+      },
     ]));
 
     this.log(utils.h2('SVG Symbols'));
@@ -206,21 +210,21 @@ export default class extends Generator {
       {
         type: 'confirm',
         name: 'symbols',
-        message: 'Use Symbols task?'
+        message: 'Use Symbols task?',
       },
       {
         type: 'confirm',
         name: 'overflow',
         message: 'Should symbols overflow viewbox?',
-        when: answers => answers.symbols
+        when: answers => answers.symbols,
       },
       {
         name: 'defaultSymbol',
         message: 'Name of default symbols file:',
         default: 'symbols',
         transformer: answer => chalk.cyan(answer) + chalk.dim('.svg'),
-        when: answers => answers.symbols
-      }
+        when: answers => answers.symbols,
+      },
     ]));
 
     this.log(utils.h2('Images'));
@@ -229,8 +233,8 @@ export default class extends Generator {
       {
         type: 'confirm',
         name: 'images',
-        message: 'Use Images task?'
-      }
+        message: 'Use Images task?',
+      },
     ]));
 
     this.log(utils.h2('Fonts'));
@@ -239,8 +243,8 @@ export default class extends Generator {
       {
         type: 'confirm',
         name: 'fonts',
-        message: 'Use Fonts task?'
-      }
+        message: 'Use Fonts task?',
+      },
     ]));
 
     this.log(utils.h2('Scripts'));
@@ -249,20 +253,20 @@ export default class extends Generator {
       {
         type: 'confirm',
         name: 'scripts',
-        message: 'Use Scripts task?'
+        message: 'Use Scripts task?',
       },
       {
         type: 'confirm',
         name: 'babel',
         message: 'Use Babel?',
-        when: answers => answers.scripts
+        when: answers => answers.scripts,
       },
       {
         type: 'confirm',
         name: 'xo',
         message: 'Use XO?',
-        when: answers => answers.scripts
-      }
+        when: answers => answers.scripts,
+      },
     ]));
 
     this.log(utils.h2('Views'));
@@ -275,23 +279,23 @@ export default class extends Generator {
         choices: [
           {
             name: 'Pug',
-            value: 'pug'
+            value: 'pug',
           },
           {
             name: 'PHP',
-            value: 'php'
-          }
-        ]
+            value: 'php',
+          },
+        ],
       },
       {
         type: 'number',
         name: 'port',
         message: 'Port:',
         default: await getPort(),
-        validate: answer => Number.isInteger(answer) && answer > 1024 && answer < 65535 ? true : 'Must be an available port number between 1024 and 65535.',
-        filter: answer => Number.isInteger(answer) && answer > 1024 && answer < 65535 ? answer : '',
-        when: answers => answers.views === 'php'
-      }
+        validate: answer => Number.isInteger(answer) && answer > 1024 && answer < 65_535 ? true : 'Must be an available port number between 1024 and 65535.',
+        filter: answer => Number.isInteger(answer) && answer > 1024 && answer < 65_535 ? answer : '',
+        when: answers => answers.views === 'php',
+      },
     ]));
 
     this.log(utils.h2('Miscellaneous Static Files'));
@@ -300,8 +304,8 @@ export default class extends Generator {
       {
         type: 'confirm',
         name: 'misc',
-        message: 'Use Misc task?'
-      }
+        message: 'Use Misc task?',
+      },
     ]));
 
     if (this.answers.type === 'website') {
@@ -309,8 +313,8 @@ export default class extends Generator {
         {
           type: 'confirm',
           name: 'robots',
-          message: 'Allow Robots?'
-        }
+          message: 'Allow Robots?',
+        },
       ]));
     }
 
@@ -331,28 +335,28 @@ export default class extends Generator {
         {
           name: 'serverHost',
           message: 'Server Host:',
-          store: true
+          store: true,
         },
         {
           name: 'serverUser',
           message: 'Server Username:',
-          store: true
+          store: true,
         },
         {
           name: 'serverPath',
           message: 'Server Path:',
-          default: `/var/www/${directory}`
-        }
+          default: `/var/www/${directory}`,
+        },
       ]));
     }
 
     this.log(
-      '\n' +
-      utils.say(
-        chalk.green('All questions asked!') + '\n\n' +
-        'Preparing files now.'
-      ) +
       '\n'
+      + utils.say(
+        chalk.green('All questions asked!') + '\n\n'
+        + 'Preparing files now.',
+      )
+      + '\n',
     );
   }
 
@@ -363,7 +367,7 @@ export default class extends Generator {
       email: this.answers.email,
       website: this.answers.website,
       year: this.answers.year,
-      license: this.answers.license
+      license: this.answers.license,
     });
   }
 
@@ -373,19 +377,19 @@ export default class extends Generator {
 
     this.fs.copy(
       this.templatePath('_editorconfig'),
-      this.destinationPath('.editorconfig')
+      this.destinationPath('.editorconfig'),
     );
 
     this.fs.copyTpl(
       this.templatePath('_gitignore'),
       this.destinationPath('.gitignore'),
-      this.answers
+      this.answers,
     );
 
     this.fs.copyTpl(
       this.templatePath('_package.json'),
       this.destinationPath('package.json'),
-      this.answers
+      this.answers,
     );
 
     await this.addDevDependencies([
@@ -396,12 +400,12 @@ export default class extends Generator {
       'gulp-postcss',
       'autoprefixer',
       'browser-sync',
-      'cssnano'
+      'cssnano',
     ]);
 
     if (this.answers.sass || this.answers.symbols) {
       await this.addDevDependencies({
-        slash: '^3.0.0' // TODO: Update to latest version when the templates support native ESM.
+        slash: '^3.0.0', // TODO: Update to latest version when the templates support native ESM.
       });
     }
 
@@ -413,7 +417,7 @@ export default class extends Generator {
       await this.addDevDependencies([
         'sass',
         'gulp-dart-sass',
-        'gulp-rename'
+        'gulp-rename',
       ]);
     }
 
@@ -425,7 +429,7 @@ export default class extends Generator {
       await this.addDevDependencies([
         'gulp-svg-sprite',
         'merge-stream',
-        'walk-sync'
+        'walk-sync',
       ]);
     }
 
@@ -441,7 +445,7 @@ export default class extends Generator {
       await this.addDevDependencies([
         '@babel/core',
         '@babel/preset-env',
-        'gulp-babel'
+        'gulp-babel',
       ]);
     }
 
@@ -452,13 +456,13 @@ export default class extends Generator {
     if (this.answers.type === 'website') {
       await this.addDevDependencies([
         'dotenv',
-        'gulp-rsync'
+        'gulp-rsync',
       ]);
     }
 
     if (this.answers.xo) {
       await this.addDevDependencies({
-        xo: '^0.39.1' // TODO: Update to latest version when the templates support native ESM.
+        xo: '^0.39.1', // TODO: Update to latest version when the templates support native ESM.
       });
     }
 
@@ -474,20 +478,20 @@ export default class extends Generator {
     this.fs.copyTpl(
       this.templatePath('gulpfile.esm.js/(index|config).js'),
       this.destinationPath('gulpfile.esm.js'),
-      this.answers
+      this.answers,
     );
 
     this.fs.copyTpl(
       this.templatePath('gulpfile.esm.js/tasks/(styles|views|copy|browser|watch).js'),
       this.destinationPath('gulpfile.esm.js/tasks'),
-      this.answers
+      this.answers,
     );
 
     if (this.answers.sass || this.answers.symbols) {
       this.fs.copyTpl(
         this.templatePath('gulpfile.esm.js/utils.js'),
         this.destinationPath('gulpfile.esm.js/utils.js'),
-        this.answers
+        this.answers,
       );
     }
 
@@ -495,7 +499,7 @@ export default class extends Generator {
       this.fs.copyTpl(
         this.templatePath('gulpfile.esm.js/tasks/symbols.js'),
         this.destinationPath('gulpfile.esm.js/tasks/symbols.js'),
-        this.answers
+        this.answers,
       );
     }
 
@@ -503,7 +507,7 @@ export default class extends Generator {
       this.fs.copyTpl(
         this.templatePath('gulpfile.esm.js/tasks/images.js'),
         this.destinationPath('gulpfile.esm.js/tasks/images.js'),
-        this.answers
+        this.answers,
       );
     }
 
@@ -511,7 +515,7 @@ export default class extends Generator {
       this.fs.copyTpl(
         this.templatePath('gulpfile.esm.js/tasks/fonts.js'),
         this.destinationPath('gulpfile.esm.js/tasks/fonts.js'),
-        this.answers
+        this.answers,
       );
     }
 
@@ -519,52 +523,52 @@ export default class extends Generator {
       this.fs.copyTpl(
         this.templatePath('gulpfile.esm.js/tasks/scripts.js'),
         this.destinationPath('gulpfile.esm.js/tasks/scripts.js'),
-        this.answers
+        this.answers,
       );
     }
 
     if (this.answers.type === 'website') {
       this.fs.copy(
         this.templatePath('gulpfile.esm.js/tasks/deploy.js'),
-        this.destinationPath('gulpfile.esm.js/tasks/deploy.js')
+        this.destinationPath('gulpfile.esm.js/tasks/deploy.js'),
       );
 
       if (this.answers.robots === false) {
         this.fs.copy(
           this.templatePath('src/robots.txt'),
-          this.destinationPath('src/robots.txt')
+          this.destinationPath('src/robots.txt'),
         );
       }
 
       if (this.answers.views === 'php') {
         this.fs.copy(
           this.templatePath('_dockerignore'),
-          this.destinationPath('.dockerignore')
+          this.destinationPath('.dockerignore'),
         );
 
         this.fs.copyTpl(
           this.templatePath('_docker-compose.yml'),
           this.destinationPath('docker-compose.yml'),
-          this.answers
+          this.answers,
         );
 
         this.fs.copyTpl(
           this.templatePath('docker/**/*'),
           this.destinationPath('docker'),
-          this.answers
+          this.answers,
         );
       }
 
       this.fs.copy(
         this.templatePath('_env.template'),
-        this.destinationPath('.env.template')
+        this.destinationPath('.env.template'),
       );
 
       if (this.answers.serverHost && this.answers.serverUser && this.answers.serverPath) {
         this.fs.copyTpl(
           this.templatePath('_env'),
           this.destinationPath('.env'),
-          this.answers
+          this.answers,
         );
       }
     }
@@ -573,7 +577,7 @@ export default class extends Generator {
       this.fs.copyTpl(
         this.templatePath('src/styles/main.sass'),
         this.destinationPath('src/styles/main.sass'),
-        this.answers
+        this.answers,
       );
 
       if (this.answers.sevenOnePattern) {
@@ -581,27 +585,27 @@ export default class extends Generator {
           this.fs.copyTpl(
             this.templatePath('src/styles/abstracts/_index.sass'),
             this.destinationPath('src/styles/abstracts/_index.sass'),
-            this.answers
+            this.answers,
           );
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/settings')) {
           this.fs.copy(
             this.templatePath('src/styles/abstracts/settings/_index.scss'),
-            this.destinationPath('src/styles/abstracts/settings/_index.scss')
+            this.destinationPath('src/styles/abstracts/settings/_index.scss'),
           );
 
           if (this.answers.sevenOnePattern.includes('base')) {
             this.fs.copy(
               this.templatePath('src/styles/abstracts/settings/_base.scss'),
-              this.destinationPath('src/styles/abstracts/settings/_base.scss')
+              this.destinationPath('src/styles/abstracts/settings/_base.scss'),
             );
           }
 
           if (this.answers.sevenOnePattern.includes('components')) {
             this.fs.copy(
               this.templatePath('src/styles/abstracts/settings/_components.scss'),
-              this.destinationPath('src/styles/abstracts/settings/_components.scss')
+              this.destinationPath('src/styles/abstracts/settings/_components.scss'),
             );
           }
         }
@@ -609,14 +613,14 @@ export default class extends Generator {
         if (this.answers.sevenOnePattern.includes('abstracts/functions')) {
           this.fs.copy(
             this.templatePath('src/styles/abstracts/functions/**/*'),
-            this.destinationPath('src/styles/abstracts/functions')
+            this.destinationPath('src/styles/abstracts/functions'),
           );
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/mixins')) {
           this.fs.copy(
             this.templatePath('src/styles/abstracts/mixins/**/*'),
-            this.destinationPath('src/styles/abstracts/mixins')
+            this.destinationPath('src/styles/abstracts/mixins'),
           );
         }
 
@@ -624,24 +628,24 @@ export default class extends Generator {
           this.fs.copyTpl(
             [
               this.templatePath('src/styles/base/**/*'),
-              '!**/base/_(svg|font-face).sass'
+              '!**/base/_(svg|font-face).sass',
             ],
             this.destinationPath('src/styles/base'),
-            this.answers
+            this.answers,
           );
 
           if (this.answers.symbols) {
             this.fs.copyTpl(
               this.templatePath('src/styles/base/_svg.sass'),
               this.destinationPath('src/styles/base/_svg.sass'),
-              this.answers
+              this.answers,
             );
           }
 
           if (this.answers.fonts) {
             this.fs.copy(
               this.templatePath('src/styles/base/_font-face.sass'),
-              this.destinationPath('src/styles/base/_font-face.sass')
+              this.destinationPath('src/styles/base/_font-face.sass'),
             );
           }
         }
@@ -649,35 +653,35 @@ export default class extends Generator {
         if (this.answers.sevenOnePattern.includes('components')) {
           this.fs.copy(
             this.templatePath('src/styles/components/**/*'),
-            this.destinationPath('src/styles/components')
+            this.destinationPath('src/styles/components'),
           );
         }
 
         if (this.answers.sevenOnePattern.includes('layout')) {
           this.fs.copy(
             this.templatePath('src/styles/layout/**/*'),
-            this.destinationPath('src/styles/layout')
+            this.destinationPath('src/styles/layout'),
           );
         }
 
         if (this.answers.sevenOnePattern.includes('pages')) {
           this.fs.copy(
             this.templatePath('src/styles/pages/**/*'),
-            this.destinationPath('src/styles/pages')
+            this.destinationPath('src/styles/pages'),
           );
         }
 
         if (this.answers.sevenOnePattern.includes('themes')) {
           this.fs.copy(
             this.templatePath('src/styles/themes/**/*'),
-            this.destinationPath('src/styles/themes')
+            this.destinationPath('src/styles/themes'),
           );
         }
 
         if (this.answers.sevenOnePattern.includes('vendors')) {
           this.fs.copy(
             this.templatePath('src/styles/vendors/**/*'),
-            this.destinationPath('src/styles/vendors')
+            this.destinationPath('src/styles/vendors'),
           );
         }
       }
@@ -688,14 +692,14 @@ export default class extends Generator {
     if (this.answers.scripts) {
       this.fs.copy(
         this.templatePath('src/scripts/**/*'),
-        this.destinationPath('src/scripts')
+        this.destinationPath('src/scripts'),
       );
     }
 
     this.fs.copyTpl(
       this.templatePath(`src/views/${this.answers.views}/**/*`),
       this.destinationPath('src/views'),
-      this.answers
+      this.answers,
     );
   }
 
@@ -711,9 +715,9 @@ export default class extends Generator {
     this.spawnCommandSync('git', ['init', '--quiet']);
 
     this.log(utils.say(
-      chalk.green('Configuration is ready!') + '\n\n' +
-      'You can start by committing these newly added files.\n\n' +
-      chalk.yellow(' Good work! ') // FIXME: Spacings is for a workaround of an issue on chalk not coloring X letters when `\n` is present X+1 times before them.
+      chalk.green('Configuration is ready!') + '\n\n'
+      + 'You can start by committing these newly added files.\n\n'
+      + chalk.yellow(' Good work! '), // FIXME: Spacings is for a workaround of an issue on chalk not coloring X letters when `\n` is present X+1 times before them.
     ));
   }
-};
+}
