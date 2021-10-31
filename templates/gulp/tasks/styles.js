@@ -44,22 +44,22 @@ export const build = () =>
     .pipe(sass())
     .on('error', onError({
       title: 'Error in styles',
-      message: '<%%= error.message %>'
+      message: '<%%= error.message %>',
     }))
     <%_ } -%>
     .pipe(postcss([
-      autoprefixer()
+      autoprefixer(),
     ]))
     <%_ if (sass) { -%>
     .pipe(rename(dirToFile))
     <%_ } -%>
     .pipe(dest(config.build.styles))
     .pipe(reload({
-      stream: true
+      stream: true,
     }))
     .pipe(notify({
       message: 'CSS generated!',
-      onLast: true
+      onLast: true,
     }));
 
 
@@ -74,10 +74,10 @@ export const build = () =>
 export const dist = () =>
   src(config.build.globs.styles)
     .pipe(postcss([
-      cssnano()
+      cssnano(),
     ]))
     .pipe(dest(config.dist.styles))
     .pipe(notify({
       message: 'CSS minified!',
-      onLast: true
+      onLast: true,
     }));

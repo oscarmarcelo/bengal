@@ -1,7 +1,7 @@
 <% if (symbols) { -%>
-import {existsSync, statSync} from 'fs';
+import {existsSync, statSync} from 'node:fs';
 <% } -%>
-import {join<% if (sass) { %>, basename<% } %>} from 'path';
+import {join<% if (sass) { %>, basename<% } %>} from 'node:path';
 
 <% if (symbols) { -%>
 import walkSync from 'walk-sync';
@@ -31,16 +31,13 @@ export const path = (...path) =>
  */
 
 export const getDirs = ctx =>
-  ['.']
-    .concat(
-      existsSync(ctx) ?
-        walkSync(ctx).filter(e =>
-          statSync(path(ctx, e)).isDirectory()
-        )
-        :
-        []
-    )
-    .map(e => e.replace(/\/$/, ''));
+  [
+    '.',
+    ...existsSync(ctx)
+      ? walkSync(ctx).filter(dirent => statSync(path(ctx, dirent)).isDirectory())
+      : [],
+  ]
+    .map(directory => directory.replace(/\/$/, ''));
 <% } -%>
 <% if (sass) { -%>
 
@@ -57,5 +54,5 @@ export const dirToFile = file => {
     file.basename = slash(basename(file.dirname));
     file.dirname = path(file.dirname, '../');
   }
-}
+};
 <% } -%>

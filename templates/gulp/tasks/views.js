@@ -25,22 +25,26 @@ const {src, dest} = gulp;
  * ================================
  */
 
-export default () =>
+const build = () =>
   <%_ if (views === 'php') { -%>
   src(config.src.views)
   <%_ } -%>
   <%_ if (views === 'pug') { -%>
   src([
     config.src.views,
-    '!**/_*'
+    '!**/_*',
   ])
     .pipe(plumber())
     .pipe(pug({
-      pretty: true
+      pretty: true,
     }))
     <%_ } -%>
     .pipe(dest(config.build.views))
     .pipe(notify({
       message: 'HTML generated!',
-      onLast: true
+      onLast: true,
     }));
+
+
+
+export default build;

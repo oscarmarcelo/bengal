@@ -20,7 +20,7 @@ export const serve = done => {
     <%_ if (views === 'php') { -%>
     proxy: 'localhost:<%= port %>',
     <%_ } -%>
-    ghostMode: false
+    ghostMode: false,
   });
   done();
 };

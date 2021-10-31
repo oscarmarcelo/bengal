@@ -28,7 +28,7 @@ const {src, dest} = gulp;
  * ================================
  */
 
-export default done => {
+const build = done => {
   const dirs = getDirs(config.src.symbols);
 
   if (dirs.length === 0) {
@@ -45,31 +45,35 @@ export default done => {
       <%_ } -%>
       .pipe(imagemin({
         svgoPlugins: [{
-          removeViewBox: false
-        }]
+          removeViewBox: false,
+        }],
       }))
       .pipe(svgSprite({
         mode: {
           symbol: {
             dest: '.',
-            sprite: `${dir === '.' ? '<%= defaultSymbol %>' : dir}.svg`
-          }
+            sprite: `${dir === '.' ? '<%= defaultSymbol %>' : dir}.svg`,
+          },
         },
         svg: {
           xmlDeclaration: false,
-          doctypeDeclaration: false
-        }
+          doctypeDeclaration: false,
+        },
       }))
       .on('error', onError({
         title: 'Error in symbols',
-        message: '<%%= error.message %>'
+        message: '<%%= error.message %>',
       }))
-      .pipe(dest(config.build.images))
+      .pipe(dest(config.build.images)),
   );
 
   return merge(subtasks)
     .pipe(notify({
       message: 'Symbols generated!',
-      onLast: true
+      onLast: true,
     }));
 };
+
+
+
+export default build;

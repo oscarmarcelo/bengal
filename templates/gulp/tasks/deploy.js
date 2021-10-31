@@ -1,3 +1,5 @@
+import {env} from 'node:process';
+
 import {config as dotenv} from 'dotenv';
 import gulp from 'gulp';
 import rsync from 'gulp-rsync';
@@ -19,21 +21,25 @@ const {src} = gulp;
  * ========================================================
  */
 
-export default () => {
+const deploy = () => {
   dotenv();
 
   return src(config.dist.globs.all)
     .pipe(rsync({
       root: config.dist.base,
-      destination: process.env.SERVER_PATH,
-      hostname: process.env.SERVER_HOST,
-      username: process.env.SERVER_USER,
+      destination: env.SERVER_PATH,
+      hostname: env.SERVER_HOST,
+      username: env.SERVER_USER,
       archive: true,
       incremental: true,
-      clean: true
+      clean: true,
     }))
     .pipe(notify({
       message: 'Website deployed!',
-      onLast: true
+      onLast: true,
     }));
 };
+
+
+
+export default deploy;

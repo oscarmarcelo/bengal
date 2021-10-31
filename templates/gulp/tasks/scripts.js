@@ -33,13 +33,13 @@ export const build = () =>
     .pipe(babel())
     .on('error', onError({
       title: 'Error in scripts',
-      message: '<%%= error.message %>'
+      message: '<%%= error.message %>',
     }))
     <%_ } -%>
     .pipe(dest(config.build.scripts))
     .pipe(notify({
       message: 'JavaScript generated!',
-      onLast: true
+      onLast: true,
     }));
 
 
@@ -57,10 +57,10 @@ export const dist = () =>
     .pipe(uglify())
     .on('error', onError({
       title: 'Error in scripts for distribution',
-      message: '<%%= error.message %>'
+      message: '<%%= error.message %>',
     }))
     .pipe(dest(config.dist.scripts))
     .pipe(notify({
       message: 'JavaScript uglified!',
-      onLast: true
+      onLast: true,
     }));

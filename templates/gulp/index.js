@@ -29,11 +29,15 @@ const {series, parallel} = gulp;
 
 export default series(
   parallel(styles.build<% if (symbols) { %>, symbols<% } %><% if (images) { %>, images<% } %><% if (fonts) { %>, fonts<% } %><% if (scripts) { %>, scripts.build<% } %>, views),
-  parallel(serve, watch)
+  parallel(serve, watch),
 );
+
+
 
 export const dist = parallel(styles.dist<% if (scripts) { %>, scripts.dist<% } %>, copy);
 <% if (type === 'website') { -%>
+
+
 
 export {deploy};
 <% } -%>

@@ -20,22 +20,24 @@ const {src, lastRun, dest} = gulp;
 
 const build = () =>
   src(config.src.images, {
-    since: lastRun(build)
+    since: lastRun(build),
   })
     .pipe(plumber())
     .pipe(imagemin({
       svgoPlugins: [{
-        removeViewBox: false
-      }]
+        removeViewBox: false,
+      }],
     }))
     .on('error', onError({
       title: 'Error in images',
-      message: '<%%= error.message %>'
+      message: '<%%= error.message %>',
     }))
     .pipe(dest(config.build.images))
     .pipe(notify({
       message: 'Images optimized!',
-      onLast: true
+      onLast: true,
     }));
+
+
 
 export default build;

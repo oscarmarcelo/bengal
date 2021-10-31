@@ -17,13 +17,17 @@ const {src, dest} = gulp;
  * ================================
  */
 
-export default () =>
+const build = () =>
   src(config.src.fonts)
     .pipe(dest(config.build.fonts))
     .pipe(reload({
-      stream: true
+      stream: true,
     }))
     .pipe(notify({
       message: 'Fonts copied!',
-      onLast: true
+      onLast: true,
     }));
+
+
+
+export default build;

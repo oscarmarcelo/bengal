@@ -30,7 +30,7 @@ const {watch, series} = gulp;
  * ================================
  */
 
-export default done => {
+const build = done => {
   // When styles update, <% if (sass) { %>compile Sass<% } else { %>copy CSS<% } %> files.
   watch(config.src.styles, styles);
 
@@ -59,3 +59,7 @@ export default done => {
 
   done();
 };
+
+
+
+export default build;

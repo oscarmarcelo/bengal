@@ -16,17 +16,21 @@ const {src, dest} = gulp;
  * ========================================================
  */
 
-export default () => {
-  const excludedGlobs = Object.assign({}, config.build.globs);
+const dist = () => {
+  const excludedGlobs = {...config.build.globs};
 
   delete excludedGlobs.all;
 
   return src(config.build.globs.all, {
-    ignore: Object.values(excludedGlobs)
+    ignore: Object.values(excludedGlobs),
   })
     .pipe(dest(config.dist.base))
     .pipe(notify({
       message: 'Build files copied!',
-      onLast: true
+      onLast: true,
     }));
-}
+};
+
+
+
+export default dist;
