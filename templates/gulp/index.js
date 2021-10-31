@@ -1,25 +1,29 @@
-import {series, parallel} from 'gulp';
+import gulp from 'gulp';
 
-import * as styles from './tasks/styles';
+import * as styles from './tasks/styles.js';
 <% if (symbols) { -%>
-import symbols from './tasks/symbols';
+import symbols from './tasks/symbols.js';
 <% } -%>
 <% if (images) { -%>
-import images from './tasks/images';
+import images from './tasks/images.js';
 <% } -%>
 <% if (fonts) { -%>
-import fonts from './tasks/fonts';
+import fonts from './tasks/fonts.js';
 <% } -%>
 <% if (scripts) { -%>
-import * as scripts from './tasks/scripts';
+import * as scripts from './tasks/scripts.js';
 <% } -%>
-import views from './tasks/views';
-import copy from './tasks/copy';
+import views from './tasks/views.js';
+import copy from './tasks/copy.js';
 <% if (type === 'website') { -%>
-import deploy from './tasks/deploy';
+import deploy from './tasks/deploy.js';
 <% } -%>
-import {serve} from './tasks/browser';
-import watch from './tasks/watch';
+import {serve} from './tasks/browser.js';
+import watch from './tasks/watch.js';
+
+
+
+const {series, parallel} = gulp;
 
 
 

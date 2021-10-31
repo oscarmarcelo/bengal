@@ -2,7 +2,11 @@
   "name": "<%= package %>",
   "version": "<%= version %>",
   "description": "<%= description %>",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "scripts": {
     "build": "gulp",
     "dist": "gulp dist",

@@ -4,4 +4,5 @@ npm-debug.log
 .git
 .gitignore
 src
-gulpfile.esm.js
+gulp
+gulpfile.js

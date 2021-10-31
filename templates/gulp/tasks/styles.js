@@ -1,4 +1,4 @@
-import {src, dest} from 'gulp';
+import gulp from 'gulp';
 <% if (sass) { -%>
 import sass from 'gulp-dart-sass';
 import dartSass from 'sass';
@@ -12,12 +12,14 @@ import rename from 'gulp-rename';
 import {reload} from 'browser-sync';
 import cssnano from 'cssnano';
 
-import config from '../config';
+import config from '../config.js';
 <% if (sass) { -%>
-import {dirToFile} from '../utils';
+import {dirToFile} from '../utils.js';
 <% } -%>
 
 
+
+const {src, dest} = gulp;
 
 <% if (sass) { -%>
 sass.compiler = dartSass;

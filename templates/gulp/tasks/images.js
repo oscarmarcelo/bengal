@@ -1,9 +1,13 @@
-import {src, lastRun, dest} from 'gulp';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import imagemin from 'gulp-imagemin';
 import notify, {onError} from 'gulp-notify';
 
-import config from '../config';
+import config from '../config.js';
+
+
+
+const {src, lastRun, dest} = gulp;
 
 
 

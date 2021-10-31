@@ -1,7 +1,11 @@
-import {src, dest} from 'gulp';
+import gulp from 'gulp';
 import notify from 'gulp-notify';
 
-import config from '../config';
+import config from '../config.js';
+
+
+
+const {src, dest} = gulp;
 
 
 

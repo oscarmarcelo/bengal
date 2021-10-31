@@ -1,4 +1,4 @@
-import {src, dest} from 'gulp';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 <% if (overflow) { -%>
 import cheerio from 'gulp-cheerio';
@@ -8,8 +8,12 @@ import svgSprite from 'gulp-svg-sprite';
 import notify, {onError} from 'gulp-notify';
 import merge from 'merge-stream';
 
-import config from '../config';
-import {getDirs, path} from '../utils';
+import config from '../config.js';
+import {getDirs, path} from '../utils.js';
+
+
+
+const {src, dest} = gulp;
 
 
 

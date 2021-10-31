@@ -1,7 +1,7 @@
 import {init, reload as bsReload} from 'browser-sync';
 <% if (views === 'pug') { -%>
 
-import config from '../config';
+import config from '../config.js';
 <% } -%>
 
 

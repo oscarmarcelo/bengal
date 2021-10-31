@@ -1,22 +1,26 @@
-import {watch, series} from 'gulp';
+import gulp from 'gulp';
 
-import config from '../config';
+import config from '../config.js';
 
-import {build as styles} from './styles';
+import {build as styles} from './styles.js';
 <% if (symbols) { -%>
-import symbols from './symbols';
+import symbols from './symbols.js';
 <% } -%>
 <% if (images) { -%>
-import images from './images';
+import images from './images.js';
 <% } -%>
 <% if (fonts) { -%>
-import fonts from './fonts';
+import fonts from './fonts.js';
 <% } -%>
 <% if (scripts) { -%>
-import {build as scripts} from './scripts';
+import {build as scripts} from './scripts.js';
 <% } -%>
-import views from './views';
-import {reload} from './browser';
+import views from './views.js';
+import {reload} from './browser.js';
+
+
+
+const {watch, series} = gulp;
 
 
 

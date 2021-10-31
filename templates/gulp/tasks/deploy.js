@@ -1,9 +1,13 @@
 import {config as dotenv} from 'dotenv';
-import {src} from 'gulp';
+import gulp from 'gulp';
 import rsync from 'gulp-rsync';
 import notify from 'gulp-notify';
 
-import config from '../config';
+import config from '../config.js';
+
+
+
+const {src} = gulp;
 
 
 

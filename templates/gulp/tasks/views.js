@@ -1,11 +1,15 @@
-import {src, dest} from 'gulp';
+import gulp from 'gulp';
 <% if (views === 'pug') { -%>
 import plumber from 'gulp-plumber';
 import pug from 'gulp-pug';
 <% } -%>
 import notify from 'gulp-notify';
 
-import config from '../config';
+import config from '../config.js';
+
+
+
+const {src, dest} = gulp;
 
 
 

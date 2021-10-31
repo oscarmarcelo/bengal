@@ -393,7 +393,6 @@ export default class Bengal extends Generator {
     );
 
     await this.addDevDependencies([
-      'esm',
       'gulp',
       'gulp-notify',
       'postcss',
@@ -404,9 +403,7 @@ export default class Bengal extends Generator {
     ]);
 
     if (this.answers.sass || this.answers.symbols) {
-      await this.addDevDependencies({
-        slash: '^3.0.0', // TODO: Update to latest version when the templates support native ESM.
-      });
+      await this.addDevDependencies('slash');
     }
 
     if (this.answers.symbols || this.answers.images || this.answers.scripts || this.answers.views === 'pug') {
@@ -461,9 +458,7 @@ export default class Bengal extends Generator {
     }
 
     if (this.answers.xo) {
-      await this.addDevDependencies({
-        xo: '^0.39.1', // TODO: Update to latest version when the templates support native ESM.
-      });
+      await this.addDevDependencies('xo');
     }
 
     const devDependencies = this.packageJson.get('devDependencies');
@@ -476,61 +471,67 @@ export default class Bengal extends Generator {
     this.packageJson.set('devDependencies', orderedDevDependencies);
 
     this.fs.copyTpl(
-      this.templatePath('gulpfile.esm.js/(index|config).js'),
-      this.destinationPath('gulpfile.esm.js'),
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js'),
       this.answers,
     );
 
     this.fs.copyTpl(
-      this.templatePath('gulpfile.esm.js/tasks/(styles|views|copy|browser|watch).js'),
-      this.destinationPath('gulpfile.esm.js/tasks'),
+      this.templatePath('gulp/(index|config).js'),
+      this.destinationPath('gulp'),
+      this.answers,
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('gulp/tasks/(styles|views|copy|browser|watch).js'),
+      this.destinationPath('gulp/tasks'),
       this.answers,
     );
 
     if (this.answers.sass || this.answers.symbols) {
       this.fs.copyTpl(
-        this.templatePath('gulpfile.esm.js/utils.js'),
-        this.destinationPath('gulpfile.esm.js/utils.js'),
+        this.templatePath('gulp/utils.js'),
+        this.destinationPath('gulp/utils.js'),
         this.answers,
       );
     }
 
     if (this.answers.symbols) {
       this.fs.copyTpl(
-        this.templatePath('gulpfile.esm.js/tasks/symbols.js'),
-        this.destinationPath('gulpfile.esm.js/tasks/symbols.js'),
+        this.templatePath('gulp/tasks/symbols.js'),
+        this.destinationPath('gulp/tasks/symbols.js'),
         this.answers,
       );
     }
 
     if (this.answers.images) {
       this.fs.copyTpl(
-        this.templatePath('gulpfile.esm.js/tasks/images.js'),
-        this.destinationPath('gulpfile.esm.js/tasks/images.js'),
+        this.templatePath('gulp/tasks/images.js'),
+        this.destinationPath('gulp/tasks/images.js'),
         this.answers,
       );
     }
 
     if (this.answers.fonts) {
       this.fs.copyTpl(
-        this.templatePath('gulpfile.esm.js/tasks/fonts.js'),
-        this.destinationPath('gulpfile.esm.js/tasks/fonts.js'),
+        this.templatePath('gulp/tasks/fonts.js'),
+        this.destinationPath('gulp/tasks/fonts.js'),
         this.answers,
       );
     }
 
     if (this.answers.scripts) {
       this.fs.copyTpl(
-        this.templatePath('gulpfile.esm.js/tasks/scripts.js'),
-        this.destinationPath('gulpfile.esm.js/tasks/scripts.js'),
+        this.templatePath('gulp/tasks/scripts.js'),
+        this.destinationPath('gulp/tasks/scripts.js'),
         this.answers,
       );
     }
 
     if (this.answers.type === 'website') {
       this.fs.copy(
-        this.templatePath('gulpfile.esm.js/tasks/deploy.js'),
-        this.destinationPath('gulpfile.esm.js/tasks/deploy.js'),
+        this.templatePath('gulp/tasks/deploy.js'),
+        this.destinationPath('gulp/tasks/deploy.js'),
       );
 
       if (this.answers.robots === false) {

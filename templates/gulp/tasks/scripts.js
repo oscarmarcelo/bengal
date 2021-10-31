@@ -1,12 +1,17 @@
-import {src, dest} from 'gulp';
+import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 <% if (babel) { -%>
 import babel from 'gulp-babel';
 <% } -%>
 import notify, {onError} from 'gulp-notify';
-import uglify from 'gulp-uglify-es';
+import uglifyEs from 'gulp-uglify-es';
 
-import config from '../config';
+import config from '../config.js';
+
+
+
+const {src, dest} = gulp;
+const {default: uglify} = uglifyEs;
 
 
 
