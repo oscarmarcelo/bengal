@@ -54,7 +54,7 @@ export const dist = () =>
       title: 'Error in scripts for distribution',
       message: '<%%= error.message %>'
     }))
-    .pipe(dest(config.dist.base))
+    .pipe(dest(config.dist.scripts))
     .pipe(notify({
       message: 'JavaScript uglified!',
       onLast: true

@@ -74,7 +74,7 @@ export const dist = () =>
     .pipe(postcss([
       cssnano()
     ]))
-    .pipe(dest(config.dist.base))
+    .pipe(dest(config.dist.styles))
     .pipe(notify({
       message: 'CSS minified!',
       onLast: true

@@ -8,6 +8,7 @@ build.base = './build';
 build.assets = `${build.base}/assets`;
 
 dist.base = './dist';
+dist.assets = `${dist.base}/assets`;
 
 export default {
   src: {
@@ -40,13 +41,17 @@ export default {
     <%_ } -%>
     views: build.base,
     globs: {
-      base: `${build.base}/**/*`,
+      all: `${build.base}/**/*`,
       styles: `${build.assets}/**/*.css`<% if (scripts) { %>,
       scripts: `${build.assets}/**/*.js`<% } %>
     }
   },
   dist: {
     base: dist.base,
+    styles: `${dist.assets}`,
+    <%_ if (scripts) { -%>
+    scripts: `${dist.assets}`,
+    <%_ } -%>
     globs: {
       all: `${dist.base}/**/*`
     }

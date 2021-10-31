@@ -15,9 +15,9 @@ import config from '../config';
 export default () => {
   const excludedGlobs = Object.assign({}, config.build.globs);
 
-  delete excludedGlobs.base;
+  delete excludedGlobs.all;
 
-  return src(config.build.globs.base, {
+  return src(config.build.globs.all, {
     ignore: Object.values(excludedGlobs)
   })
     .pipe(dest(config.dist.base))
