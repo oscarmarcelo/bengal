@@ -9,13 +9,10 @@
   },
   "scripts": {
     "build": "gulp",
-    "dist": "gulp dist",
-    <%_ if (views === 'php') { -%>
-    "start": "docker-compose up",
-    <%_ } -%>
-    <%_ if (type === 'website') { -%>
-    "deploy": "gulp dist && gulp deploy"
-    <%_ } -%>
+    "dist": "gulp dist"<% if (views === 'php') { %>,
+    "start": "docker-compose up"<% } %><% if (type === 'website') { %>,
+    "deploy": "gulp dist && gulp deploy"<% } %><% if (typeof xo !== 'undefined' && xo) { %>,
+    "lint": "xo"<% } %>
   },
   "keywords": [],
   "author": {
