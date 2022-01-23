@@ -15,9 +15,6 @@ import * as scripts from './tasks/scripts.js';
 <% } -%>
 import views from './tasks/views.js';
 import copy from './tasks/copy.js';
-<% if (type === 'website') { -%>
-import deploy from './tasks/deploy.js';
-<% } -%>
 import {serve} from './tasks/browser.js';
 import watch from './tasks/watch.js';
 
@@ -39,5 +36,5 @@ export const dist = parallel(styles.dist<% if (scripts) { %>, scripts.dist<% } %
 
 
 
-export {deploy};
+export {default as deploy} from './tasks/deploy.js';
 <% } -%>
