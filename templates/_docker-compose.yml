@@ -15,7 +15,7 @@ services:
       - <%= package %>
 
   php:
-    image: php:7-fpm
+    image: php:8-fpm
     container_name: <%= package %>_php
     volumes:
       - ./build:/var/www/<%= package %>/html
