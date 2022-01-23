@@ -39,7 +39,7 @@ const build = done => {
     src(path(config.src.symbols, dir, '/*.svg'))
       .pipe(plumber())
       <%_ if (overflow) { -%>
-      .pipe(cheerio(($, file) => { // eslint-disable-line no-unused-vars
+      .pipe(cheerio(($, _) => {
         $('svg').attr('overflow', 'visible');
       }))
       <%_ } -%>
