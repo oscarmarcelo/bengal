@@ -86,12 +86,6 @@ export default class Bengal extends Generator {
         },
         filter: answer => answer.trim(),
       },
-      {
-        type: 'confirm',
-        name: 'private',
-        message: 'Private:',
-        when: answers => answers.type !== 'package',
-      },
     ]));
 
     this.log(utils.h1('Author'));

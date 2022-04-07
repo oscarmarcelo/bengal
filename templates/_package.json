@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/<%= username %>/<%= package %>/issues"
   },
-  <%_ if (private) { -%>
+  <%_ if (type !== 'package') { -%>
   "private": true,
   <%_ } -%>
   "dependencies": {},
