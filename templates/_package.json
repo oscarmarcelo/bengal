@@ -35,16 +35,15 @@
   "dependencies": {},
   "devDependencies": {},
   "browserslist": [
-    <%_ if (type === 'website') { -%>
+    <%_ if (type === 'electron') { -%>
+      "Electron <%= electronVersion %>"
+    <%_ } else { -%>
     "last 2 Chrome versions",
     "last 2 Firefox versions",
     "last 2 Safari versions",
     "last 2 Edge versions",
     "last 2 ChromeAndroid versions",
     "last 2 iOS versions"
-    <%_ } -%>
-    <%_ if (type === 'electron') { -%>
-    "Electron <%= electronVersion %>"
     <%_ } -%>
   ]<% if (typeof babel !== 'undefined' && babel) { %>,
   "babel": {

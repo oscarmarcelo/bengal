@@ -47,6 +47,10 @@ export default class Bengal extends Generator {
             value: 'electron',
             disabled: 'Coming Soon', // TODO: Implement Electron flow.
           },
+          {
+            name: 'NPM Package',
+            value: 'package',
+          },
         ],
       },
       {
@@ -86,6 +90,7 @@ export default class Bengal extends Generator {
         type: 'confirm',
         name: 'private',
         message: 'Private:',
+        when: answers => answers.type !== 'package',
       },
     ]));
 
@@ -141,8 +146,15 @@ export default class Bengal extends Generator {
     Object.assign(this.answers, await this.prompt([
       {
         type: 'confirm',
+        name: 'styles',
+        message: 'Use Styles task?',
+        when: this.answers.type === 'package',
+      },
+      {
+        type: 'confirm',
         name: 'sass',
         message: 'Use Sass?',
+        when: answers => this.answers.type !== 'package' || answers.styles,
       },
       {
         type: 'checkbox',
