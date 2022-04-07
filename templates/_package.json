@@ -58,9 +58,7 @@
   "xo": {
     "space": 2,
     "envs": [
-      <%_ if (type === 'website') { -%>
       "node",
-      <%_ } -%>
       "browser"
     ],
     "rules": {
