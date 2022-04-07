@@ -3,7 +3,7 @@ import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 
 import Generator from 'yeoman-generator';
-import slugify from 'slugify';
+import slugify from '@sindresorhus/slugify';
 import license from 'generator-license';
 import chalk from 'chalk';
 import figures from 'figures';

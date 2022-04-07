@@ -31,12 +31,12 @@
   },
   "homepage": "https://github.com/oscarmarcelo/bengal#readme",
   "dependencies": {
+    "@sindresorhus/slugify": "^2.1.0",
     "chalk": "^4.1.2",
     "figures": "^4.0.0",
     "generator-license": "^5.5.0",
     "get-port": "^6.0.0",
     "rimraf": "^3.0.2",
-    "slugify": "^1.6.1",
     "yeoman-generator": "^5.4.2",
     "yosay": "^2.0.2"
   },
