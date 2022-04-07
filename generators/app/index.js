@@ -413,7 +413,7 @@ export default class Bengal extends Generator {
     if (this.answers.sass) {
       await this.addDevDependencies([
         'sass',
-        'gulp-dart-sass',
+        'gulp-sass',
         'gulp-rename',
       ]);
     }

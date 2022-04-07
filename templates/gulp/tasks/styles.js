@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 <% if (sass) { -%>
-import sass from 'gulp-dart-sass';
+import gulpSass from 'gulp-sass';
 import dartSass from 'sass';
 <% } -%>
 import notify<% if (sass) { %>, {onError}<% } %> from 'gulp-notify';
@@ -20,9 +20,8 @@ import {dirToFile} from '../utils.js';
 
 
 const {src, dest} = gulp;
-
 <% if (sass) { -%>
-sass.compiler = dartSass;
+const sass = gulpSass(dartSass);
 <% } -%>
 
 
