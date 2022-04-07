@@ -298,17 +298,9 @@ export default class Bengal extends Generator {
       },
     ]));
 
-    this.log(utils.h2('Miscellaneous Static Files'));
-
-    Object.assign(this.answers, await this.prompt([
-      {
-        type: 'confirm',
-        name: 'misc',
-        message: 'Use Misc task?',
-      },
-    ]));
-
     if (this.answers.type === 'website') {
+      this.log(utils.h2('Miscellaneous Static Files'));
+
       Object.assign(this.answers, await this.prompt([
         {
           type: 'confirm',
@@ -316,11 +308,9 @@ export default class Bengal extends Generator {
           message: 'Allow Robots?',
         },
       ]));
-    }
 
-    this.log(utils.h2('Deploy'));
+      this.log(utils.h2('Deploy'));
 
-    if (this.answers.type === 'website') {
       let directory;
 
       try {
