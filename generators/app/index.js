@@ -425,6 +425,7 @@ export default class Bengal extends Generator {
     if (this.answers.symbols) {
       await this.addDevDependencies([
         'gulp-svg-sprite',
+        '@sindresorhus/slugify',
         'merge-stream',
         'walk-sync',
       ]);

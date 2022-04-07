@@ -1,3 +1,4 @@
+import {parse as parsePath} from 'node:path';
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 <% if (overflow) { -%>
@@ -5,6 +6,7 @@ import cheerio from 'gulp-cheerio';
 <% } -%>
 import imagemin from 'gulp-imagemin';
 import svgSprite from 'gulp-svg-sprite';
+import slugify from '@sindresorhus/slugify';
 import notify, {onError} from 'gulp-notify';
 import merge from 'merge-stream';
 
@@ -53,6 +55,11 @@ const build = done => {
           symbol: {
             dest: '.',
             sprite: `${dir === '.' ? '<%= defaultSymbol %>' : dir}.svg`,
+          },
+        },
+        shape: {
+          id: {
+            generator: (name, _) => slugify(parsePath(name).name),
           },
         },
         svg: {
