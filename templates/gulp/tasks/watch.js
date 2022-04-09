@@ -2,7 +2,7 @@ import gulp from 'gulp';
 
 import config from '../config.js';
 
-<%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+<% if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
 import {build as styles} from './styles.js';
 <% } -%>
 <% if (symbols) { -%>

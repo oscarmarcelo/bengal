@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 
-<%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+<% if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
 import * as styles from './tasks/styles.js';
 <% } -%>
 <% if (symbols) { -%>

@@ -1,14 +1,14 @@
 import gulp from 'gulp';
-<%_ if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
 import merge from 'merge-stream';
 import rename from 'gulp-rename';
-<%_ } -%>
+<% } -%>
 import notify from 'gulp-notify';
 
 import config from '../config.js';
-<%_ if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
 import {path} from '../utils.js';
-<%_ } -%>
+<% } -%>
 
 
 
@@ -32,7 +32,7 @@ const build = () =>
       message: 'Static files copied!',
       onLast: true,
     }));
-<%_ if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
 
 
 
@@ -62,7 +62,7 @@ const vendor = () => {
       onLast: true,
     }));
 };
-<%_ } -%>
+<% } -%>
 
 
 
