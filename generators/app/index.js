@@ -391,12 +391,17 @@ export default class Bengal extends Generator {
     await this.addDevDependencies([
       'gulp',
       'gulp-notify',
-      'postcss',
-      'gulp-postcss',
-      'autoprefixer',
       'browser-sync',
-      'cssnano',
     ]);
+
+    if (this.answers.styles || this.answers.type !== 'package') { // TODO: Update to rely only on `styles` when failsafe properties are added.
+      await this.addDevDependencies([
+        'postcss',
+        'gulp-postcss',
+        'autoprefixer',
+        'cssnano',
+      ]);
+    }
 
     if (this.answers.sass || this.answers.symbols) {
       await this.addDevDependencies('slash');
@@ -480,7 +485,7 @@ export default class Bengal extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('gulp/tasks/(styles|views|copy|browser|watch).js'),
+      this.templatePath('gulp/tasks/(views|copy|browser|watch).js'),
       this.destinationPath('gulp/tasks'),
       this.answers,
     );
@@ -489,6 +494,14 @@ export default class Bengal extends Generator {
       this.fs.copyTpl(
         this.templatePath('gulp/utils.js'),
         this.destinationPath('gulp/utils.js'),
+        this.answers,
+      );
+    }
+
+    if (this.answers.styles || this.answers.type !== 'package') { // TODO: Update to rely only on `styles` when failsafe properties are added.
+      this.fs.copyTpl(
+        this.templatePath('gulp/tasks/styles.js'),
+        this.destinationPath('gulp/tasks/styles.js'),
         this.answers,
       );
     }
@@ -683,7 +696,7 @@ export default class Bengal extends Generator {
           );
         }
       }
-    } else {
+    } else if (this.answers.styles) {
       this.fs.write(this.destinationPath('src/styles/main.css'), ''); // TODO: Consider having a template file instead.
     }
 

@@ -2,7 +2,9 @@ import gulp from 'gulp';
 
 import config from '../config.js';
 
+<%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
 import {build as styles} from './styles.js';
+<% } -%>
 <% if (symbols) { -%>
 import symbols from './symbols.js';
 <% } -%>
@@ -31,9 +33,11 @@ const {watch, series} = gulp;
  */
 
 const build = done => {
-  // When styles update, <% if (sass) { %>compile Sass<% } else { %>copy CSS<% } %> files.
+  <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+  // When styles update, <% if (typeof sass !== 'undefined' && sass) { %>compile Sass<% } else { %>copy CSS<% } %> files.
   watch(config.src.styles, styles);
 
+  <%_ } -%>
   <%_ if (symbols) { -%>
   // When symbols update, compile symbols and reload browser.
   watch(config.src.symbols, series(symbols, reload));

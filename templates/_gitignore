@@ -15,7 +15,7 @@ build
 dist
 
 
-<% if (sass) { -%>
+<% if (typeof sass !== 'undefined' && sass) { -%>
 # Sass
 # =========================
 .sass-cache

@@ -1,6 +1,8 @@
 import gulp from 'gulp';
 
+<%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
 import * as styles from './tasks/styles.js';
+<% } -%>
 <% if (symbols) { -%>
 import symbols from './tasks/symbols.js';
 <% } -%>
@@ -25,13 +27,41 @@ const {series, parallel} = gulp;
 
 
 export default series(
-  parallel(styles.build<% if (symbols) { %>, symbols<% } %><% if (images) { %>, images<% } %><% if (fonts) { %>, fonts<% } %><% if (scripts) { %>, scripts.build<% } %>, views),
-  parallel(serve, watch),
+  parallel(
+    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+    styles.build,
+    <%_ } -%>
+    <%_ if (symbols) { -%>
+    symbols,
+    <%_ } -%>
+    <%_ if (images) { -%>
+    images,
+    <%_ } -%>
+    <%_ if (fonts) { -%>
+    fonts,
+    <%_ } -%>
+    <%_ if (scripts) { -%>
+    scripts.build,
+    <%_ } -%>
+    views,
+  ),
+  parallel(
+    serve,
+    watch,
+  ),
 );
 
 
 
-export const dist = parallel(styles.dist<% if (scripts) { %>, scripts.dist<% } %>, copy);
+export const dist = parallel(
+  <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+  styles.dist,
+  <%_ } -%>
+  <%_ if (scripts) { -%>
+  scripts.dist,
+  <%_ } -%>
+  copy,
+);
 <% if (type === 'website') { -%>
 
 

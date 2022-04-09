@@ -12,7 +12,9 @@ dist.assets = `${dist.base}/assets`;
 
 const config = {
   src: {
+    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
     styles: `${src.base}/styles/**/*.s+(a|c)ss`,
+    <%_ } -%>
     <%_ if (symbols) { -%>
     symbols: `${src.base}/symbols`,
     <%_ } -%>
@@ -29,7 +31,9 @@ const config = {
   },
   build: {
     base: build.base,
+    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
     styles: `${build.assets}/styles`,
+    <%_ } -%>
     <%_ if (symbols || images) { -%>
     images: `${build.assets}/images`,
     <%_ } -%>
@@ -42,7 +46,9 @@ const config = {
     views: build.base,
     globs: {
       all: `${build.base}/**/*`,
+      <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
       styles: `${build.assets}/**/*.css`,
+      <%_ } -%>
       <%_ if (scripts) { -%>
       scripts: `${build.assets}/**/*.js`,
       <%_ } -%>
@@ -50,7 +56,9 @@ const config = {
   },
   dist: {
     base: dist.base,
+    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
     styles: `${dist.assets}`,
+    <%_ } -%>
     <%_ if (scripts) { -%>
     scripts: `${dist.assets}`,
     <%_ } -%>
