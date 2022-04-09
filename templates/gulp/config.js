@@ -5,10 +5,14 @@ const dist = {};
 src.base = './src';
 
 build.base = './build';
+<%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package' || symbols || images || fonts || scripts) { -%>
 build.assets = `${build.base}/assets`;
+<%_ } -%>
 
 dist.base = './dist';
+<%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package' || symbols || images || fonts || scripts) { -%>
 dist.assets = `${dist.base}/assets`;
+<%_ } -%>
 
 const config = {
   src: {
