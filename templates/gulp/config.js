@@ -16,6 +16,7 @@ dist.assets = `${dist.base}/assets`;
 
 const config = {
   src: {
+    base: `${src.base}/*`,
     <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
     styles: `${src.base}/styles/**/*.s+(a|c)ss`,
     <%_ } -%>
@@ -32,6 +33,16 @@ const config = {
     scripts: `${src.base}/scripts/**/*.js`,
     <%_ } -%>
     views: `${src.base}/views/**/*.<%= views %>`,
+    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package' || scripts) { -%>
+    vendors: {
+      <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+      styles: {},
+      <%_ } -%>
+      <%_ if (scripts) { -%>
+      scripts: {},
+      <%_ } -%>
+    },
+    <%_ } -%>
   },
   build: {
     base: build.base,

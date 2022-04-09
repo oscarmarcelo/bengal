@@ -16,7 +16,7 @@ import fonts from './tasks/fonts.js';
 import * as scripts from './tasks/scripts.js';
 <% } -%>
 import views from './tasks/views.js';
-import copy from './tasks/copy.js';
+import * as copy from './tasks/copy.js';
 import {serve} from './tasks/browser.js';
 import watch from './tasks/watch.js';
 
@@ -43,6 +43,10 @@ export default series(
     <%_ if (scripts) { -%>
     scripts.build,
     <%_ } -%>
+    copy.build,
+    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package' || scripts) { -%>
+    copy.vendor,
+    <%_ } -%>
     views,
   ),
   parallel(
@@ -60,7 +64,7 @@ export const dist = parallel(
   <%_ if (scripts) { -%>
   scripts.dist,
   <%_ } -%>
-  copy,
+  copy.dist,
 );
 <% if (type === 'website') { -%>
 
