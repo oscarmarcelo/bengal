@@ -30,12 +30,8 @@ const {src, dest} = gulp;
  * ================================
  */
 
-const build = done => {
+const build = () => {
   const dirs = getDirs(config.src.symbols);
-
-  if (dirs.length === 0) {
-    return done();
-  }
 
   const subtasks = dirs.map(dir =>
     src(path(config.src.symbols, dir, '/*.svg'))
