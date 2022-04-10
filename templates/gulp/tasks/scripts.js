@@ -38,7 +38,7 @@ export const build = () =>
     <%_ } -%>
     .pipe(dest(config.build.scripts))
     .pipe(notify({
-      message: 'JavaScript generated!',
+      message: 'Scripts generated!',
       onLast: true,
     }));
 
@@ -46,7 +46,7 @@ export const build = () =>
 
 /*
  * =============================================================================
- * Uglify JavaScript.
+ * Minify JavaScript.
  * Notify end of task.
  * =============================================================================
  */
@@ -61,6 +61,6 @@ export const dist = () =>
     }))
     .pipe(dest(config.dist.scripts))
     .pipe(notify({
-      message: 'JavaScript uglified!',
+      message: 'Scripts minified!',
       onLast: true,
     }));

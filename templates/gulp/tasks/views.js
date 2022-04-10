@@ -41,7 +41,7 @@ const build = () =>
     <%_ } -%>
     .pipe(dest(config.build.views))
     .pipe(notify({
-      message: 'HTML generated!',
+      message: 'Views generated!',
       onLast: true,
     }));
 

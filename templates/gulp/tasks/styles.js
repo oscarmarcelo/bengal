@@ -61,7 +61,7 @@ export const build = () =>
     }))
     <%_ } -%>
     .pipe(notify({
-      message: 'CSS generated!',
+      message: 'Styles generated!',
       onLast: true,
     }));
 
@@ -69,7 +69,7 @@ export const build = () =>
 
 /*
  * =============================================================================
- * Compress styles.
+ * Minify styles.
  * Notify end of task.
  * =============================================================================
  */
@@ -81,6 +81,6 @@ export const dist = () =>
     ]))
     .pipe(dest(config.dist.styles))
     .pipe(notify({
-      message: 'CSS minified!',
+      message: 'Styles minified!',
       onLast: true,
     }));
