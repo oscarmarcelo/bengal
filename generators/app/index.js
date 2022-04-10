@@ -720,6 +720,30 @@ export default class Bengal extends Generator {
       this.fs.write(this.destinationPath('src/styles/main.css'), ''); // TODO: Consider having a template file instead.
     }
 
+    if (this.answers.symbols) {
+      this.fs.copyTpl(
+        this.templatePath('src/symbols/**/*'),
+        this.destinationPath('src/symbols'),
+        this.answers,
+      );
+    }
+
+    if (this.answers.images) {
+      this.fs.copyTpl(
+        this.templatePath('src/images/**/*'),
+        this.destinationPath('src/images'),
+        this.answers,
+      );
+    }
+
+    if (this.answers.fonts) {
+      this.fs.copyTpl(
+        this.templatePath('src/fonts/**/*'),
+        this.destinationPath('src/fonts'),
+        this.answers,
+      );
+    }
+
     if (this.answers.scripts) {
       this.fs.copy(
         this.templatePath('src/scripts/**/*'),
