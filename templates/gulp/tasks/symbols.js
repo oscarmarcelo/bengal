@@ -19,15 +19,15 @@ const {src, dest} = gulp;
 
 
 
-/**
- * ================================
+/*
+ * =============================================================================
  <%_ if (overflow) { -%>
  * Add visible overflow to all SVG files.
  <%_ } -%>
  * Optimize SVG files.
  * Concatenate SVG files into symbols files.
  * Notify end of task.
- * ================================
+ * =============================================================================
  */
 
 const build = () => {
