@@ -602,6 +602,8 @@ export default class Bengal extends Generator {
       }
     }
 
+    this.fs.write(this.destinationPath('src/_placeholder'), '');
+
     if (this.answers.sass) {
       this.fs.copyTpl(
         this.templatePath('src/styles/main.sass'),
