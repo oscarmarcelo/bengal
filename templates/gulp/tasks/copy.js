@@ -43,7 +43,7 @@ const build = () =>
  * ========================================================
  */
 
-const vendor = () => {
+const vendor = done => {
   const vendors = merge();
 
   for (const [type, typeFiles] of Object.entries(config.src.vendors)) {
@@ -54,6 +54,10 @@ const vendor = () => {
           .pipe(dest(path(config.build[type], 'vendors'))),
       );
     }
+  }
+
+  if (vendors.isEmpty()) {
+    done();
   }
 
   return merge(vendors)
