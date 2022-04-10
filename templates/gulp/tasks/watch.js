@@ -18,6 +18,7 @@ import fonts from './fonts.js';
 import {build as scripts} from './scripts.js';
 <% } -%>
 import views from './views.js';
+import {build as copy} from './copy.js';
 import {reload} from './browser.js';
 
 
@@ -60,6 +61,9 @@ const build = done => {
   <%_ } -%>
   // When views update, <% if (views === 'pug') { %>compile<% } else { %>copy<% } %> views and reload browser.
   watch(config.src.views, series(views, reload));
+
+  // When static files in the root update, copy them.
+  watch(config.src.base, series(copy, reload));
 
   done();
 };
