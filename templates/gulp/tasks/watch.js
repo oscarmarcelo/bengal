@@ -17,13 +17,17 @@ import fonts from './fonts.js';
 <% if (scripts) { -%>
 import {build as scripts} from './scripts.js';
 <% } -%>
+<% if (typeof views !== 'undefined' && views) { -%>
 import views from './views.js';
+<% } -%>
 import {build as copy} from './copy.js';
+<% if (typeof views !== 'undefined' && views) { -%>
 import {reload} from './browser.js';
+<% } -%>
 
 
 
-const {watch, series} = gulp;
+const {watch<% if (typeof views !== 'undefined' && views) { %>, series<% } %>} = gulp;
 
 
 
@@ -41,12 +45,12 @@ const build = done => {
   <%_ } -%>
   <%_ if (symbols) { -%>
   // When symbols update, compile symbols and reload browser.
-  watch(config.src.symbols, series(symbols, reload));
+  watch(config.src.symbols, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>symbols<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
 
   <%_ } -%>
   <%_ if (images) { -%>
   // When images update, optimize images and reload browser.
-  watch(config.src.images, series(images, reload));
+  watch(config.src.images, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>images<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
 
   <%_ } -%>
   <%_ if (fonts) { -%>
@@ -56,14 +60,16 @@ const build = done => {
   <%_ } -%>
   <%_ if (scripts) { -%>
   // When scripts update, compile scripts and reload browser.
-  watch(config.src.scripts, series(scripts, reload));
+  watch(config.src.scripts, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>scripts<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
 
   <%_ } -%>
+  <%_ if (typeof views !== 'undefined' && views) { -%>
   // When views update, <% if (views === 'pug') { %>compile<% } else { %>copy<% } %> views and reload browser.
-  watch(config.src.views, series(views, reload));
+  watch(config.src.views, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>views<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
 
+  <%_ } -%>
   // When static files in the root update, copy them.
-  watch(config.src.base, series(copy, reload));
+  watch(config.src.base, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>copy<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
 
   done();
 };

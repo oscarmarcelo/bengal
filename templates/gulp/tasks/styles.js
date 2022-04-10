@@ -9,7 +9,9 @@ import autoprefixer from 'autoprefixer';
 <% if (typeof sass !== 'undefined' && sass) { -%>
 import rename from 'gulp-rename';
 <% } -%>
+<% if (typeof views !== 'undefined' && views) { -%>
 import {reload} from 'browser-sync';
+<% } -%>
 import cssnano from 'cssnano';
 
 import config from '../config.js';
@@ -53,9 +55,11 @@ export const build = () =>
     .pipe(rename(dirToFile))
     <%_ } -%>
     .pipe(dest(config.build.styles))
+    <%_ if (typeof views !== 'undefined' && views) { -%>
     .pipe(reload({
       stream: true,
     }))
+    <%_ } -%>
     .pipe(notify({
       message: 'CSS generated!',
       onLast: true,

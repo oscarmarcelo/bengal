@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "gulp",
-    "dist": "gulp dist"<% if (views === 'php') { %>,
+    "dist": "gulp dist"<% if (typeof views !=='undefined' && views === 'php') { %>,
     "start": "docker-compose up"<% } %><% if (type === 'website') { %>,
     "deploy": "gulp dist && gulp deploy"<% } %><% if (typeof xo !== 'undefined' && xo) { %>,
     "lint": "xo"<% } %>

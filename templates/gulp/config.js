@@ -32,7 +32,9 @@ const config = {
     <%_ if (scripts) { -%>
     scripts: `${src.base}/scripts/**/*.js`,
     <%_ } -%>
+    <%_ if (typeof views !== 'undefined' && views) { -%>
     views: `${src.base}/views/**/*.<%= views %>`,
+    <%_ } -%>
     <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package' || scripts) { -%>
     vendors: {
       <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
@@ -58,7 +60,9 @@ const config = {
     <%_ if (scripts) { -%>
     scripts: `${build.assets}/scripts`,
     <%_ } -%>
+    <%_ if (typeof views !== 'undefined' && views) { -%>
     views: build.base,
+    <%_ } -%>
     globs: {
       all: `${build.base}/**/*`,
       <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>

@@ -279,6 +279,12 @@ export default class Bengal extends Generator {
 
     Object.assign(this.answers, await this.prompt([
       {
+        type: 'confirm',
+        name: 'viewsTask',
+        message: 'Use Views task?',
+        when: this.answers.type === 'package',
+      },
+      {
         type: 'list',
         name: 'views',
         message: 'Language:',
@@ -292,6 +298,7 @@ export default class Bengal extends Generator {
             value: 'php',
           },
         ],
+        when: answers => this.answers.type !== 'package' || answers.viewsTask,
       },
       {
         type: 'number',
@@ -300,7 +307,7 @@ export default class Bengal extends Generator {
         default: await getPort(),
         validate: answer => Number.isInteger(answer) && answer > 1024 && answer < 65_535 ? true : 'Must be an available port number between 1024 and 65535.',
         filter: answer => Number.isInteger(answer) && answer > 1024 && answer < 65_535 ? answer : '',
-        when: answers => answers.views === 'php',
+        when: answers => answers.views && answers.views === 'php',
       },
     ]));
 
@@ -391,7 +398,6 @@ export default class Bengal extends Generator {
     await this.addDevDependencies([
       'gulp',
       'gulp-notify',
-      'browser-sync',
     ]);
 
     if (this.answers.styles || this.answers.type !== 'package') { // TODO: Update to rely only on `styles` when failsafe properties are added.
@@ -448,6 +454,10 @@ export default class Bengal extends Generator {
       ]);
     }
 
+    if (this.answers.views) {
+      await this.addDevDependencies('browser-sync');
+    }
+
     if (this.answers.views === 'pug') {
       await this.addDevDependencies('gulp-pug');
     }
@@ -485,7 +495,7 @@ export default class Bengal extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('gulp/tasks/(views|copy|browser|watch).js'),
+      this.templatePath('gulp/tasks/(copy|watch).js'),
       this.destinationPath('gulp/tasks'),
       this.answers,
     );
@@ -526,6 +536,14 @@ export default class Bengal extends Generator {
       this.fs.copyTpl(
         this.templatePath('gulp/tasks/fonts.js'),
         this.destinationPath('gulp/tasks/fonts.js'),
+        this.answers,
+      );
+    }
+
+    if (this.answers.views) {
+      this.fs.copyTpl(
+        this.templatePath('gulp/tasks/(views|browser).js'),
+        this.destinationPath('gulp/tasks'),
         this.answers,
       );
     }
@@ -707,11 +725,13 @@ export default class Bengal extends Generator {
       );
     }
 
-    this.fs.copyTpl(
-      this.templatePath(`src/views/${this.answers.views}/**/*`),
-      this.destinationPath('src/views'),
-      this.answers,
-    );
+    if (this.answers.views) {
+      this.fs.copyTpl(
+        this.templatePath(`src/views/${this.answers.views}/**/*`),
+        this.destinationPath('src/views'),
+        this.answers,
+      );
+    }
   }
 
 

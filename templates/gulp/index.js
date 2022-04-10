@@ -15,9 +15,13 @@ import fonts from './tasks/fonts.js';
 <% if (scripts) { -%>
 import * as scripts from './tasks/scripts.js';
 <% } -%>
+<% if (typeof views !== 'undefined' && views) { -%>
 import views from './tasks/views.js';
+<% } -%>
 import * as copy from './tasks/copy.js';
+<% if (typeof views !== 'undefined' && views) { -%>
 import {serve} from './tasks/browser.js';
+<% } -%>
 import watch from './tasks/watch.js';
 
 
@@ -47,12 +51,18 @@ export default series(
     <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package' || scripts) { -%>
     copy.vendor,
     <%_ } -%>
+    <%_ if (typeof views !== 'undefined' && views) { -%>
     views,
+    <%_ } -%>
   ),
+  <%_ if (typeof views !== 'undefined' && views) { -%>
   parallel(
     serve,
-    watch,
+  <%_ } -%>
+  <% if (typeof views !== 'undefined' && views) { %>  <% } %>watch,
+  <%_ if (typeof views !== 'undefined' && views) { -%>
   ),
+  <%_ } -%>
 );
 
 
