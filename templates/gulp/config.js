@@ -76,10 +76,10 @@ const config = {
   dist: {
     base: dist.base,
     <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
-    styles: `${dist.assets}`,
+    styles: dist.assets,
     <%_ } -%>
     <%_ if (scripts) { -%>
-    scripts: `${dist.assets}`,
+    scripts: dist.assets,
     <%_ } -%>
     globs: {
       all: `${dist.base}/**/*`,
