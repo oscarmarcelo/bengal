@@ -94,6 +94,18 @@ const dist = () => {
 
 
 
+/*
+ * =============================================================================
+ * Exports
+ * =============================================================================
+ */
+
+build.displayName = 'copy:build';
+<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+vendor.displayName = 'copy:vendor';
+<% } -%>
+dist.displayName = 'copy:dist';
+
 export {
   build,
   <%_ if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>

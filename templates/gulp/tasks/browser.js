@@ -12,7 +12,7 @@ import config from '../config.js';
  * =============================================================================
  */
 
-export const serve = done => {
+const serve = done => {
   init({
     <%_ if (views === 'pug') { -%>
     server: config.build.base,
@@ -22,6 +22,7 @@ export const serve = done => {
     <%_ } -%>
     ghostMode: false,
   });
+
   done();
 };
 
@@ -33,7 +34,21 @@ export const serve = done => {
  * =============================================================================
  */
 
-export const reload = done => {
+const reload = done => {
   bsReload();
+
   done();
+};
+
+
+
+/*
+ * =============================================================================
+ * Exports
+ * =============================================================================
+ */
+
+export {
+  serve,
+  reload,
 };

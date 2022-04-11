@@ -26,7 +26,7 @@ const {default: uglify} = uglifyEs;
  * =============================================================================
  */
 
-export const build = () =>
+const build = () =>
   src(config.src.scripts)
     <%_ if (babel) { -%>
     .pipe(plumber())
@@ -51,7 +51,7 @@ export const build = () =>
  * =============================================================================
  */
 
-export const dist = () =>
+const dist = () =>
   src(config.build.globs.scripts)
     .pipe(plumber())
     .pipe(uglify())
@@ -64,3 +64,19 @@ export const dist = () =>
       message: 'Scripts minified!',
       onLast: true,
     }));
+
+
+
+/*
+ * =============================================================================
+ * Exports
+ * =============================================================================
+ */
+
+build.displayName = 'scripts:build';
+dist.displayName = 'scripts:dist';
+
+export {
+  build,
+  dist,
+};

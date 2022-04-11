@@ -39,7 +39,7 @@ const sass = gulpSass(dartSass);
  * =============================================================================
  */
 
-export const build = () =>
+const build = () =>
   src(config.src.styles)
     <%_ if (typeof sass !== 'undefined' && sass) { -%>
     .pipe(sass())
@@ -74,7 +74,7 @@ export const build = () =>
  * =============================================================================
  */
 
-export const dist = () =>
+const dist = () =>
   src(config.build.globs.styles)
     .pipe(postcss([
       cssnano(),
@@ -84,3 +84,19 @@ export const dist = () =>
       message: 'Styles minified!',
       onLast: true,
     }));
+
+
+
+/*
+ * =============================================================================
+ * Exports
+ * =============================================================================
+ */
+
+build.displayName = 'styles:build';
+dist.displayName = 'styles:dist';
+
+export {
+  build,
+  dist,
+};
