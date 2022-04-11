@@ -535,67 +535,67 @@ export default class Bengal extends Generator {
     this.copyTemplate('src/_placeholder', 'src/_placeholder');
 
     if (this.answers.sass) {
-      this.renderTemplate('src/styles/main.sass', 'src/styles/main.sass', this.answers);
+      this.renderTemplate('src/styles/sass/main.sass', 'src/styles/main.sass', this.answers);
 
       if (this.answers.sevenOnePattern) {
         if (this.answers.sevenOnePattern.includes('abstracts/settings') || this.answers.sevenOnePattern.includes('abstracts/functions') || this.answers.sevenOnePattern.includes('abstracts/mixins')) {
-          this.renderTemplate('src/styles/abstracts/_index.sass', 'src/styles/abstracts/_index.sass', this.answers);
+          this.renderTemplate('src/styles/sass/abstracts/_index.sass', 'src/styles/abstracts/_index.sass', this.answers);
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/settings')) {
-          this.copyTemplate('src/styles/abstracts/settings/_index.scss', 'src/styles/abstracts/settings/_index.scss');
+          this.copyTemplate('src/styles/sass/abstracts/settings/_index.scss', 'src/styles/abstracts/settings/_index.scss');
 
           if (this.answers.sevenOnePattern.includes('base')) {
-            this.copyTemplate('src/styles/abstracts/settings/_base.scss', 'src/styles/abstracts/settings/_base.scss');
+            this.copyTemplate('src/styles/sass/abstracts/settings/_base.scss', 'src/styles/abstracts/settings/_base.scss');
           }
 
           if (this.answers.sevenOnePattern.includes('components')) {
-            this.copyTemplate('src/styles/abstracts/settings/_components.scss', 'src/styles/abstracts/settings/_components.scss');
+            this.copyTemplate('src/styles/sass/abstracts/settings/_components.scss', 'src/styles/abstracts/settings/_components.scss');
           }
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/functions')) {
-          this.copyTemplate('src/styles/abstracts/functions/**/*', 'src/styles/abstracts/functions');
+          this.copyTemplate('src/styles/sass/abstracts/functions/**/*', 'src/styles/abstracts/functions');
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/mixins')) {
-          this.copyTemplate('src/styles/abstracts/mixins/**/*', 'src/styles/abstracts/mixins');
+          this.copyTemplate('src/styles/sass/abstracts/mixins/**/*', 'src/styles/abstracts/mixins');
         }
 
         if (this.answers.sevenOnePattern.includes('base')) {
-          this.renderTemplate('src/styles/base/**/_!(svg|font-face).sass', 'src/styles/base', this.answers);
+          this.renderTemplate('src/styles/sass/base/**/_!(svg|font-face).sass', 'src/styles/base', this.answers);
 
           if (this.answers.symbols) {
-            this.renderTemplate('src/styles/base/_svg.sass', 'src/styles/base/_svg.sass', this.answers);
+            this.renderTemplate('src/styles/sass/base/_svg.sass', 'src/styles/base/_svg.sass', this.answers);
           }
 
           if (this.answers.fonts) {
-            this.copyTemplate('src/styles/base/_font-face.sass', 'src/styles/base/_font-face.sass');
+            this.copyTemplate('src/styles/sass/base/_font-face.sass', 'src/styles/base/_font-face.sass');
           }
         }
 
         if (this.answers.sevenOnePattern.includes('components')) {
-          this.copyTemplate('src/styles/components/**/*', 'src/styles/components');
+          this.copyTemplate('src/styles/sass/components/**/*', 'src/styles/components');
         }
 
         if (this.answers.sevenOnePattern.includes('layout')) {
-          this.copyTemplate('src/styles/layout/**/*', 'src/styles/layout');
+          this.copyTemplate('src/styles/sass/layout/**/*', 'src/styles/layout');
         }
 
         if (this.answers.sevenOnePattern.includes('pages')) {
-          this.copyTemplate('src/styles/pages/**/*', 'src/styles/pages');
+          this.copyTemplate('src/styles/sass/pages/**/*', 'src/styles/pages');
         }
 
         if (this.answers.sevenOnePattern.includes('themes')) {
-          this.copyTemplate('src/styles/themes/**/*', 'src/styles/themes');
+          this.copyTemplate('src/styles/sass/themes/**/*', 'src/styles/themes');
         }
 
         if (this.answers.sevenOnePattern.includes('vendors')) {
-          this.copyTemplate('src/styles/vendors/**/*', 'src/styles/vendors');
+          this.copyTemplate('src/styles/sass/vendors/**/*', 'src/styles/vendors');
         }
       }
     } else if (this.answers.styles) {
-      this.writeDestination('src/styles/main.css', ''); // TODO: Consider having a template file instead.
+      this.copyTemplate('src/styles/css/main.css', 'src/styles/main.css');
     }
 
     if (this.answers.symbols) {
