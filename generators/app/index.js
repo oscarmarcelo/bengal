@@ -389,6 +389,12 @@ export default class Bengal extends Generator {
       'gulp-notify',
     ]);
 
+    if ((typeof this.answers.styles !== 'undefined' && this.answers.styles) || (typeof this.answers.sass !== 'undefined' && this.answers.sass) || this.answers.scripts || this.answers.symbols) {
+      await this.addDevDependencies([
+        'merge-stream',
+      ]);
+    }
+
     if (this.answers.styles || this.answers.type !== 'package') { // TODO: Update to rely only on `styles` when failsafe properties are added.
       await this.addDevDependencies([
         'postcss',
@@ -422,7 +428,6 @@ export default class Bengal extends Generator {
       await this.addDevDependencies([
         'gulp-svg-sprite',
         '@sindresorhus/slugify',
-        'merge-stream',
         'walk-sync',
       ]);
     }
