@@ -477,7 +477,7 @@ export default class Bengal extends Generator {
     const orderedDevDependencies = {};
 
     for (const key of Object.keys(devDependencies).sort()) {
-      orderedDevDependencies[key] = devDependencies[key];
+      orderedDevDependencies[key] = `^${devDependencies[key]}`;
     }
 
     this.packageJson.set('devDependencies', orderedDevDependencies);
