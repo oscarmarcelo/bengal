@@ -18,7 +18,7 @@ const config = {
   src: {
     base: `${src.base}/*`,
     <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
-    styles: `${src.base}/styles/**/*.s+(a|c)ss`,
+    styles: `${src.base}/styles/**/*.<% if (typeof sass !== 'undefined' && sass) { %>s+(a|c)ss<% } else { %>css<% } %>`,
     <%_ } -%>
     <%_ if (symbols) { -%>
     symbols: `${src.base}/symbols`,

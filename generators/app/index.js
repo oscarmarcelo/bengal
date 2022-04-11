@@ -392,6 +392,7 @@ export default class Bengal extends Generator {
     if ((typeof this.answers.styles !== 'undefined' && this.answers.styles) || (typeof this.answers.sass !== 'undefined' && this.answers.sass) || this.answers.scripts || this.answers.symbols) {
       await this.addDevDependencies([
         'merge-stream',
+        'slash',
       ]);
     }
 
@@ -412,11 +413,14 @@ export default class Bengal extends Generator {
       await this.addDevDependencies('gulp-plumber');
     }
 
+    if ((typeof this.answers.styles !== 'undefined' && this.answers.styles) || (typeof this.answers.sass !== 'undefined' && this.answers.sass) || this.answers.scripts) {
+      await this.addDevDependencies('gulp-rename');
+    }
+
     if (this.answers.sass) {
       await this.addDevDependencies([
         'sass',
         'gulp-sass',
-        'gulp-rename',
       ]);
     }
 
@@ -482,7 +486,7 @@ export default class Bengal extends Generator {
 
     this.renderTemplate('gulp/tasks/(copy|watch).js', 'gulp/tasks', this.answers);
 
-    if (this.answers.sass || this.answers.symbols) {
+    if (this.answers.styles || this.answers.sass || this.answers.symbols) {
       this.renderTemplate('gulp/utils.js', 'gulp/utils.js', this.answers);
     }
 
