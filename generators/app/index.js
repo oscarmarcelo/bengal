@@ -378,22 +378,11 @@ export default class Bengal extends Generator {
   async writing() {
     this.sourceRoot(join(fileURLToPath(new URL('.', import.meta.url)), '../../templates'));
 
-    this.fs.copy(
-      this.templatePath('_editorconfig'),
-      this.destinationPath('.editorconfig'),
-    );
+    this.copyTemplate('_editorconfig', '.editorconfig');
 
-    this.fs.copyTpl(
-      this.templatePath('_gitignore'),
-      this.destinationPath('.gitignore'),
-      this.answers,
-    );
+    this.renderTemplate('_gitignore', '.gitignore', this.answers);
 
-    this.fs.copyTpl(
-      this.templatePath('_package.json'),
-      this.destinationPath('package.json'),
-      this.answers,
-    );
+    this.renderTemplate('_package.json', 'package.json', this.answers);
 
     await this.addDevDependencies([
       'gulp',
@@ -482,281 +471,146 @@ export default class Bengal extends Generator {
 
     this.packageJson.set('devDependencies', orderedDevDependencies);
 
-    this.fs.copyTpl(
-      this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'),
-      this.answers,
-    );
+    this.renderTemplate('gulpfile.js', 'gulpfile.js', this.answers);
 
-    this.fs.copyTpl(
-      this.templatePath('gulp/(index|config).js'),
-      this.destinationPath('gulp'),
-      this.answers,
-    );
+    this.renderTemplate('gulp/(index|config).js', 'gulp', this.answers);
 
-    this.fs.copyTpl(
-      this.templatePath('gulp/tasks/(copy|watch).js'),
-      this.destinationPath('gulp/tasks'),
-      this.answers,
-    );
+    this.renderTemplate('gulp/tasks/(copy|watch).js', 'gulp/tasks', this.answers);
 
     if (this.answers.sass || this.answers.symbols) {
-      this.fs.copyTpl(
-        this.templatePath('gulp/utils.js'),
-        this.destinationPath('gulp/utils.js'),
-        this.answers,
-      );
+      this.renderTemplate('gulp/utils.js', 'gulp/utils.js', this.answers);
     }
 
     if (this.answers.styles || this.answers.type !== 'package') { // TODO: Update to rely only on `styles` when failsafe properties are added.
-      this.fs.copyTpl(
-        this.templatePath('gulp/tasks/styles.js'),
-        this.destinationPath('gulp/tasks/styles.js'),
-        this.answers,
-      );
+      this.renderTemplate('gulp/tasks/styles.js', 'gulp/tasks/styles.js', this.answers);
     }
 
     if (this.answers.symbols) {
-      this.fs.copyTpl(
-        this.templatePath('gulp/tasks/symbols.js'),
-        this.destinationPath('gulp/tasks/symbols.js'),
-        this.answers,
-      );
+      this.renderTemplate('gulp/tasks/symbols.js', 'gulp/tasks/symbols.js', this.answers);
     }
 
     if (this.answers.images) {
-      this.fs.copyTpl(
-        this.templatePath('gulp/tasks/images.js'),
-        this.destinationPath('gulp/tasks/images.js'),
-        this.answers,
-      );
+      this.renderTemplate('gulp/tasks/images.js', 'gulp/tasks/images.js', this.answers);
     }
 
     if (this.answers.fonts) {
-      this.fs.copyTpl(
-        this.templatePath('gulp/tasks/fonts.js'),
-        this.destinationPath('gulp/tasks/fonts.js'),
-        this.answers,
-      );
+      this.renderTemplate('gulp/tasks/fonts.js', 'gulp/tasks/fonts.js', this.answers);
     }
 
     if (this.answers.views) {
-      this.fs.copyTpl(
-        this.templatePath('gulp/tasks/(views|browser).js'),
-        this.destinationPath('gulp/tasks'),
-        this.answers,
-      );
+      this.renderTemplate('gulp/tasks/(views|browser).js', 'gulp/tasks', this.answers);
     }
 
     if (this.answers.scripts) {
-      this.fs.copyTpl(
-        this.templatePath('gulp/tasks/scripts.js'),
-        this.destinationPath('gulp/tasks/scripts.js'),
-        this.answers,
-      );
+      this.renderTemplate('gulp/tasks/scripts.js', 'gulp/tasks/scripts.js', this.answers);
     }
 
     if (this.answers.type === 'website') {
-      this.fs.copy(
-        this.templatePath('gulp/tasks/deploy.js'),
-        this.destinationPath('gulp/tasks/deploy.js'),
-      );
+      this.copyTemplate('gulp/tasks/deploy.js', 'gulp/tasks/deploy.js');
 
       if (this.answers.robots === false) {
-        this.fs.copy(
-          this.templatePath('src/robots.txt'),
-          this.destinationPath('src/robots.txt'),
-        );
+        this.copyTemplate('src/robots.txt', 'src/robots.txt');
       }
 
       if (this.answers.views === 'php') {
-        this.fs.copy(
-          this.templatePath('_dockerignore'),
-          this.destinationPath('.dockerignore'),
-        );
+        this.copyTemplate('_dockerignore', '.dockerignore');
 
-        this.fs.copyTpl(
-          this.templatePath('_docker-compose.yml'),
-          this.destinationPath('docker-compose.yml'),
-          this.answers,
-        );
+        this.renderTemplate('_docker-compose.yml', 'docker-compose.yml', this.answers);
 
-        this.fs.copyTpl(
-          this.templatePath('docker/**/*'),
-          this.destinationPath('docker'),
-          this.answers,
-        );
+        this.renderTemplate('docker/**/*', 'docker', this.answers);
       }
 
-      this.fs.copy(
-        this.templatePath('_env.template'),
-        this.destinationPath('.env.template'),
-      );
+      this.copyTemplate('_env.template', '.env.template');
 
       if (this.answers.serverHost && this.answers.serverUser && this.answers.serverPath) {
-        this.fs.copyTpl(
-          this.templatePath('_env'),
-          this.destinationPath('.env'),
-          this.answers,
-        );
+        this.renderTemplate('_env', '.env', this.answers);
       }
     }
 
     this.copyTemplate('src/_placeholder', 'src/_placeholder');
 
     if (this.answers.sass) {
-      this.fs.copyTpl(
-        this.templatePath('src/styles/main.sass'),
-        this.destinationPath('src/styles/main.sass'),
-        this.answers,
-      );
+      this.renderTemplate('src/styles/main.sass', 'src/styles/main.sass', this.answers);
 
       if (this.answers.sevenOnePattern) {
         if (this.answers.sevenOnePattern.includes('abstracts/settings') || this.answers.sevenOnePattern.includes('abstracts/functions') || this.answers.sevenOnePattern.includes('abstracts/mixins')) {
-          this.fs.copyTpl(
-            this.templatePath('src/styles/abstracts/_index.sass'),
-            this.destinationPath('src/styles/abstracts/_index.sass'),
-            this.answers,
-          );
+          this.renderTemplate('src/styles/abstracts/_index.sass', 'src/styles/abstracts/_index.sass', this.answers);
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/settings')) {
-          this.fs.copy(
-            this.templatePath('src/styles/abstracts/settings/_index.scss'),
-            this.destinationPath('src/styles/abstracts/settings/_index.scss'),
-          );
+          this.copyTemplate('src/styles/abstracts/settings/_index.scss', 'src/styles/abstracts/settings/_index.scss');
 
           if (this.answers.sevenOnePattern.includes('base')) {
-            this.fs.copy(
-              this.templatePath('src/styles/abstracts/settings/_base.scss'),
-              this.destinationPath('src/styles/abstracts/settings/_base.scss'),
-            );
+            this.copyTemplate('src/styles/abstracts/settings/_base.scss', 'src/styles/abstracts/settings/_base.scss');
           }
 
           if (this.answers.sevenOnePattern.includes('components')) {
-            this.fs.copy(
-              this.templatePath('src/styles/abstracts/settings/_components.scss'),
-              this.destinationPath('src/styles/abstracts/settings/_components.scss'),
-            );
+            this.copyTemplate('src/styles/abstracts/settings/_components.scss', 'src/styles/abstracts/settings/_components.scss');
           }
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/functions')) {
-          this.fs.copy(
-            this.templatePath('src/styles/abstracts/functions/**/*'),
-            this.destinationPath('src/styles/abstracts/functions'),
-          );
+          this.copyTemplate('src/styles/abstracts/functions/**/*', 'src/styles/abstracts/functions');
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/mixins')) {
-          this.fs.copy(
-            this.templatePath('src/styles/abstracts/mixins/**/*'),
-            this.destinationPath('src/styles/abstracts/mixins'),
-          );
+          this.copyTemplate('src/styles/abstracts/mixins/**/*', 'src/styles/abstracts/mixins');
         }
 
         if (this.answers.sevenOnePattern.includes('base')) {
-          this.fs.copyTpl(
-            [
-              this.templatePath('src/styles/base/**/*'),
-              '!**/base/_(svg|font-face).sass',
-            ],
-            this.destinationPath('src/styles/base'),
-            this.answers,
-          );
+          this.renderTemplate('src/styles/base/**/_!(svg|font-face).sass', 'src/styles/base', this.answers);
 
           if (this.answers.symbols) {
-            this.fs.copyTpl(
-              this.templatePath('src/styles/base/_svg.sass'),
-              this.destinationPath('src/styles/base/_svg.sass'),
-              this.answers,
-            );
+            this.renderTemplate('src/styles/base/_svg.sass', 'src/styles/base/_svg.sass', this.answers);
           }
 
           if (this.answers.fonts) {
-            this.fs.copy(
-              this.templatePath('src/styles/base/_font-face.sass'),
-              this.destinationPath('src/styles/base/_font-face.sass'),
-            );
+            this.copyTemplate('src/styles/base/_font-face.sass', 'src/styles/base/_font-face.sass');
           }
         }
 
         if (this.answers.sevenOnePattern.includes('components')) {
-          this.fs.copy(
-            this.templatePath('src/styles/components/**/*'),
-            this.destinationPath('src/styles/components'),
-          );
+          this.copyTemplate('src/styles/components/**/*', 'src/styles/components');
         }
 
         if (this.answers.sevenOnePattern.includes('layout')) {
-          this.fs.copy(
-            this.templatePath('src/styles/layout/**/*'),
-            this.destinationPath('src/styles/layout'),
-          );
+          this.copyTemplate('src/styles/layout/**/*', 'src/styles/layout');
         }
 
         if (this.answers.sevenOnePattern.includes('pages')) {
-          this.fs.copy(
-            this.templatePath('src/styles/pages/**/*'),
-            this.destinationPath('src/styles/pages'),
-          );
+          this.copyTemplate('src/styles/pages/**/*', 'src/styles/pages');
         }
 
         if (this.answers.sevenOnePattern.includes('themes')) {
-          this.fs.copy(
-            this.templatePath('src/styles/themes/**/*'),
-            this.destinationPath('src/styles/themes'),
-          );
+          this.copyTemplate('src/styles/themes/**/*', 'src/styles/themes');
         }
 
         if (this.answers.sevenOnePattern.includes('vendors')) {
-          this.fs.copy(
-            this.templatePath('src/styles/vendors/**/*'),
-            this.destinationPath('src/styles/vendors'),
-          );
+          this.copyTemplate('src/styles/vendors/**/*', 'src/styles/vendors');
         }
       }
     } else if (this.answers.styles) {
-      this.fs.write(this.destinationPath('src/styles/main.css'), ''); // TODO: Consider having a template file instead.
+      this.writeDestination('src/styles/main.css', ''); // TODO: Consider having a template file instead.
     }
 
     if (this.answers.symbols) {
-      this.fs.copyTpl(
-        this.templatePath('src/symbols/**/*'),
-        this.destinationPath('src/symbols'),
-        this.answers,
-      );
+      this.renderTemplate('src/symbols/**/*', 'src/symbols', this.answers);
     }
 
     if (this.answers.images) {
-      this.fs.copyTpl(
-        this.templatePath('src/images/**/*'),
-        this.destinationPath('src/images'),
-        this.answers,
-      );
+      this.renderTemplate('src/images/**/*', 'src/images', this.answers);
     }
 
     if (this.answers.fonts) {
-      this.fs.copyTpl(
-        this.templatePath('src/fonts/**/*'),
-        this.destinationPath('src/fonts'),
-        this.answers,
-      );
+      this.renderTemplate('src/fonts/**/*', 'src/fonts', this.answers);
     }
 
     if (this.answers.scripts) {
-      this.fs.copy(
-        this.templatePath('src/scripts/**/*'),
-        this.destinationPath('src/scripts'),
-      );
+      this.copyTemplate('src/scripts/**/*', 'src/scripts');
     }
 
     if (this.answers.views) {
-      this.fs.copyTpl(
-        this.templatePath(`src/views/${this.answers.views}/**/*`),
-        this.destinationPath('src/views'),
-        this.answers,
-      );
+      this.renderTemplate(`src/views/${this.answers.views}/**/*`, 'src/views', this.answers);
     }
   }
 
