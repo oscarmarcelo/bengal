@@ -9,9 +9,9 @@
   },
   "scripts": {
     "build": "gulp",
-    "dist": "gulp dist"<% if (typeof views !=='undefined' && views === 'php') { %>,
+    "dist": "gulp dist"<% if (views === 'php') { %>,
     "start": "docker-compose up"<% } %><% if (type === 'website') { %>,
-    "deploy": "gulp dist && gulp deploy"<% } %><% if (typeof xo !== 'undefined' && xo) { %>,
+    "deploy": "gulp dist && gulp deploy"<% } %><% if (xo) { %>,
     "lint": "xo"<% } %>
   },
   "keywords": [],
@@ -45,7 +45,7 @@
     "last 2 ChromeAndroid versions",
     "last 2 iOS versions"
     <%_ } -%>
-  ]<% if (typeof babel !== 'undefined' && babel) { %>,
+  ]<% if (babel) { %>,
   "babel": {
     "presets": [
       "@babel/env"
@@ -53,7 +53,7 @@
     "only": [
       "./src/**/*"
     ]
-  }<% } %><% if (typeof xo !== 'undefined' && xo) { %>,
+  }<% } %><% if (xo) { %>,
   "xo": {
     "space": 2,
     "envs": [

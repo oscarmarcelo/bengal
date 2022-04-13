@@ -2,7 +2,7 @@ import gulp from 'gulp';
 
 import config from '../config.js';
 
-<% if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+<% if (styles) { -%>
 import {build as styles} from './styles.js';
 <% } -%>
 <% if (symbols) { -%>
@@ -17,17 +17,17 @@ import fonts from './fonts.js';
 <% if (scripts) { -%>
 import {build as scripts} from './scripts.js';
 <% } -%>
-<% if (typeof views !== 'undefined' && views) { -%>
+<% if (views) { -%>
 import views from './views.js';
 <% } -%>
 import {build as copy} from './copy.js';
-<% if (typeof views !== 'undefined' && views) { -%>
+<% if (views) { -%>
 import {reload} from './browser.js';
 <% } -%>
 
 
 
-const {watch<% if (typeof views !== 'undefined' && views) { %>, series<% } %>} = gulp;
+const {watch<% if (views) { %>, series<% } %>} = gulp;
 
 
 
@@ -38,19 +38,19 @@ const {watch<% if (typeof views !== 'undefined' && views) { %>, series<% } %>} =
  */
 
 const build = done => {
-  <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
-  // When styles update, <% if (typeof sass !== 'undefined' && sass) { %>compile Sass<% } else { %>copy CSS<% } %> files.
+  <%_ if (styles) { -%>
+  // When styles update, <% if (sass) { %>compile Sass<% } else { %>copy CSS<% } %> files.
   watch(config.src.styles, styles);
 
   <%_ } -%>
   <%_ if (symbols) { -%>
   // When symbols update, compile symbols and reload browser.
-  watch(config.src.symbols, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>symbols<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
+  watch(config.src.symbols, <% if (views) { %>series(<% } %>symbols<% if (views) { %>, reload)<% } %>);
 
   <%_ } -%>
   <%_ if (images) { -%>
   // When images update, optimize images and reload browser.
-  watch(config.src.images, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>images<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
+  watch(config.src.images, <% if (views) { %>series(<% } %>images<% if (views) { %>, reload)<% } %>);
 
   <%_ } -%>
   <%_ if (fonts) { -%>
@@ -60,16 +60,16 @@ const build = done => {
   <%_ } -%>
   <%_ if (scripts) { -%>
   // When scripts update, compile scripts and reload browser.
-  watch(config.src.scripts, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>scripts<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
+  watch(config.src.scripts, <% if (views) { %>series(<% } %>scripts<% if (views) { %>, reload)<% } %>);
 
   <%_ } -%>
-  <%_ if (typeof views !== 'undefined' && views) { -%>
+  <%_ if (views) { -%>
   // When views update, <% if (views === 'pug') { %>compile<% } else { %>copy<% } %> views and reload browser.
-  watch(config.src.views, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>views<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
+  watch(config.src.views, <% if (views) { %>series(<% } %>views<% if (views) { %>, reload)<% } %>);
 
   <%_ } -%>
   // When static files in the root update, copy them.
-  watch(config.src.base, <% if (typeof views !== 'undefined' && views) { %>series(<% } %>copy<% if (typeof views !== 'undefined' && views) { %>, reload)<% } %>);
+  watch(config.src.base, <% if (views) { %>series(<% } %>copy<% if (views) { %>, reload)<% } %>);
 
   done();
 };

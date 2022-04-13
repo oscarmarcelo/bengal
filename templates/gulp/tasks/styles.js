@@ -1,28 +1,28 @@
 import gulp from 'gulp';
-<% if (typeof sass !== 'undefined' && sass) { -%>
+<% if (sass) { -%>
 import gulpSass from 'gulp-sass';
 import dartSass from 'sass';
 <% } -%>
-import notify<% if (typeof sass !== 'undefined' && sass) { %>, {onError}<% } %> from 'gulp-notify';
+import notify<% if (sass) { %>, {onError}<% } %> from 'gulp-notify';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
-<% if (typeof sass !== 'undefined' && sass) { -%>
+<% if (sass) { -%>
 import rename from 'gulp-rename';
 <% } -%>
-<% if (typeof views !== 'undefined' && views) { -%>
+<% if (views) { -%>
 import {reload} from 'browser-sync';
 <% } -%>
 import cssnano from 'cssnano';
 
 import config from '../config.js';
-<% if (typeof sass !== 'undefined' && sass) { -%>
+<% if (sass) { -%>
 import {dirToFile} from '../utils.js';
 <% } -%>
 
 
 
 const {src, dest} = gulp;
-<% if (typeof sass !== 'undefined' && sass) { -%>
+<% if (sass) { -%>
 const sass = gulpSass(dartSass);
 <% } -%>
 
@@ -30,7 +30,7 @@ const sass = gulpSass(dartSass);
 
 /*
  * =============================================================================
- <%_ if (typeof sass !== 'undefined' && sass) { -%>
+ <%_ if (sass) { -%>
  * Compile Sass files.
  <%_ } -%>
  * Autoprefix.
@@ -41,7 +41,7 @@ const sass = gulpSass(dartSass);
 
 const build = () =>
   src(config.src.styles)
-    <%_ if (typeof sass !== 'undefined' && sass) { -%>
+    <%_ if (sass) { -%>
     .pipe(sass())
     .on('error', onError({
       title: 'Error in styles',
@@ -51,11 +51,11 @@ const build = () =>
     .pipe(postcss([
       autoprefixer(),
     ]))
-    <%_ if (typeof sass !== 'undefined' && sass) { -%>
+    <%_ if (sass) { -%>
     .pipe(rename(dirToFile))
     <%_ } -%>
     .pipe(dest(config.build.styles))
-    <%_ if (typeof views !== 'undefined' && views) { -%>
+    <%_ if (views) { -%>
     .pipe(reload({
       stream: true,
     }))

@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-<% if (typeof views !== 'undefined' && views) { -%>
+<% if (views) { -%>
 import {reload} from 'browser-sync';
 <% } -%>
 import notify from 'gulp-notify';
@@ -22,7 +22,7 @@ const {src, dest} = gulp;
 const build = () =>
   src(config.src.fonts)
     .pipe(dest(config.build.fonts))
-    <%_ if (typeof views !== 'undefined' && views) { -%>
+    <%_ if (views) { -%>
     .pipe(reload({
       stream: true,
     }))

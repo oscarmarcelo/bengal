@@ -30,7 +30,7 @@ html
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   <%# TODO: Remove definition check when Maro is added to generator. Also, this check is creating an empty line. %>
-  <%_ if (typeof maro !== 'undefined' && maro) { -%>
+  <%_ if (maro) { -%>
   +prefix(text-size-adjust, 100%, webkit ms) // [1]
   <%_ } else { -%>
   -webkit-text-size-adjust: 100% // [1]

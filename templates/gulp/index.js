@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 
-<% if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+<% if (styles) { -%>
 import * as styles from './tasks/styles.js';
 <% } -%>
 <% if (symbols) { -%>
@@ -15,11 +15,11 @@ import fonts from './tasks/fonts.js';
 <% if (scripts) { -%>
 import * as scripts from './tasks/scripts.js';
 <% } -%>
-<% if (typeof views !== 'undefined' && views) { -%>
+<% if (views) { -%>
 import views from './tasks/views.js';
 <% } -%>
 import * as copy from './tasks/copy.js';
-<% if (typeof views !== 'undefined' && views) { -%>
+<% if (views) { -%>
 import {serve} from './tasks/browser.js';
 <% } -%>
 import watch from './tasks/watch.js';
@@ -32,7 +32,7 @@ const {series, parallel} = gulp;
 
 export default series(
   parallel(
-    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+    <%_ if (styles) { -%>
     styles.build,
     <%_ } -%>
     <%_ if (symbols) { -%>
@@ -48,19 +48,19 @@ export default series(
     scripts.build,
     <%_ } -%>
     copy.build,
-    <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package' || scripts) { -%>
+    <%_ if (styles || scripts) { -%>
     copy.vendor,
     <%_ } -%>
-    <%_ if (typeof views !== 'undefined' && views) { -%>
+    <%_ if (views) { -%>
     views,
     <%_ } -%>
   ),
-  <%_ if (typeof views !== 'undefined' && views) { -%>
+  <%_ if (views) { -%>
   parallel(
     serve,
   <%_ } -%>
-  <% if (typeof views !== 'undefined' && views) { %>  <% } %>watch,
-  <%_ if (typeof views !== 'undefined' && views) { -%>
+  <% if (views) { %>  <% } %>watch,
+  <%_ if (views) { -%>
   ),
   <%_ } -%>
 );
@@ -68,7 +68,7 @@ export default series(
 
 
 export const dist = parallel(
-  <%_ if ((typeof styles !== 'undefined' && styles) || type !== 'package') { -%>
+  <%_ if (styles) { -%>
   styles.dist,
   <%_ } -%>
   <%_ if (scripts) { -%>

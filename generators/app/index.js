@@ -137,7 +137,12 @@ export default class Bengal extends Generator {
 
     this.log(utils.h2('Styles', true));
 
-    Object.assign(this.answers, await this.prompt([
+    Object.assign(this.answers, {
+      styles: undefined,
+      sass: undefined,
+      maro: undefined,
+      sevenOnePattern: undefined,
+    }, await this.prompt([
       {
         type: 'confirm',
         name: 'styles',
@@ -212,7 +217,10 @@ export default class Bengal extends Generator {
 
     this.log(utils.h2('SVG Symbols'));
 
-    Object.assign(this.answers, await this.prompt([
+    Object.assign(this.answers, {
+      overflow: undefined,
+      defaultSymbol: undefined,
+    }, await this.prompt([
       {
         type: 'confirm',
         name: 'symbols',
@@ -255,7 +263,10 @@ export default class Bengal extends Generator {
 
     this.log(utils.h2('Scripts'));
 
-    Object.assign(this.answers, await this.prompt([
+    Object.assign(this.answers, {
+      babel: undefined,
+      xo: undefined,
+    }, await this.prompt([
       {
         type: 'confirm',
         name: 'scripts',
@@ -277,7 +288,11 @@ export default class Bengal extends Generator {
 
     this.log(utils.h2('Views'));
 
-    Object.assign(this.answers, await this.prompt([
+    Object.assign(this.answers, {
+      viewsTask: undefined,
+      views: undefined,
+      port: undefined,
+    }, await this.prompt([
       {
         type: 'confirm',
         name: 'viewsTask',
@@ -307,7 +322,7 @@ export default class Bengal extends Generator {
         default: await getPort(),
         validate: answer => Number.isInteger(answer) && answer > 1024 && answer < 65_535 ? true : 'Must be an available port number between 1024 and 65535.',
         filter: answer => Number.isInteger(answer) && answer > 1024 && answer < 65_535 ? answer : '',
-        when: answers => answers.views && answers.views === 'php',
+        when: answers => answers.views === 'php',
       },
     ]));
 
@@ -353,6 +368,14 @@ export default class Bengal extends Generator {
       ]));
     }
 
+    if (this.answers.sass) {
+      this.answers.styles = true;
+    }
+
+    if (this.answers.views) {
+      this.answers.viewsTask = true;
+    }
+
     this.log(
       '\n'
       + utils.say(
@@ -389,14 +412,14 @@ export default class Bengal extends Generator {
       'gulp-notify',
     ]);
 
-    if ((typeof this.answers.styles !== 'undefined' && this.answers.styles) || (typeof this.answers.sass !== 'undefined' && this.answers.sass) || this.answers.scripts || this.answers.symbols) {
+    if (this.answers.styles || this.answers.scripts || this.answers.symbols) {
       await this.addDevDependencies([
         'merge-stream',
         'slash',
       ]);
     }
 
-    if (this.answers.styles || this.answers.type !== 'package') { // TODO: Update to rely only on `styles` when failsafe properties are added.
+    if (this.answers.styles) {
       await this.addDevDependencies([
         'postcss',
         'gulp-postcss',
@@ -413,7 +436,7 @@ export default class Bengal extends Generator {
       await this.addDevDependencies('gulp-plumber');
     }
 
-    if ((typeof this.answers.styles !== 'undefined' && this.answers.styles) || (typeof this.answers.sass !== 'undefined' && this.answers.sass) || this.answers.scripts) {
+    if (this.answers.styles || this.answers.scripts) {
       await this.addDevDependencies('gulp-rename');
     }
 
@@ -486,11 +509,11 @@ export default class Bengal extends Generator {
 
     this.renderTemplate('gulp/tasks/(copy|watch).js', 'gulp/tasks', this.answers);
 
-    if (this.answers.styles || this.answers.sass || this.answers.symbols) {
+    if (this.answers.styles || this.answers.symbols) {
       this.renderTemplate('gulp/utils.js', 'gulp/utils.js', this.answers);
     }
 
-    if (this.answers.styles || this.answers.type !== 'package') { // TODO: Update to rely only on `styles` when failsafe properties are added.
+    if (this.answers.styles) {
       this.renderTemplate('gulp/tasks/styles.js', 'gulp/tasks/styles.js', this.answers);
     }
 

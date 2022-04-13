@@ -1,7 +1,7 @@
 <% if (symbols) { -%>
 import {existsSync, statSync} from 'node:fs';
 <% } -%>
-import {join<% if (typeof sass !== 'undefined' && sass) { %>, basename<% } %>} from 'node:path';
+import {join<% if (sass) { %>, basename<% } %>} from 'node:path';
 
 <% if (symbols) { -%>
 import walkSync from 'walk-sync';
@@ -39,7 +39,7 @@ export const getDirs = ctx =>
   ]
     .map(directory => directory.replace(/\/$/, ''));
 <% } -%>
-<% if (typeof sass !== 'undefined' && sass) { -%>
+<% if (sass) { -%>
 
 
 

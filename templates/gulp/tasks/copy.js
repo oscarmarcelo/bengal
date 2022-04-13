@@ -1,12 +1,12 @@
 import gulp from 'gulp';
-<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+<% if (styles || scripts) { -%>
 import merge from 'merge-stream';
 import rename from 'gulp-rename';
 <% } -%>
 import notify from 'gulp-notify';
 
 import config from '../config.js';
-<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+<% if (styles || scripts) { -%>
 import {path} from '../utils.js';
 <% } -%>
 
@@ -32,7 +32,7 @@ const build = () =>
       message: 'Static files copied!',
       onLast: true,
     }));
-<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+<% if (styles || scripts) { -%>
 
 
 
@@ -101,14 +101,14 @@ const dist = () => {
  */
 
 build.displayName = 'copy:build';
-<% if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+<% if (styles || scripts) { -%>
 vendor.displayName = 'copy:vendor';
 <% } -%>
 dist.displayName = 'copy:dist';
 
 export {
   build,
-  <%_ if ((typeof styles !== 'undefined' && styles) || (typeof sass !== 'undefined' && sass) || scripts) { -%>
+  <%_ if (styles || scripts) { -%>
   vendor,
   <%_ } -%>
   dist,
