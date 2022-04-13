@@ -428,10 +428,6 @@ export default class Bengal extends Generator {
       ]);
     }
 
-    if (this.answers.sass || this.answers.symbols) {
-      await this.addDevDependencies('slash');
-    }
-
     if (this.answers.symbols || this.answers.images || this.answers.scripts || this.answers.views === 'pug') {
       await this.addDevDependencies('gulp-plumber');
     }
