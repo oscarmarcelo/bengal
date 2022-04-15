@@ -32,6 +32,7 @@ const build = () =>
   <%_ if (views === 'pug') { -%>
   src([
     config.src.views,
+    '!**/_*/**',
     '!**/_*',
   ])
     .pipe(plumber())
