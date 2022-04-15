@@ -575,6 +575,18 @@ export default class Bengal extends Generator {
           if (this.answers.sevenOnePattern.includes('components')) {
             this.copyTemplate('src/styles/sass/abstracts/settings/components/**/*', 'src/styles/abstracts/settings/components');
           }
+
+          if (this.answers.sevenOnePattern.includes('layout')) {
+            this.copyTemplate('src/styles/sass/abstracts/settings/layout/**/*', 'src/styles/abstracts/settings/layout');
+          }
+
+          if (this.answers.sevenOnePattern.includes('pages')) {
+            this.copyTemplate('src/styles/sass/abstracts/settings/pages/**/*', 'src/styles/abstracts/settings/pages');
+          }
+
+          if (this.answers.sevenOnePattern.includes('themes')) {
+            this.copyTemplate('src/styles/sass/abstracts/settings/themes/**/*', 'src/styles/abstracts/settings/themes');
+          }
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/functions')) {
