@@ -1,0 +1,15 @@
+@use "../tokens" as *;
+
+
+
+// =============================================================================
+// abstracts/settings/base/typography
+// =============================================================================
+
+$fs-body: $font-size-m;
+
+$lh-body: $line-height-m;
+
+$fw-body: $font-weight-m;
+
+$font-stack: $system-stack;
