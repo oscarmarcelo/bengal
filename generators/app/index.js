@@ -703,7 +703,17 @@ export default class Bengal extends Generator {
       }
 
       if (this.answers.viewsSevenOnePattern.includes('abstracts/mixins')) {
-        this.copyTemplate('src/views/pug/_abstracts/mixins/**', 'src/views/_abstracts/mixins');
+        this.copyTemplate('src/views/pug/_abstracts/mixins/**', 'src/views/_abstracts/mixins', {
+          globOptions: {
+            ignore: [
+              '**/symbol.pug',
+            ],
+          },
+        });
+
+        if (this.answers.symbols) {
+          this.renderTemplate('src/views/pug/_abstracts/mixins/symbol.pug', 'src/views/_abstracts/mixins/symbol.pug', this.answers);
+        }
       }
 
       if (this.answers.viewsSevenOnePattern.includes('layout')) {

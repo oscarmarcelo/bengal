@@ -1,0 +1,25 @@
+//- @pugdoc
+
+    Creates an SVG symbol.
+
+    @param {String} [file='/assets/images/<%= defaultSymbol %>.svg'] - The SVG file containing the symbol.
+      The `.svg` extension is appended automatically, if not specified.
+    @param {String} id - The symbol ID.
+
+    @attributes * - The attributes for the `svg` element.
+
+    @returns {SVGElement} The SVG symbol instance.
+
+mixin symbol(file, id)
+
+  if !id
+    - [id, file] = [file, undefined]
+
+  if !file
+    - file = '/assets/images/<%= defaultSymbol %>'
+
+  if file.endsWith('.svg') === false
+    - file += '.svg'
+
+  svg(aria-hidden="true")&attributes(attributes)
+    use(xlink:href=`${file}#${id}`)
