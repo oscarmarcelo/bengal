@@ -316,6 +316,42 @@ export default class Bengal extends Generator {
         when: answers => this.answers.type !== 'package' || answers.viewsTask,
       },
       {
+        type: 'checkbox',
+        name: 'viewsSevenOnePattern',
+        message: 'Adapted 7-1 Pattern directories:',
+        choices: [
+          {
+            type: 'separator',
+            line: `${figures.circleFilled} ${chalk.reset('Abstracts')} ${chalk.dim('(Added if there are nested folders selected)')}`,
+          },
+          {
+            name: '├ Settings',
+            value: 'abstracts/settings',
+            short: 'Abstracts/Settings',
+            checked: true,
+          },
+          {
+            name: '├ Functions',
+            value: 'abstracts/functions',
+            short: 'Abstracts/Functions',
+            checked: true,
+          },
+          {
+            name: '└ Mixins',
+            value: 'abstracts/mixins',
+            short: 'Abstracts/Mixins',
+            checked: true,
+          },
+          {
+            name: 'Layout',
+            value: 'layout',
+            checked: true,
+          },
+        ],
+        when: answers => answers.views === 'pug',
+        pageSize: 10,
+      },
+      {
         type: 'number',
         name: 'port',
         message: 'Port:',
@@ -650,7 +686,29 @@ export default class Bengal extends Generator {
     }
 
     if (this.answers.views) {
-      this.renderTemplate(`src/views/${this.answers.views}/**`, 'src/views', this.answers);
+      this.renderTemplate(`src/views/${this.answers.views}/index.pug`, 'src/views/index.pug', this.answers);
+    }
+
+    if (this.answers.viewsSevenOnePattern) {
+      if (this.answers.viewsSevenOnePattern.some(directory => directory.startsWith('abstracts'))) {
+        this.renderTemplate('src/views/pug/_abstracts/index.pug', 'src/views/_abstracts/index.pug', this.answers);
+      }
+
+      if (this.answers.viewsSevenOnePattern.includes('abstracts/settings')) {
+        this.copyTemplate('src/views/pug/_abstracts/settings/**', 'src/views/_abstracts/settings');
+      }
+
+      if (this.answers.viewsSevenOnePattern.includes('abstracts/functions')) {
+        this.copyTemplate('src/views/pug/_abstracts/functions/**', 'src/views/_abstracts/functions');
+      }
+
+      if (this.answers.viewsSevenOnePattern.includes('abstracts/mixins')) {
+        this.copyTemplate('src/views/pug/_abstracts/mixins/**', 'src/views/_abstracts/mixins');
+      }
+
+      if (this.answers.viewsSevenOnePattern.includes('layout')) {
+        this.renderTemplate('src/views/pug/_layout/**', 'src/views/_layout', this.answers);
+      }
     }
   }
 

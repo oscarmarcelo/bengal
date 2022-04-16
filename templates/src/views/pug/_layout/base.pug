@@ -1,14 +1,18 @@
+<% if (viewsSevenOnePattern.some(directory => directory.startsWith('abstracts'))) { -%>
 include ../_abstracts/index
 
 
 
+<% } -%>
 doctype html
 html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover")
     title <%= project %>
+    <%_ if (styles) { -%>
     link(href="/assets/styles/main.css" rel="stylesheet")
+    <%_ } -%>
     block styles
     block scripts-head
 
