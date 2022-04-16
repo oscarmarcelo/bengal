@@ -561,7 +561,7 @@ export default class Bengal extends Generator {
       this.renderTemplate('src/styles/sass/main.sass', 'src/styles/main.sass', this.answers);
 
       if (this.answers.sevenOnePattern) {
-        if (this.answers.sevenOnePattern.includes('abstracts/settings') || this.answers.sevenOnePattern.includes('abstracts/functions') || this.answers.sevenOnePattern.includes('abstracts/mixins')) {
+        if (this.answers.sevenOnePattern.some(directory => directory.startsWith('abstracts'))) {
           this.renderTemplate('src/styles/sass/abstracts/_index.sass', 'src/styles/abstracts/_index.sass', this.answers);
         }
 
