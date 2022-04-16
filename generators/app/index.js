@@ -343,6 +343,11 @@ export default class Bengal extends Generator {
             checked: true,
           },
           {
+            name: 'Components',
+            value: 'components',
+            checked: true,
+          },
+          {
             name: 'Layout',
             value: 'layout',
             checked: true,
@@ -714,6 +719,10 @@ export default class Bengal extends Generator {
         if (this.answers.symbols) {
           this.renderTemplate('src/views/pug/_abstracts/mixins/symbol.pug', 'src/views/_abstracts/mixins/symbol.pug', this.answers);
         }
+      }
+
+      if (this.answers.viewsSevenOnePattern.includes('components')) {
+        this.renderTemplate('src/views/pug/_components/**', 'src/views/_components', this.answers);
       }
 
       if (this.answers.viewsSevenOnePattern.includes('layout')) {
