@@ -505,7 +505,7 @@ export default class Bengal extends Generator {
 
     this.renderTemplate('gulp/tasks/(copy|watch).js', 'gulp/tasks', this.answers);
 
-    if (this.answers.styles || this.answers.symbols) {
+    if (this.answers.styles || this.answers.symbols || this.answers.scripts) {
       this.renderTemplate('gulp/utils.js', 'gulp/utils.js', this.answers);
     }
 
