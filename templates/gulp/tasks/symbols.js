@@ -34,7 +34,7 @@ const build = () => {
   const dirs = getDirs(config.src.symbols);
 
   const subtasks = dirs.map(dir =>
-    src(path(config.src.symbols, dir, '/*.svg'))
+    src(path(config.src.symbols, dir, '*.svg'))
       .pipe(plumber())
       <%_ if (overflow) { -%>
       .pipe(cheerio(($, _) => {
