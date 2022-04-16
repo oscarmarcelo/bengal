@@ -24,7 +24,7 @@ const config = {
     symbols: `${src.base}/symbols`,
     <%_ } -%>
     <%_ if (images) { -%>
-    images: `${src.base}/images/**/*`,
+    images: `${src.base}/images/**`,
     <%_ } -%>
     <%_ if (fonts) { -%>
     fonts: `${src.base}/fonts/**/*.woff2`,
@@ -64,7 +64,7 @@ const config = {
     views: build.base,
     <%_ } -%>
     globs: {
-      all: `${build.base}/**/*`,
+      all: `${build.base}/**`,
       <%_ if (styles) { -%>
       styles: `${build.assets}/**/*.css`,
       <%_ } -%>
@@ -82,7 +82,7 @@ const config = {
     scripts: dist.assets,
     <%_ } -%>
     globs: {
-      all: `${dist.base}/**/*`,
+      all: `${dist.base}/**`,
     },
   },
 };

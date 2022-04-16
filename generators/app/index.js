@@ -545,7 +545,7 @@ export default class Bengal extends Generator {
 
         this.renderTemplate('_docker-compose.yml', 'docker-compose.yml', this.answers);
 
-        this.renderTemplate('docker/**/*', 'docker', this.answers);
+        this.renderTemplate('docker/**', 'docker', this.answers);
       }
 
       this.copyTemplate('_env.template', '.env.template');
@@ -569,32 +569,32 @@ export default class Bengal extends Generator {
           this.copyTemplate('src/styles/sass/abstracts/settings/_tokens.scss', 'src/styles/abstracts/settings/_tokens.scss');
 
           if (this.answers.sevenOnePattern.includes('base')) {
-            this.copyTemplate('src/styles/sass/abstracts/settings/base/**/*', 'src/styles/abstracts/settings/base');
+            this.copyTemplate('src/styles/sass/abstracts/settings/base/**', 'src/styles/abstracts/settings/base');
           }
 
           if (this.answers.sevenOnePattern.includes('components')) {
-            this.copyTemplate('src/styles/sass/abstracts/settings/components/**/*', 'src/styles/abstracts/settings/components');
+            this.copyTemplate('src/styles/sass/abstracts/settings/components/**', 'src/styles/abstracts/settings/components');
           }
 
           if (this.answers.sevenOnePattern.includes('layout')) {
-            this.copyTemplate('src/styles/sass/abstracts/settings/layout/**/*', 'src/styles/abstracts/settings/layout');
+            this.copyTemplate('src/styles/sass/abstracts/settings/layout/**', 'src/styles/abstracts/settings/layout');
           }
 
           if (this.answers.sevenOnePattern.includes('pages')) {
-            this.copyTemplate('src/styles/sass/abstracts/settings/pages/**/*', 'src/styles/abstracts/settings/pages');
+            this.copyTemplate('src/styles/sass/abstracts/settings/pages/**', 'src/styles/abstracts/settings/pages');
           }
 
           if (this.answers.sevenOnePattern.includes('themes')) {
-            this.copyTemplate('src/styles/sass/abstracts/settings/themes/**/*', 'src/styles/abstracts/settings/themes');
+            this.copyTemplate('src/styles/sass/abstracts/settings/themes/**', 'src/styles/abstracts/settings/themes');
           }
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/functions')) {
-          this.copyTemplate('src/styles/sass/abstracts/functions/**/*', 'src/styles/abstracts/functions');
+          this.copyTemplate('src/styles/sass/abstracts/functions/**', 'src/styles/abstracts/functions');
         }
 
         if (this.answers.sevenOnePattern.includes('abstracts/mixins')) {
-          this.copyTemplate('src/styles/sass/abstracts/mixins/**/*', 'src/styles/abstracts/mixins');
+          this.copyTemplate('src/styles/sass/abstracts/mixins/**', 'src/styles/abstracts/mixins');
         }
 
         if (this.answers.sevenOnePattern.includes('base')) {
@@ -610,23 +610,23 @@ export default class Bengal extends Generator {
         }
 
         if (this.answers.sevenOnePattern.includes('components')) {
-          this.copyTemplate('src/styles/sass/components/**/*', 'src/styles/components');
+          this.copyTemplate('src/styles/sass/components/**', 'src/styles/components');
         }
 
         if (this.answers.sevenOnePattern.includes('layout')) {
-          this.copyTemplate('src/styles/sass/layout/**/*', 'src/styles/layout');
+          this.copyTemplate('src/styles/sass/layout/**', 'src/styles/layout');
         }
 
         if (this.answers.sevenOnePattern.includes('pages')) {
-          this.copyTemplate('src/styles/sass/pages/**/*', 'src/styles/pages');
+          this.copyTemplate('src/styles/sass/pages/**', 'src/styles/pages');
         }
 
         if (this.answers.sevenOnePattern.includes('themes')) {
-          this.copyTemplate('src/styles/sass/themes/**/*', 'src/styles/themes');
+          this.copyTemplate('src/styles/sass/themes/**', 'src/styles/themes');
         }
 
         if (this.answers.sevenOnePattern.includes('vendors')) {
-          this.copyTemplate('src/styles/sass/vendors/**/*', 'src/styles/vendors');
+          this.copyTemplate('src/styles/sass/vendors/**', 'src/styles/vendors');
         }
       }
     } else if (this.answers.styles) {
@@ -634,23 +634,23 @@ export default class Bengal extends Generator {
     }
 
     if (this.answers.symbols) {
-      this.renderTemplate('src/symbols/**/*', 'src/symbols', this.answers);
+      this.renderTemplate('src/symbols/**', 'src/symbols', this.answers);
     }
 
     if (this.answers.images) {
-      this.renderTemplate('src/images/**/*', 'src/images', this.answers);
+      this.renderTemplate('src/images/**', 'src/images', this.answers);
     }
 
     if (this.answers.fonts) {
-      this.renderTemplate('src/fonts/**/*', 'src/fonts', this.answers);
+      this.renderTemplate('src/fonts/**', 'src/fonts', this.answers);
     }
 
     if (this.answers.scripts) {
-      this.copyTemplate('src/scripts/**/*', 'src/scripts');
+      this.copyTemplate('src/scripts/**', 'src/scripts');
     }
 
     if (this.answers.views) {
-      this.renderTemplate(`src/views/${this.answers.views}/**/*`, 'src/views', this.answers);
+      this.renderTemplate(`src/views/${this.answers.views}/**`, 'src/views', this.answers);
     }
   }
 

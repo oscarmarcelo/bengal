@@ -55,7 +55,7 @@
       ]
     },
     "ignores": [
-      "templates/**/*"
+      "templates/**"
     ]
   }
 }
