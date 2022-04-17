@@ -10,16 +10,16 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover")
     title <%= project %>
-    <%_ if (styles) { -%>
-    link(href="/assets/styles/main.css" rel="stylesheet")
-    <%_ } -%>
     block styles
+      <%_ if (styles) { -%>
+      link(href="/assets/styles/main.css" rel="stylesheet")
+      <%_ } -%>
     block scripts-head
 
   body
     block body
 
-    <%_ if (scripts) { -%>
-    script(src="/assets/scripts/main.js")
-    <%_ } -%>
     block scripts
+      <%_ if (scripts) { -%>
+      script(src="/assets/scripts/main.js")
+      <%_ } -%>
