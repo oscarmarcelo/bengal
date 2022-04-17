@@ -30,11 +30,7 @@ html
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   -webkit-text-size-adjust: 100% // [1]
-  <%_ if (sevenOnePattern.includes('abstracts/settings')) { -%>
-  -webkit-tap-highlight-color: rgba($color-text, 0) // [2]
-  <%_ } else {-%>
-  -webkit-tap-highlight-color: rgba(#000, 0) // [2]
-  <%_ } -%>
+  -webkit-tap-highlight-color: transparent // [2]
 
 body
   color: var(--color-text)
