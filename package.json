@@ -57,5 +57,9 @@
     "ignores": [
       "templates/**"
     ]
+  },
+  "np": {
+    "tests": false,
+    "message": "🎉 Release %s"
   }
 }
