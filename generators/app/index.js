@@ -691,7 +691,7 @@ export default class Bengal extends Generator {
     }
 
     if (this.answers.views) {
-      this.renderTemplate(`src/views/${this.answers.views}/index.pug`, 'src/views/index.pug', this.answers);
+      this.renderTemplate(`src/views/${this.answers.views}/index.${this.answers.views}`, `src/views/index.${this.answers.views}`, this.answers);
     }
 
     if (this.answers.viewsSevenOnePattern) {
