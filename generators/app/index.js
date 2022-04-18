@@ -77,7 +77,7 @@ export default class Bengal extends Generator {
       {
         name: 'homepage',
         message: 'Homepage:',
-        validate: answer => {
+        validate(answer) {
           try {
             return Boolean(answer.trim() === '' || new URL(answer));
           } catch {
