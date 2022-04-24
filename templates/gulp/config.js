@@ -10,7 +10,7 @@ build.assets = `${build.base}/assets`;
 <% } -%>
 
 dist.base = './dist';
-<% if (styles || symbols || images || fonts || scripts) { -%>
+<% if (styles || scripts) { -%>
 dist.assets = `${dist.base}/assets`;
 <% } -%>
 
@@ -81,9 +81,11 @@ const config = {
     <%_ if (scripts) { -%>
     scripts: dist.assets,
     <%_ } -%>
+    <%_ if (type === 'website') { -%>
     globs: {
       all: `${dist.base}/**`,
     },
+    <%_ } -%>
   },
 };
 
