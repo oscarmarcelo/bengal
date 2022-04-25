@@ -38,6 +38,7 @@
     "generator-license": "^5.5.0",
     "get-port": "^6.1.2",
     "rimraf": "^3.0.2",
+    "update-notifier": "^5.1.0",
     "validate-npm-package-name": "^4.0.0",
     "yeoman-generator": "^5.6.1",
     "yosay": "^2.0.2"

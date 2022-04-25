@@ -1,6 +1,8 @@
+import {createRequire} from 'node:module';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
+import updateNotifier from 'update-notifier';
 import Generator from 'yeoman-generator';
 import chalk from 'chalk';
 import rimraf from 'rimraf';
@@ -22,13 +24,32 @@ import * as deploy from './modules/deploy.js';
 
 
 const {sync: rmSync} = rimraf;
+const pkg = createRequire(import.meta.url)('../../package.json');
+const notifier = updateNotifier({pkg});
+
+
+
+notifier.notify({
+  message: `Update available for ${chalk.yellow.bold('Bengal')}`
+    + ' \n\n'
+    + `${chalk.dim('{currentVersion}')} ${chalk.reset('→')} ${chalk.green('{latestVersion}')}`
+    + ' \n\n'
+    + `Run ${chalk.cyan('{updateCommand}')} to update`,
+});
 
 
 
 export default class Bengal extends Generator {
-  initializing() {
+  async initializing() {
+    const updateInfo = await notifier.fetchInfo();
+
+    const updateMessage = ['build', 'latest'].includes(updateInfo.type)
+      ? ''
+      : `${chalk.green('There is an update you might want to check before continuing.')}\n\n`;
+
     this.log(utils.say(
       chalk.red(`Welcome to ${chalk.yellow.bold('Bengal')}!`) + '\n\n'
+      + updateMessage
       + 'Let me start by asking a few questions about your project.',
     ));
   }
