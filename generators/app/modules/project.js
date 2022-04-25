@@ -1,4 +1,6 @@
 import slugify from '@sindresorhus/slugify';
+import validatePackageName from 'validate-npm-package-name';
+import chalk from 'chalk';
 
 
 
@@ -40,7 +42,34 @@ const prompts = generator =>
       name: 'package',
       message: 'Package Name:',
       default: slugify(generator.appname),
-      validate: answer => answer.length > 0 ? true : 'Package Name is required!',
+      validate(answer) {
+        const validity = validatePackageName(answer);
+
+        if (validity.validForNewPackages === false) {
+          const messages = [
+            ...(validity.errors || []),
+            ...(validity.warnings || []),
+          ];
+
+          for (let [index, message] of messages.entries()) {
+            if (message.startsWith(answer)) {
+              message = `"${answer}"${message.slice(answer.length)}`;
+            } else if (message.startsWith('name')) {
+              message = `Package ${message}`;
+            }
+
+            if (index > 0) {
+              message = `${chalk.red('>>')} ${message}`;
+            }
+
+            messages[index] = `${message}.`;
+          }
+
+          return messages.join('\n');
+        }
+
+        return true;
+      },
     },
     {
       name: 'description',
