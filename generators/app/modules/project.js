@@ -87,7 +87,9 @@ const prompts = generator =>
         try {
           return Boolean(answer.trim() === '' || new URL(answer));
         } catch {
-          return 'URL is not valid!';
+          const hasProtocol = /^(?:\w+:)?\/\//i.test(answer);
+
+          return `Invalid URL!${hasProtocol === false ? ' Protocol is missing.' : ''}`;
         }
       },
       filter: answer => answer.trim(),
