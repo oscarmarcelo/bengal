@@ -72,5 +72,8 @@
       "build/**",
       "dist/**"
     ]
-  }<% } %>
+  }<% } %>,
+  "bengal": {
+    "version": "<%= bengalVersion %>"
+  }
 }
