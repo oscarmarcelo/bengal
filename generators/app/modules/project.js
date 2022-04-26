@@ -76,6 +76,25 @@ const prompts = generator =>
       message: 'Description:',
     },
     {
+      name: 'keywords',
+      message: 'Keywords:',
+      transformer(answer, _answers, options) {
+        if (options.isFinal) {
+          answer = answer
+            .split(',')
+            .map(keyword => chalk.cyan(keyword.trim()))
+            .filter(keyword => keyword.length > 0);
+
+          answer = [...new Set(answer)]
+            .join(', ');
+        } else {
+          answer = `${chalk.reset.dim('(Use comma as separator)')}\n  ${answer}`;
+        }
+
+        return answer;
+      },
+    },
+    {
       name: 'version',
       message: 'Version:',
       default: '1.0.0',
@@ -100,10 +119,28 @@ const prompts = generator =>
 
 /*
  * =============================================================================
+ * Configuration
+ * =============================================================================
+ */
+
+const configuration = generator => {
+  const keywords = generator.answers.keywords
+    .split(',')
+    .map(keyword => keyword.trim())
+    .filter(keyword => keyword.length > 0);
+
+  generator.answers.keywords = JSON.stringify([...new Set(keywords)]);
+};
+
+
+
+/*
+ * =============================================================================
  * Exports
  * =============================================================================
  */
 
 export {
   prompts,
+  configuration,
 };

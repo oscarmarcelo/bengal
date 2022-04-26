@@ -142,6 +142,7 @@ export default class Bengal extends Generator {
   configuring() {
     this.answers.bengalVersion = this.rootGeneratorVersion();
 
+    project.configuration(this);
     license.configuration(this);
   }
 

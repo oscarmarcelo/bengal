@@ -14,7 +14,7 @@
     "deploy": "gulp dist && gulp deploy"<% } %><% if (xo) { %>,
     "lint": "xo"<% } %>
   },
-  "keywords": [],
+  "keywords": <%- keywords %>,
   "author": {
     "name": "<%= author %>"<% if (email) { %>,
     "email": "<%= email %>"<% } %><% if (website) { %>,
