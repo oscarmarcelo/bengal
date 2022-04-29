@@ -51,15 +51,15 @@ const prompts = async generator =>
       name: 'port',
       message: 'Port:',
       default: await getPort(),
-      validate: answer => Number.isInteger(answer) && answer > 1024 && answer < 65_535 ? true : 'Must be an available port number between 1024 and 65535.',
+      validate(answer) {
+        const number = Number(answer);
+
+        return Number.isInteger(number) && number > 1024 && number < 65_535 ? true : 'Must be an available port number between 1024 and 65535.';
+      },
       filter(answer) {
         const number = Number(answer);
 
-        // REVIEW: Don't clear answer if it's a number, but out of range.
-        //         This is a workaround for a bug in Inquirer that makes the cursor move to first character
-        //         and have weird behaviours after that.
-        // TODO: Support numeric separators. See: https://github.com/tc39/proposal-numeric-separator
-        return typeof answer === 'string' && Number.isFinite(number) && number > 1024 && number < 65_535 ? number : '';
+        return Number.isFinite(number) && number > 1024 && number < 65_535 ? number : answer;
       },
       when: answers => answers.views === 'php',
     },
