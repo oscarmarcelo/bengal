@@ -1,6 +1,7 @@
 import slugify from '@sindresorhus/slugify';
 import validatePackageName from 'validate-npm-package-name';
 import chalk from 'chalk';
+import semver from 'semver';
 
 
 
@@ -98,6 +99,7 @@ const prompts = generator =>
       name: 'version',
       message: 'Version:',
       default: '1.0.0',
+      validate: answer => semver.valid(answer) ? true : 'Must be a valid semantic version.',
     },
     {
       name: 'homepage',
