@@ -59,7 +59,7 @@ const prompts = async generator =>
       filter(answer) {
         const number = Number(answer);
 
-        return Number.isFinite(number) && number > 1024 && number < 65_535 ? number : answer;
+        return Number.isInteger(number) && number > 1024 && number < 65_535 ? number : answer;
       },
       when: answers => answers.views === 'php',
     },
