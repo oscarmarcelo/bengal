@@ -10,11 +10,13 @@ const prompts = generator =>
       name: 'serverHost',
       message: 'Server Host:',
       store: true,
+      filter: answer => answer.trim(),
     },
     {
       name: 'serverUser',
       message: 'Server Username:',
       store: true,
+      filter: answer => answer.trim(),
     },
     {
       name: 'serverPath',
@@ -31,6 +33,7 @@ const prompts = generator =>
 
         return `/var/www/${directory}`;
       },
+      filter: answer => answer.trim(),
     },
   ]);
 

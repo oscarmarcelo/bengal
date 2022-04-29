@@ -11,22 +11,26 @@ const prompts = generator =>
       message: 'Author:',
       default: generator.user.git.name(),
       validate: answer => answer.length > 0 ? true : 'Author name is required!',
+      filter: answer => answer.trim(),
     },
     {
       name: 'username',
       message: 'GitHub Username:',
       store: true,
       validate: answer => answer.length > 0 ? true : 'GitHub Username is required!',
+      filter: answer => answer.trim(),
     },
     {
       name: 'email',
       message: 'Email:',
       default: generator.user.git.email(),
+      filter: answer => answer.trim(),
     },
     {
       name: 'website',
       message: 'Website:',
       store: true,
+      filter: answer => answer.trim(),
     },
   ]);
 

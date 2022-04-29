@@ -38,6 +38,7 @@ const prompts = generator =>
       message: 'Project Name:',
       default: generator.appname.replace(/(?:^|\s)\S/g, match => match.toUpperCase()),
       validate: answer => answer.length > 0 ? true : 'Project Name is required!',
+      filter: answer => answer.trim(),
     },
     {
       name: 'package',
@@ -71,10 +72,12 @@ const prompts = generator =>
 
         return true;
       },
+      filter: answer => answer.trim(),
     },
     {
       name: 'description',
       message: 'Description:',
+      filter: answer => answer.trim(),
     },
     {
       name: 'keywords',

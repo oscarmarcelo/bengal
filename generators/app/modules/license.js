@@ -24,6 +24,7 @@ const prompts = generator =>
       name: 'year',
       message: 'Year(s):',
       default: new Date().getFullYear(),
+      filter: answer => typeof answer === 'string' ? answer.trim() : answer,
     },
   ]);
 
