@@ -1,3 +1,5 @@
+import net from 'node:net';
+
 import chalk from 'chalk';
 import yosay from 'yosay';
 import figures from 'figures';
@@ -114,3 +116,19 @@ export const sevenOnePattern = (exclude = []) => {
 
   return choices;
 };
+
+
+
+export const checkAvailablePort = options =>
+  new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.unref();
+    server.on('error', reject);
+
+    server.listen(options, () => {
+      const {port} = server.address();
+      server.close(() => {
+        resolve(port);
+      });
+    });
+  });

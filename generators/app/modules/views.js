@@ -1,6 +1,6 @@
 import getPort from 'get-port';
 
-import {sevenOnePattern} from '../utils.js';
+import {sevenOnePattern, checkAvailablePort} from '../utils.js';
 
 
 
@@ -51,10 +51,25 @@ const prompts = async generator =>
       name: 'port',
       message: 'Port:',
       default: await getPort(),
-      validate(answer) {
+      async validate(answer) {
         const number = Number(answer);
 
-        return Number.isInteger(number) && number > 1024 && number < 65_535 ? true : 'Must be an available port number between 1024 and 65535.';
+        if (Number.isInteger(number) && number > 1024 && number < 65_535) {
+          try {
+            await checkAvailablePort({
+              port: number,
+              host: 'localhost',
+            });
+
+            return true;
+          } catch ({code}) {
+            return ['EADDRINUSE', 'EADDRNOTAVAIL', 'EACCES'].includes(code)
+              ? `Port ${number} is unavailable.`
+              : `Couldn't check if port ${number} is available. (${code})`;
+          }
+        }
+
+        return 'Must be an available port number between 1024 and 65535.';
       },
       filter(answer) {
         const number = Number(answer);
