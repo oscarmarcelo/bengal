@@ -3,6 +3,8 @@ import validatePackageName from 'validate-npm-package-name';
 import chalk from 'chalk';
 import semver from 'semver';
 
+import {validateUrl} from '../utils.js';
+
 
 
 /*
@@ -108,15 +110,7 @@ const prompts = generator =>
     {
       name: 'homepage',
       message: 'Homepage:',
-      validate(answer) {
-        try {
-          return Boolean(answer.trim() === '' || new URL(answer));
-        } catch {
-          const hasProtocol = /^(?:\w+:)?\/\//i.test(answer);
-
-          return `Invalid URL!${hasProtocol === false ? ' Protocol is missing.' : ''}`;
-        }
-      },
+      validate: validateUrl,
       filter: answer => answer.trim(),
     },
   ]);

@@ -1,3 +1,7 @@
+import {validateUrl} from '../utils.js';
+
+
+
 /*
  * =============================================================================
  * Prompts
@@ -30,6 +34,7 @@ const prompts = generator =>
       name: 'website',
       message: 'Website:',
       store: true,
+      validate: validateUrl,
       filter: answer => answer.trim(),
     },
   ]);

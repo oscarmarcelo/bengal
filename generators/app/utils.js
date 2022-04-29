@@ -39,6 +39,18 @@ export const say = text =>
 
 
 
+export const validateUrl = answer => {
+  try {
+    return Boolean(answer.trim() === '' || new URL(answer));
+  } catch {
+    const hasProtocol = /^(?:\w+:)?\/\//i.test(answer);
+
+    return `Invalid URL!${hasProtocol === false ? ' Protocol is missing.' : ''}`;
+  }
+};
+
+
+
 export const sevenOnePattern = (exclude = []) => {
   const choices = [
     {
