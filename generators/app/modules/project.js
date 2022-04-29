@@ -100,6 +100,7 @@ const prompts = generator =>
       message: 'Version:',
       default: '1.0.0',
       validate: answer => semver.valid(answer) ? true : 'Must be a valid semantic version.',
+      filter: answer => semver.clean(answer) || answer.trim(),
     },
     {
       name: 'homepage',
