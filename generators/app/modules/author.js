@@ -1,3 +1,5 @@
+import {validate as validateEmail} from 'email-validator';
+
 import {validateUrl} from '../utils.js';
 
 
@@ -28,6 +30,7 @@ const prompts = generator =>
       name: 'email',
       message: 'Email:',
       default: generator.user.git.email(),
+      validate: answer => answer.length === 0 || validateEmail(answer) ? true : 'Must be a valid email address!',
       filter: answer => answer.trim(),
     },
     {
