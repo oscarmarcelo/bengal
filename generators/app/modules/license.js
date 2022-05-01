@@ -3,6 +3,8 @@ import {createRequire} from 'node:module';
 import license from 'generator-license';
 import chalk from 'chalk';
 
+import {error} from '../utils.js';
+
 
 
 /*
@@ -48,12 +50,11 @@ const prompts = generator =>
         ]
           .map(example => chalk.cyan(example));
 
-        return [
+        return error([
           'Must be one or more 4-digit years separated by commas (,) or hyphens (-) if there are ranges.',
           'Examples:',
           ...examples,
-        ]
-          .join(`\n${chalk.red('>>')} `);
+        ]);
       },
       filter(answer) {
         if (typeof answer === 'string') {

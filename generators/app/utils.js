@@ -132,3 +132,10 @@ export const checkAvailablePort = options =>
       });
     });
   });
+
+
+
+export const error = lines =>
+  lines
+    .map((line, index) => (index > 0 ? `${chalk.red('>>')} ` : '') + line)
+    .join('\n');

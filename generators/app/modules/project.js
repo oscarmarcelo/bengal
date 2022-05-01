@@ -3,7 +3,7 @@ import validatePackageName from 'validate-npm-package-name';
 import chalk from 'chalk';
 import semver from 'semver';
 
-import {validateUrl} from '../utils.js';
+import {validateUrl, error} from '../utils.js';
 
 
 
@@ -62,14 +62,10 @@ const prompts = generator =>
               message = `Package ${message}`;
             }
 
-            if (index > 0) {
-              message = `${chalk.red('>>')} ${message}`;
-            }
-
             messages[index] = `${message}.`;
           }
 
-          return messages.join('\n');
+          return error(messages);
         }
 
         return true;
