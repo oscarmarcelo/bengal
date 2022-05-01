@@ -60,19 +60,19 @@ export const sevenOnePattern = (exclude = []) => {
       line: `${figures.circleFilled} ${chalk.reset('Abstracts')} ${chalk.dim('(Added if there are nested folders selected)')}`,
     },
     {
-      name: '├ Settings',
+      name: `${chalk.white.dim(figures.lineUpDownRight)} Settings`,
       value: 'abstracts/settings',
       short: 'Abstracts/Settings',
       checked: true,
     },
     {
-      name: '├ Functions',
+      name: `${chalk.white.dim(figures.lineUpDownRight)} Functions`,
       value: 'abstracts/functions',
       short: 'Abstracts/Functions',
       checked: true,
     },
     {
-      name: '└ Mixins',
+      name: `${chalk.white.dim(figures.lineUpRight)} Mixins`,
       value: 'abstracts/mixins',
       short: 'Abstracts/Mixins',
       checked: true,
