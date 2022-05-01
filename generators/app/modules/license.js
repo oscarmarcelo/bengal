@@ -2,6 +2,7 @@ import {createRequire} from 'node:module';
 
 import license from 'generator-license';
 import chalk from 'chalk';
+import figures from 'figures';
 
 import {error} from '../utils.js';
 
@@ -48,11 +49,12 @@ const prompts = generator =>
           `${currentYear - 5}, ${currentYear - 2}, ${currentYear}`,
           `${currentYear - 5}, ${currentYear - 2}-${currentYear}`,
         ]
-          .map(example => chalk.cyan(example));
+          .map(example => `${chalk.green(figures.tick)} ${chalk.cyan(example)}`);
 
         return error([
           'Must be one or more 4-digit years separated by commas (,) or hyphens (-) if there are ranges.',
-          'Examples:',
+          '',
+          chalk.dim('Examples:'),
           ...examples,
         ]);
       },
