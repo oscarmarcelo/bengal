@@ -23,7 +23,6 @@ const prompts = async generator =>
       name: 'username',
       message: 'GitHub Username:',
       default: await generator.user.github.username().catch(() => undefined),
-      store: true,
       validate: answer => answer.length > 0 ? true : 'GitHub Username is required!',
       filter: answer => answer.trim(),
     },
