@@ -1,3 +1,6 @@
+import {isIP} from 'node:net';
+
+import isValidHostname from 'is-valid-hostname';
 import chalk from 'chalk';
 import figures from 'figures';
 
@@ -17,6 +20,12 @@ const prompts = generator =>
       name: 'serverHost',
       message: 'Server Host:',
       store: true,
+      validate: answer =>
+        answer.length === 0
+        || isIP(answer)
+        || isValidHostname(answer)
+          ? true
+          : 'Must be a valid IP or DNS hostname.',
       filter: answer => answer.trim(),
     },
     {
