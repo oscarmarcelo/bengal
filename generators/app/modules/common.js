@@ -43,6 +43,7 @@ const dependencies = generator => {
 const files = generator => {
   generator.copyTemplate('_editorconfig', '.editorconfig');
   generator.renderTemplate('_gitignore', '.gitignore', generator.answers);
+  generator.renderTemplate('_nvmrc', '.nvmrc', generator.answers);
   generator.renderTemplate('_package.json', 'package.json', generator.answers);
 
   generator.renderTemplate('gulpfile.js', 'gulpfile.js', generator.answers);

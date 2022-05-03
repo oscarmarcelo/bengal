@@ -1,3 +1,5 @@
+import {version} from 'node:process';
+
 import slugify from '@sindresorhus/slugify';
 import validatePackageName from 'validate-npm-package-name';
 import chalk from 'chalk';
@@ -109,7 +111,19 @@ const prompts = generator =>
       validate: validateUrl,
       filter: answer => answer.trim(),
     },
-  ]);
+  ])
+    .then(answers => {
+      const minNodeVersion = '14.16';
+      const currentNodeVersion = semver.coerce(version);
+
+      const nodeVersion = semver.gt(currentNodeVersion.version, semver.coerce(minNodeVersion).version)
+        ? currentNodeVersion.major + (currentNodeVersion.minor > 0 ? `.${currentNodeVersion.minor}` : '')
+        : minNodeVersion;
+
+      return Object.assign(answers, {
+        nodeVersion,
+      });
+    });
 
 
 
