@@ -26,35 +26,49 @@ import watch from './tasks/watch.js';
 
 
 
-const {series, parallel} = gulp;
+const {series<% if ([styles, symbols, images, fonts, scripts, views].filter(task => task).length > 0) { %>, parallel<% } %>} = gulp;
 
 
 
-export default series(
-  parallel(
-    <%_ if (styles) { -%>
-    styles.build,
-    <%_ } -%>
-    <%_ if (symbols) { -%>
-    symbols,
-    <%_ } -%>
-    <%_ if (images) { -%>
-    images,
-    <%_ } -%>
-    <%_ if (fonts) { -%>
-    fonts,
-    <%_ } -%>
-    <%_ if (scripts) { -%>
-    scripts.build,
-    <%_ } -%>
-    copy.build,
-    <%_ if (styles || scripts) { -%>
-    copy.vendor,
-    <%_ } -%>
-    <%_ if (views) { -%>
-    views,
-    <%_ } -%>
-  ),
+/*
+ * =============================================================================
+ * Tasks
+ * =============================================================================
+ */
+<% if ([styles, symbols, images, fonts, scripts, views].filter(task => task).length > 0) { -%>
+
+const build = parallel(
+  <%_ if (styles) { -%>
+  styles.build,
+  <%_ } -%>
+  <%_ if (symbols) { -%>
+  symbols,
+  <%_ } -%>
+  <%_ if (images) { -%>
+  images,
+  <%_ } -%>
+  <%_ if (fonts) { -%>
+  fonts,
+  <%_ } -%>
+  <%_ if (scripts) { -%>
+  scripts.build,
+  <%_ } -%>
+  <%_ if (views) { -%>
+  views,
+  <%_ } -%>
+  copy.build,
+  <%_ if (styles || scripts) { -%>
+  copy.vendor,
+  <%_ } -%>
+);
+<% } -%>
+
+const defaultTask = series(
+  <%_ if ([styles, symbols, images, fonts, scripts, views].filter(task => task).length > 0) { -%>
+  build,
+  <%_ } else { -%>
+  copy.build,
+  <%_ } -%>
   <%_ if (views) { -%>
   parallel(
     serve,
@@ -64,10 +78,21 @@ export default series(
   ),
   <%_ } -%>
 );
+<%_ if (views) { -%>
 
+const buildTask = series(
+  build,
+  watch,
+);
 
+const serveTask = parallel(
+  serve,
+  watch,
+);
+<% } -%>
+<% if ([styles, scripts].filter(task => task).length > 0) { -%>
 
-export const dist = parallel(
+const distTask = parallel(
   <%_ if (styles) { -%>
   styles.dist,
   <%_ } -%>
@@ -76,9 +101,32 @@ export const dist = parallel(
   <%_ } -%>
   copy.dist,
 );
+<% } else { -%>
+
+const distTask = copy.dist;
+<% }-%>
+
+
+
+/*
+ * =============================================================================
+ * Exports
+ * =============================================================================
+ */
+
+<% if ([styles, scripts].filter(task => task).length === 0) { -%>
+distTask.displayName = 'dist';
+
+<% }-%>
+export {
+  defaultTask as default,
+  <%_ if (views) { -%>
+  buildTask as build,
+  serveTask as serve,
+  <%_ } -%>
+  distTask as dist,
+};
 <% if (type === 'website') { -%>
-
-
 
 export {default as deploy} from './tasks/deploy.js';
 <% } -%>

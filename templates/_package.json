@@ -8,11 +8,21 @@
     "node": ">=<%= nodeVersion %>"
   },
   "scripts": {
-    "build": "gulp",
-    "dist": "gulp dist"<% if (views === 'php') { %>,
-    "start": "docker-compose up"<% } %><% if (type === 'website') { %>,
-    "deploy": "gulp dist && gulp deploy"<% } %><% if (xo) { %>,
-    "lint": "xo"<% } %>,
+    "start": "gulp",
+    <%_ if (viewsTask) { -%>
+    "build": "gulp build",
+    "serve": "gulp serve",
+    <%_ } -%>
+    <%_ if (views === 'php') { -%>
+    "container": "docker-compose up",
+    <%_ } -%>
+    "dist": "gulp dist",
+    <%_ if (type === 'website') { -%>
+    "deploy": "gulp deploy",
+    <%_ } -%>
+    <%_ if (xo) { -%>
+    "lint": "xo",
+    <%_ } -%>
     "clean": "gulp clean"
   },
   "keywords": <%- keywords %>,
