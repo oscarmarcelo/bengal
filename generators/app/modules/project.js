@@ -113,6 +113,19 @@ const prompts = generator =>
     },
   ])
     .then(answers => {
+      const scopedPackageRegex = /^(?:@([^/]+?)\/)?([^/]+?)$/;
+
+      let unscopedPackage = answers.package.match(scopedPackageRegex)?.[2] || answers.package;
+
+      if (unscopedPackage.endsWith('.js')) {
+        unscopedPackage = unscopedPackage.slice(0, -3);
+      }
+
+      unscopedPackage = unscopedPackage
+        .replace(/[-_\s]+(.)?/g, (_, letter) => letter ? letter.toUpperCase() : '');
+
+      unscopedPackage = unscopedPackage.charAt(0).toLowerCase() + unscopedPackage.slice(1);
+
       const minNodeVersion = '14.16';
       const currentNodeVersion = semver.coerce(version);
 
@@ -121,6 +134,7 @@ const prompts = generator =>
         : minNodeVersion;
 
       return Object.assign(answers, {
+        camelCasePackage: unscopedPackage,
         nodeVersion,
       });
     });
