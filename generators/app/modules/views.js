@@ -170,7 +170,7 @@ const files = generator => {
     }
   }
 
-  if (generator.answers.type === 'website' && generator.answers.views === 'php') {
+  if (generator.answers.views === 'php') {
     generator.copyTemplate('_dockerignore', '.dockerignore');
     generator.renderTemplate('_docker-compose.yml', 'docker-compose.yml', generator.answers);
     generator.renderTemplate('docker/**', 'docker', generator.answers);
