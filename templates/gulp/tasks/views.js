@@ -26,9 +26,6 @@ const {src, dest} = gulp;
  */
 
 const build = () =>
-  <%_ if (views === 'php') { -%>
-  src(config.src.views)
-  <%_ } -%>
   <%_ if (views === 'pug') { -%>
   src([
     config.src.views,
@@ -39,7 +36,10 @@ const build = () =>
     .pipe(pug({
       pretty: true,
     }))
-    <%_ } -%>
+  <%_ } -%>
+  <%_ if (views === 'php') { -%>
+  src(config.src.views)
+  <%_ } -%>
     .pipe(dest(config.build.views))
     .pipe(notify({
       message: 'Views generated!',
