@@ -82,3 +82,5 @@ export const dist = parallel(
 
 export {default as deploy} from './tasks/deploy.js';
 <% } -%>
+
+export {default as clean} from './tasks/clean.js';

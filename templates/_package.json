@@ -12,7 +12,8 @@
     "dist": "gulp dist"<% if (views === 'php') { %>,
     "start": "docker-compose up"<% } %><% if (type === 'website') { %>,
     "deploy": "gulp dist && gulp deploy"<% } %><% if (xo) { %>,
-    "lint": "xo"<% } %>
+    "lint": "xo"<% } %>,
+    "clean": "gulp clean"
   },
   "keywords": <%- keywords %>,
   "author": {

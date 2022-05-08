@@ -7,6 +7,7 @@
 const dependencies = generator => {
   const dependencies = [
     'gulp',
+    'del',
     'gulp-notify',
   ];
 
@@ -48,7 +49,7 @@ const files = generator => {
 
   generator.renderTemplate('gulpfile.js', 'gulpfile.js', generator.answers);
   generator.renderTemplate('gulp/(index|config).js', 'gulp', generator.answers);
-  generator.renderTemplate('gulp/tasks/(copy|watch).js', 'gulp/tasks', generator.answers);
+  generator.renderTemplate('gulp/tasks/(copy|watch|clean).js', 'gulp/tasks', generator.answers);
 
   if (generator.answers.styles || generator.answers.symbols || generator.answers.scripts) {
     generator.renderTemplate('gulp/utils.js', 'gulp/utils.js', generator.answers);
