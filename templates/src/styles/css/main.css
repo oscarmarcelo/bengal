@@ -1,0 +1,105 @@
+/*
+ * =============================================================================
+ * custom-properties
+ * =============================================================================
+ */
+
+:root {
+  /* Colors
+   * -----------------------------------------------------------------------------
+   */
+  --color-text: #000;
+  --color-background: #fff;
+  --color-primary: #f00;
+}
+<% if (fonts) { -%>
+
+
+
+/*
+ * =============================================================================
+ * font-faces
+ * =============================================================================
+ */
+<% } -%>
+
+
+
+/*
+ * =============================================================================
+ * animations
+ * =============================================================================
+ */
+
+
+
+/*
+ * =============================================================================
+ * base
+ * =============================================================================
+ */
+
+/* 1. Prevent adjustments of font size after orientation changes in iOS. */
+/* 2. Change the default tap highlight to be completely transparent in iOS. */
+/* 3. Remove the margin in all browsers. */
+/* 4. Set an explicit initial text-align value so that we can later use the the `inherit` value on things like `<th>` elements. */
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font: 400 16px/1.5 system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; /* [1] */
+  -webkit-tap-highlight-color: transparent; /* [2] */
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  margin: 0; /* [3] */
+  text-align: left; /* [4] */
+}
+
+
+
+/*
+ * =============================================================================
+ * typography
+ * =============================================================================
+ */
+<% if (symbols) { -%>
+
+
+
+/*
+ * =============================================================================
+ * svg
+ * =============================================================================
+ */
+<% if (overflow) { -%>
+
+/* 1. Allow SVG to show content outside of its bounding box. */
+/*    Used in conjunction with the same attribute in the symbol itself. */
+<% } -%>
+
+svg {
+  <%_ if (overflow) { -%>
+  overflow: visible; /* [1] */
+  <%_ } -%>
+  fill: currentColor;
+}
+<% } -%>
+
+
+
+/*
+ * =============================================================================
+ * utilities
+ * =============================================================================
+ */

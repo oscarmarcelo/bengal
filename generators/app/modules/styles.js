@@ -152,7 +152,7 @@ const files = generator => {
       }
     }
   } else {
-    generator.copyTemplate('src/styles/css/main.css', 'src/styles/main.css');
+    generator.renderTemplate('src/styles/css/main.css', 'src/styles/main.css', generator.answers);
   }
 };
 
