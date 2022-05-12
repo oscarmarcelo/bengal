@@ -21,6 +21,7 @@ const prompts = generator =>
       name: 'license',
       message: 'License:',
       default: 'ISC',
+      store: true,
       choices: license.licenses,
       pageSize: license.licenses.length,
     },

@@ -25,6 +25,7 @@ const prompts = generator =>
       name: 'defaultSymbol',
       message: 'Name of default symbols file:',
       default: 'symbols',
+      store: true,
       filter: answer => answer.trim(),
       transformer: answer => chalk.cyan(answer) + chalk.dim('.svg'),
       when: answers => answers.symbols,
