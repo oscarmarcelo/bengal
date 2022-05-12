@@ -47,6 +47,11 @@ export default class Bengal extends Generator {
     const lastUpdateCheck = store.get('lastUpdateCheck');
 
     if (typeof lastUpdateCheck !== 'number' || Date.now() - lastUpdateCheck >= 1000 * 60 * 60 * 24) {
+      this.user.github.username()
+        .then(username => {
+          store.set('username', username);
+        });
+
       await notifier.fetchInfo()
         .then(data => {
           store.set('update', data);
@@ -82,7 +87,7 @@ export default class Bengal extends Generator {
         module: author,
         defaults: {
           author: this.user.git.name(),
-          username: await this.user.github.username().catch(() => undefined),
+          username: store.get('username'),
           email: this.user.git.email(),
         },
       },
