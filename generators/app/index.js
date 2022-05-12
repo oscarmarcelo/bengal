@@ -4,7 +4,9 @@ import {fileURLToPath} from 'node:url';
 
 import updateNotifier from 'update-notifier';
 import Generator from 'yeoman-generator';
+import ConfigStore from 'configstore';
 import chalk from 'chalk';
+import semver from 'semver';
 import rimraf from 'rimraf';
 
 import * as utils from './utils.js';
@@ -26,6 +28,7 @@ import * as deploy from './modules/deploy.js';
 const {sync: rmSync} = rimraf;
 const pkg = createRequire(import.meta.url)('../../package.json');
 const notifier = updateNotifier({pkg});
+const store = new ConfigStore(pkg.name);
 
 
 
@@ -41,11 +44,22 @@ notifier.notify({
 
 export default class Bengal extends Generator {
   async initializing() {
-    const updateInfo = await notifier.fetchInfo();
+    const lastUpdateCheck = store.get('lastUpdateCheck');
 
-    const updateMessage = ['build', 'latest'].includes(updateInfo.type)
-      ? ''
-      : `${chalk.green('There is an update you might want to check before continuing.')}\n\n`;
+    if (typeof lastUpdateCheck !== 'number' || Date.now() - lastUpdateCheck >= 1000 * 60 * 60 * 24) {
+      await notifier.fetchInfo()
+        .then(data => {
+          store.set('update', data);
+        });
+
+      store.set('lastUpdateCheck', Date.now());
+    }
+
+    const update = store.get('update');
+
+    const updateMessage = semver.lt(pkg.version, update.latest) && ['build', 'latest'].includes(update.type) === false
+      ? `${chalk.green('There is an update you might want to check before continuing.')}\n\n`
+      : '';
 
     this.log(utils.say(
       chalk.red(`Welcome to ${chalk.yellow.bold('Bengal')}!`) + '\n\n'
