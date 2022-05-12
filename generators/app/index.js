@@ -66,6 +66,11 @@ export default class Bengal extends Generator {
       {
         heading: 'Author',
         module: author,
+        defaults: {
+          author: this.user.git.name(),
+          username: await this.user.github.username().catch(() => undefined),
+          email: this.user.git.email(),
+        },
       },
       {
         heading: 'License',
@@ -113,14 +118,14 @@ export default class Bengal extends Generator {
     ];
 
     const runSections = async (list, level = 1) => {
-      for (const [index, {heading, sections, module, when}] of list.entries()) {
+      for (const [index, {heading, sections, module, defaults, when}] of list.entries()) {
         if (typeof when === 'undefined' || (when && when())) {
           this.log(utils[`h${level}`](heading, index === 0));
 
           if (sections) {
             await runSections(sections, level + 1); // eslint-disable-line no-await-in-loop
           } else {
-            Object.assign(this.answers, await module.prompts(this)); // eslint-disable-line no-await-in-loop
+            Object.assign(this.answers, await module.prompts(this, defaults)); // eslint-disable-line no-await-in-loop
           }
         }
       }

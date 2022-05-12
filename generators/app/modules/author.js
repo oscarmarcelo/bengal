@@ -10,26 +10,26 @@ import {validateUrl} from '../utils.js';
  * =============================================================================
  */
 
-const prompts = async generator =>
+const prompts = (generator, defaults) =>
   generator.prompt([
     {
       name: 'author',
       message: 'Author:',
-      default: generator.user.git.name(),
+      default: defaults.author,
       validate: answer => answer.length > 0 ? true : 'Author name is required!',
       filter: answer => answer.trim(),
     },
     {
       name: 'username',
       message: 'GitHub Username:',
-      default: await generator.user.github.username().catch(() => undefined),
+      default: defaults.username,
       validate: answer => answer.length > 0 ? true : 'GitHub Username is required!',
       filter: answer => answer.trim(),
     },
     {
       name: 'email',
       message: 'Email:',
-      default: generator.user.git.email(),
+      default: defaults.email,
       validate: answer => answer.length === 0 || validateEmail(answer) ? true : 'Must be a valid email address!',
       filter: answer => answer.trim(),
     },
