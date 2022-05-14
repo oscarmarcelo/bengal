@@ -2,7 +2,7 @@
 
     Creates an SVG symbol.
 
-    @param {String} [file='/assets/images/<%= defaultSymbol %>.svg'] - The SVG file containing the symbol.
+    @param {String} [file='/assets/images/<%= symbolsFile %>.svg'] - The SVG file containing the symbol.
       The `.svg` extension is appended automatically, if not specified.
     @param {String} id - The symbol ID.
 
@@ -16,7 +16,7 @@ mixin symbol(file, id)
     - [id, file] = [file, undefined]
 
   if file === false
-    - file = '/assets/images/<%= defaultSymbol %>'
+    - file = '/assets/images/<%= symbolsFile %>'
 
   if file.endsWith('.svg') === false
     - file += '.svg'

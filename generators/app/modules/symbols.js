@@ -22,8 +22,8 @@ const prompts = generator =>
       when: answers => answers.symbols,
     },
     {
-      name: 'defaultSymbol',
-      message: 'Name of default symbols file:',
+      name: 'symbolsFile',
+      message: 'Default symbols file name:',
       default: 'symbols',
       store: true,
       filter: answer => answer.trim(),
@@ -34,7 +34,7 @@ const prompts = generator =>
     .then(answers => {
       const defaults = {
         overflow: undefined,
-        defaultSymbol: undefined,
+        symbolsFile: undefined,
       };
 
       return Object.assign(defaults, answers);

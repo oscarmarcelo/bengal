@@ -51,7 +51,7 @@ const build = () => {
         mode: {
           symbol: {
             dest: '.',
-            sprite: `${dir === '.' ? '<%= defaultSymbol %>' : dir}.svg`,
+            sprite: `${dir === '.' ? '<%= symbolsFile %>' : dir}.svg`,
           },
         },
         shape: {
