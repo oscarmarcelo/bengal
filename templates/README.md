@@ -7,8 +7,8 @@
 ## Requirements
 
 - [Node.js](https://nodejs.org/en/) <%= nodeVersion %> or later;
-- [Gulp CLI](https://gulpjs.com) 2.2.0 or later<% if (views === 'php') { -%>;<% } else { %>.<% } %>
-<% if (views === 'php') { -%>
+- [Gulp CLI](https://gulpjs.com) 2.2.0 or later<% if (viewsLanguage === 'php') { -%>;<% } else { %>.<% } %>
+<% if (viewsLanguage === 'php') { -%>
 - [Docker](https://www.docker.com).
 <% } -%>
 
@@ -44,12 +44,12 @@ import <%= camelCasePackage %> from '<%= package %>';
 
 To run a NPM script, type in the terminal `npm run` followed by one of the scripts below:
 
-- `start`: Builds the project<% if (viewsTask) { %>, serves it,<% } %> and watches for changes;
-<% if (viewsTask) { -%>
+- `start`: Builds the project<% if (views) { %>, serves it,<% } %> and watches for changes;
+<% if (views) { -%>
 - `build`: Builds the project (without serving it), and watches for changes;
 - `serve`: Serves the project (without building it), and watches for changes;
 <% } -%>
-<% if (views === 'php') { -%>
+<% if (viewsLanguage === 'php') { -%>
 - `container`: Starts the back-end server in a Docker container;
 <% } -%>
 - `dist`: Prepares `build` files for distribution;

@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-<% if (views === 'pug') { -%>
+<% if (viewsLanguage === 'pug') { -%>
 import plumber from 'gulp-plumber';
 import pug from 'gulp-pug';
 <% } -%>
@@ -15,13 +15,13 @@ const {src, dest} = gulp;
 
 /*
  * =============================================================================
- <%_ if (views === 'pug') { -%>
+ <%_ if (viewsLanguage === 'pug') { -%>
  * Compile Pug files.
  <%_ } -%>
- <%_ if (views === 'php') { -%>
+ <%_ if (viewsLanguage === 'php') { -%>
  * Copy PHP files.
  <%_ } -%>
- <%_ if (views === 'html') { -%>
+ <%_ if (viewsLanguage === 'html') { -%>
  * Copy HTML files.
  <%_ } -%>
  * Notify end of task.
@@ -29,7 +29,7 @@ const {src, dest} = gulp;
  */
 
 const build = () =>
-  <%_ if (views === 'pug') { -%>
+  <%_ if (viewsLanguage === 'pug') { -%>
   src([
     config.src.views,
     '!**/_*/**',
@@ -40,7 +40,7 @@ const build = () =>
       pretty: true,
     }))
   <%_ } -%>
-  <%_ if (['php', 'html'].includes(views)) { -%>
+  <%_ if (['php', 'html'].includes(viewsLanguage)) { -%>
   src(config.src.views)
   <%_ } -%>
     .pipe(dest(config.build.views))

@@ -9,11 +9,11 @@
   },
   "scripts": {
     "start": "gulp",
-    <%_ if (viewsTask) { -%>
+    <%_ if (views) { -%>
     "build": "gulp build",
     "serve": "gulp serve",
     <%_ } -%>
-    <%_ if (views === 'php') { -%>
+    <%_ if (viewsLanguage === 'php') { -%>
     "container": "docker-compose up",
     <%_ } -%>
     "dist": "gulp dist",

@@ -64,7 +64,7 @@ const build = done => {
 
   <%_ } -%>
   <%_ if (views) { -%>
-  // When views update, <% if (views === 'pug') { %>compile<% } else { %>copy<% } %> views and reload browser.
+  // When views update, <% if (viewsLanguage === 'pug') { %>compile<% } else { %>copy<% } %> views and reload browser.
   watch(config.src.views, <% if (views) { %>series(<% } %>views<% if (views) { %>, reload)<% } %>);
 
   <%_ } -%>

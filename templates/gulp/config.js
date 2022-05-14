@@ -33,7 +33,7 @@ const config = {
     scripts: `${src.base}/scripts/**/*.js`,
     <%_ } -%>
     <%_ if (views) { -%>
-    views: `${src.base}/views/**/*.<%= views %>`,
+    views: `${src.base}/views/**/*.<%= viewsLanguage %>`,
     <%_ } -%>
     <%_ if (styles || scripts) { -%>
     vendors: {

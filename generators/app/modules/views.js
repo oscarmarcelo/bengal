@@ -14,13 +14,13 @@ const prompts = async generator =>
   generator.prompt([
     {
       type: 'confirm',
-      name: 'viewsTask',
+      name: 'views',
       message: 'Use Views task?',
       when: generator.answers.type === 'package',
     },
     {
       type: 'list',
-      name: 'views',
+      name: 'viewsLanguage',
       message: 'Language:',
       choices: [
         {
@@ -36,7 +36,7 @@ const prompts = async generator =>
           value: 'html',
         },
       ],
-      when: answers => generator.answers.type !== 'package' || answers.viewsTask,
+      when: answers => generator.answers.type !== 'package' || answers.views,
     },
     {
       type: 'checkbox',
@@ -48,7 +48,7 @@ const prompts = async generator =>
         'themes',
         'vendors',
       ]),
-      when: answers => answers.views === 'pug',
+      when: answers => answers.viewsLanguage === 'pug',
       pageSize: sevenOnePattern().length,
     },
     {
@@ -80,19 +80,19 @@ const prompts = async generator =>
 
         return Number.isInteger(number) && number > 1024 && number < 65_535 ? number : answer;
       },
-      when: answers => answers.views === 'php',
+      when: answers => answers.viewsLanguage === 'php',
     },
   ])
     .then(answers => {
       const defaults = {
-        viewsTask: undefined,
         views: undefined,
+        viewsLanguage: undefined,
         viewsArchitecture: [],
         port: undefined,
       };
 
-      if (answers.views) {
-        defaults.viewsTask = true;
+      if (answers.viewsLanguage) {
+        defaults.views = true;
       }
 
       return Object.assign(defaults, answers);
@@ -113,7 +113,7 @@ const dependencies = generator => {
     'browser-sync',
   ];
 
-  if (generator.answers.views === 'pug') {
+  if (generator.answers.viewsLanguage === 'pug') {
     dependencies.push(
       'gulp-plumber',
       'gulp-pug',
@@ -133,7 +133,7 @@ const dependencies = generator => {
 
 const files = generator => {
   generator.renderTemplate('gulp/tasks/(views|browser).js', 'gulp/tasks', generator.answers);
-  generator.renderTemplate(`src/views/${generator.answers.views}/index.${generator.answers.views}`, `src/views/index.${generator.answers.views}`, generator.answers);
+  generator.renderTemplate(`src/views/${generator.answers.viewsLanguage}/index.${generator.answers.viewsLanguage}`, `src/views/index.${generator.answers.viewsLanguage}`, generator.answers);
 
   if (generator.answers.viewsArchitecture) {
     if (generator.answers.viewsArchitecture.some(directory => directory.startsWith('abstracts'))) {
@@ -174,7 +174,7 @@ const files = generator => {
     }
   }
 
-  if (generator.answers.views === 'php') {
+  if (generator.answers.viewsLanguage === 'php') {
     generator.copyTemplate('_dockerignore', '.dockerignore');
     generator.renderTemplate('_docker-compose.yml', 'docker-compose.yml', generator.answers);
     generator.renderTemplate('docker/**', 'docker', generator.answers);

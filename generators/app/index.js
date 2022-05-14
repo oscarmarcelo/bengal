@@ -200,7 +200,7 @@ export default class Bengal extends Generator {
       },
       {
         module: views,
-        when: this.answers.viewsTask,
+        when: this.answers.views,
       },
       {
         module: misc,

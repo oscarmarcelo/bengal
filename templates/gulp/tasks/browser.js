@@ -1,5 +1,5 @@
 import {init, reload as bsReload} from 'browser-sync';
-<% if (views !== 'php') { -%>
+<% if (viewsLanguage !== 'php') { -%>
 
 import config from '../config.js';
 <% } -%>
@@ -14,7 +14,7 @@ import config from '../config.js';
 
 const serve = done => {
   init({
-    <%_ if (views === 'php') { -%>
+    <%_ if (viewsLanguage === 'php') { -%>
     proxy: 'localhost:<%= port %>',
     <%_ } else { -%>
     server: config.build.base,
