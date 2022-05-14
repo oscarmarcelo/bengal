@@ -4,6 +4,9 @@
   "description": "<%= description %>",
   "type": "module",
   "exports": "./index.js",
+  <%_ if (type === 'package') { -%>
+  "files": [],
+  <%_ } -%>
   "engines": {
     "node": ">=<%= nodeVersion %>"
   },
