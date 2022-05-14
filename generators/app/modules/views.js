@@ -46,7 +46,6 @@ const prompts = async generator =>
         'base',
         'pages',
         'themes',
-        'vendors',
       ]),
       when: answers => answers.viewsLanguage === 'pug',
       pageSize: sevenOnePattern().length,
@@ -165,6 +164,7 @@ const files = generator => {
       'abstracts/functions',
       'components',
       'layout',
+      'vendors',
     ];
 
     for (const directory of remainingDirectories) {
