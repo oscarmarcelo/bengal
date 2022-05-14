@@ -40,8 +40,8 @@ const prompts = async generator =>
     },
     {
       type: 'checkbox',
-      name: 'viewsSevenOnePattern',
-      message: 'Adapted 7-1 Pattern directories:',
+      name: 'viewsArchitecture',
+      message: 'Architecture:',
       choices: sevenOnePattern([
         'base',
         'pages',
@@ -87,7 +87,7 @@ const prompts = async generator =>
       const defaults = {
         viewsTask: undefined,
         views: undefined,
-        viewsSevenOnePattern: [],
+        viewsArchitecture: [],
         port: undefined,
       };
 
@@ -135,12 +135,12 @@ const files = generator => {
   generator.renderTemplate('gulp/tasks/(views|browser).js', 'gulp/tasks', generator.answers);
   generator.renderTemplate(`src/views/${generator.answers.views}/index.${generator.answers.views}`, `src/views/index.${generator.answers.views}`, generator.answers);
 
-  if (generator.answers.viewsSevenOnePattern) {
-    if (generator.answers.viewsSevenOnePattern.some(directory => directory.startsWith('abstracts'))) {
+  if (generator.answers.viewsArchitecture) {
+    if (generator.answers.viewsArchitecture.some(directory => directory.startsWith('abstracts'))) {
       generator.renderTemplate('src/views/pug/_abstracts/index.pug', 'src/views/_abstracts/index.pug', generator.answers);
     }
 
-    if (generator.answers.viewsSevenOnePattern.includes('abstracts/mixins')) {
+    if (generator.answers.viewsArchitecture.includes('abstracts/mixins')) {
       const exceptions = {
         symbols: 'symbol',
       };
@@ -168,7 +168,7 @@ const files = generator => {
     ];
 
     for (const directory of remainingDirectories) {
-      if (generator.answers.viewsSevenOnePattern.includes(directory)) {
+      if (generator.answers.viewsArchitecture.includes(directory)) {
         generator.renderTemplate(`src/views/pug/_${directory}/**`, `src/views/_${directory}`, generator.answers);
       }
     }

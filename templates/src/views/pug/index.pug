@@ -1,4 +1,4 @@
-<% if (viewsSevenOnePattern.includes('layout')) { -%>
+<% if (viewsArchitecture.includes('layout')) { -%>
 extends _layout/base
 
 
@@ -6,7 +6,7 @@ extends _layout/base
 block body
   h1 Welcome to <%= project %>!
 <% } else { -%>
-<% if (viewsSevenOnePattern.some(directory => directory.startsWith('abstracts'))) { -%>
+<% if (viewsArchitecture.some(directory => directory.startsWith('abstracts'))) { -%>
 include _abstracts/index
 
 
