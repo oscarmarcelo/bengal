@@ -148,6 +148,7 @@ const files = generator => {
       'layout',
       'pages',
       'themes',
+      'utilities',
       'vendors',
     ];
 

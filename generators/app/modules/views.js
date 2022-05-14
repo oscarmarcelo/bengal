@@ -46,6 +46,7 @@ const prompts = async generator =>
         'base',
         'pages',
         'themes',
+        'utilities',
       ]),
       when: answers => answers.viewsLanguage === 'pug',
       pageSize: architecture().length,

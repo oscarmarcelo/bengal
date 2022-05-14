@@ -101,6 +101,11 @@ export const architecture = (exclude = []) => {
       value: 'themes',
     },
     {
+      name: 'Utilities',
+      value: 'utilities',
+      checked: true,
+    },
+    {
       name: 'Vendors',
       value: 'vendors',
     },
