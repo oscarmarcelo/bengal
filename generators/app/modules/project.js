@@ -5,7 +5,7 @@ import validatePackageName from 'validate-npm-package-name';
 import chalk from 'chalk';
 import semver from 'semver';
 
-import {validateUrl, error} from '../utils.js';
+import {parseList, validateUrl, error} from '../utils.js';
 
 
 
@@ -84,12 +84,8 @@ const prompts = generator =>
       message: 'Keywords:',
       transformer(answer, _answers, options) {
         if (options.isFinal) {
-          answer = answer
-            .split(',')
-            .map(keyword => chalk.cyan(keyword.trim()))
-            .filter(keyword => keyword.length > 0);
-
-          answer = [...new Set(answer)]
+          answer = parseList(answer)
+            .map(keyword => chalk.cyan(keyword))
             .join(', ');
         } else {
           answer = `${chalk.reset.dim('(Use comma as separator)')}\n  ${answer}`;
@@ -148,12 +144,7 @@ const prompts = generator =>
  */
 
 const configuration = generator => {
-  const keywords = generator.answers.keywords
-    .split(',')
-    .map(keyword => keyword.trim())
-    .filter(keyword => keyword.length > 0);
-
-  generator.answers.keywords = JSON.stringify([...new Set(keywords)]);
+  generator.answers.keywords = JSON.stringify(parseList(generator.answers.keywords));
 };
 
 

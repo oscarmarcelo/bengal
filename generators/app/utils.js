@@ -41,6 +41,17 @@ export const say = text =>
 
 
 
+export const parseList = list => {
+  list = list
+    .split(',')
+    .map(item => item.trim())
+    .filter(item => item.length > 0);
+
+  return [...new Set(list)];
+};
+
+
+
 export const validateUrl = answer => {
   try {
     return Boolean(answer.trim() === '' || new URL(answer));
