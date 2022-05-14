@@ -31,6 +31,10 @@ const prompts = async generator =>
           name: 'PHP',
           value: 'php',
         },
+        {
+          name: 'HTML',
+          value: 'html',
+        },
       ],
       when: answers => generator.answers.type !== 'package' || answers.viewsTask,
     },

@@ -21,6 +21,9 @@ const {src, dest} = gulp;
  <%_ if (views === 'php') { -%>
  * Copy PHP files.
  <%_ } -%>
+ <%_ if (views === 'html') { -%>
+ * Copy HTML files.
+ <%_ } -%>
  * Notify end of task.
  * =============================================================================
  */
@@ -37,7 +40,7 @@ const build = () =>
       pretty: true,
     }))
   <%_ } -%>
-  <%_ if (views === 'php') { -%>
+  <%_ if (['php', 'html'].includes(views)) { -%>
   src(config.src.views)
   <%_ } -%>
     .pipe(dest(config.build.views))

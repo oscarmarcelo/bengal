@@ -1,5 +1,5 @@
 import {init, reload as bsReload} from 'browser-sync';
-<% if (views === 'pug') { -%>
+<% if (views !== 'php') { -%>
 
 import config from '../config.js';
 <% } -%>
@@ -14,11 +14,10 @@ import config from '../config.js';
 
 const serve = done => {
   init({
-    <%_ if (views === 'pug') { -%>
-    server: config.build.base,
-    <%_ } -%>
     <%_ if (views === 'php') { -%>
     proxy: 'localhost:<%= port %>',
+    <%_ } else { -%>
+    server: config.build.base,
     <%_ } -%>
     ghostMode: false,
   });
