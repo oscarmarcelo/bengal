@@ -39,7 +39,7 @@ const prompts = generator =>
         sevenOnePattern: [],
       };
 
-      if (answers.sass) {
+      if (generator.answers.type === 'website' || answers.sass) {
         defaults.styles = true;
       }
 
