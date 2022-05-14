@@ -110,17 +110,20 @@ const prompts = generator =>
   ])
     .then(answers => {
       const scopedPackageRegex = /^(?:@([^/]+?)\/)?([^/]+?)$/;
+      const match = answers.package.match(scopedPackageRegex);
+      const scope = match?.[1];
+      const unscopedPackage = match?.[2];
 
-      let unscopedPackage = answers.package.match(scopedPackageRegex)?.[2] || answers.package;
+      let camelCasePackage = unscopedPackage || answers.package;
 
-      if (unscopedPackage.endsWith('.js')) {
-        unscopedPackage = unscopedPackage.slice(0, -3);
+      if (camelCasePackage.endsWith('.js')) {
+        camelCasePackage = camelCasePackage.slice(0, -3);
       }
 
-      unscopedPackage = unscopedPackage
+      camelCasePackage = camelCasePackage
         .replace(/[-_\s]+(.)?/g, (_, letter) => letter ? letter.toUpperCase() : '');
 
-      unscopedPackage = unscopedPackage.charAt(0).toLowerCase() + unscopedPackage.slice(1);
+      camelCasePackage = camelCasePackage.charAt(0).toLowerCase() + camelCasePackage.slice(1);
 
       const minNodeVersion = '14.16';
       const currentNodeVersion = semver.coerce(version);
@@ -130,7 +133,9 @@ const prompts = generator =>
         : minNodeVersion;
 
       return Object.assign(answers, {
-        camelCasePackage: unscopedPackage,
+        scope,
+        unscopedPackage,
+        camelCasePackage,
         nodeVersion,
       });
     });

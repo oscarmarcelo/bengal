@@ -34,14 +34,14 @@
     "email": "<%= email %>"<% } %><% if (website) { %>,
     "url": "<%= website %>"<% } %>
   },
-  "homepage": "<% if (homepage) { %><%= homepage %><% } else { %>https://github.com/<%= username %>/<%= package %>#readme<% } %>",
+  "homepage": "<% if (homepage) { %><%= homepage %><% } else { %>https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>#readme<% } %>",
   "license": "<%# Managed by generator-license %>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<%= username %>/<%= package %>.git"
+    "url": "git+https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>.git"
   },
   "bugs": {
-    "url": "https://github.com/<%= username %>/<%= package %>/issues"
+    "url": "https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>/issues"
   },
   <%_ if (type !== 'package') { -%>
   "private": true,
