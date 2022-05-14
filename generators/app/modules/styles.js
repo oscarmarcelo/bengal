@@ -39,7 +39,7 @@ const prompts = generator =>
         stylesArchitecture: [],
       };
 
-      if (generator.answers.type === 'website' || answers.sass) {
+      if (generator.answers.type !== 'package' || answers.sass) {
         defaults.styles = true;
       }
 
