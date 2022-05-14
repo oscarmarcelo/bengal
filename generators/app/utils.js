@@ -53,7 +53,7 @@ export const validateUrl = answer => {
 
 
 
-export const sevenOnePattern = (exclude = []) => {
+export const architecture = (exclude = []) => {
   const choices = [
     {
       type: 'separator',

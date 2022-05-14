@@ -1,4 +1,4 @@
-import {sevenOnePattern} from '../utils.js';
+import {architecture} from '../utils.js';
 
 
 
@@ -36,9 +36,9 @@ const prompts = generator =>
       type: 'checkbox',
       name: 'stylesArchitecture',
       message: 'Architecture:',
-      choices: sevenOnePattern(),
+      choices: architecture(),
       when: answers => answers.stylesLanguage === 'sass',
-      pageSize: sevenOnePattern().length,
+      pageSize: architecture().length,
     },
   ])
     .then(answers => {

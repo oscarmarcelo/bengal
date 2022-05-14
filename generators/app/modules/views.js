@@ -1,6 +1,6 @@
 import getPort from 'get-port';
 
-import {sevenOnePattern, checkAvailablePort} from '../utils.js';
+import {architecture, checkAvailablePort} from '../utils.js';
 
 
 
@@ -42,13 +42,13 @@ const prompts = async generator =>
       type: 'checkbox',
       name: 'viewsArchitecture',
       message: 'Architecture:',
-      choices: sevenOnePattern([
+      choices: architecture([
         'base',
         'pages',
         'themes',
       ]),
       when: answers => answers.viewsLanguage === 'pug',
-      pageSize: sevenOnePattern().length,
+      pageSize: architecture().length,
     },
     {
       name: 'port',
