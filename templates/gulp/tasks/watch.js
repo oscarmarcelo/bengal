@@ -39,7 +39,7 @@ const {watch<% if (views) { %>, series<% } %>} = gulp;
 
 const build = done => {
   <%_ if (styles) { -%>
-  // When styles update, <% if (sass) { %>compile Sass<% } else { %>copy CSS<% } %> files.
+  // When styles update, <% if (stylesLanguage === 'sass') { %>compile Sass<% } else { %>copy CSS<% } %> files.
   watch(config.src.styles, styles);
 
   <%_ } -%>

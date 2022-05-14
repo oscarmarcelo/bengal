@@ -17,9 +17,19 @@ const prompts = generator =>
       when: generator.answers.type === 'package',
     },
     {
-      type: 'confirm',
-      name: 'sass',
-      message: 'Use Sass?',
+      type: 'list',
+      name: 'stylesLanguage',
+      message: 'Language:',
+      choices: [
+        {
+          name: 'Sass',
+          value: 'sass',
+        },
+        {
+          name: 'CSS',
+          value: 'css',
+        },
+      ],
       when: answers => generator.answers.type !== 'package' || answers.styles,
     },
     {
@@ -27,19 +37,18 @@ const prompts = generator =>
       name: 'stylesArchitecture',
       message: 'Architecture:',
       choices: sevenOnePattern(),
-      when: answers => answers.sass,
+      when: answers => answers.stylesLanguage === 'sass',
       pageSize: sevenOnePattern().length,
     },
   ])
     .then(answers => {
       const defaults = {
         styles: undefined,
-        sass: undefined,
-        maro: undefined,
+        stylesLanguage: undefined,
         stylesArchitecture: [],
       };
 
-      if (generator.answers.type !== 'package' || answers.sass) {
+      if (answers.stylesLanguage) {
         defaults.styles = true;
       }
 
@@ -64,7 +73,7 @@ const dependencies = generator => {
     'cssnano',
   ];
 
-  if (generator.answers.sass) {
+  if (generator.answers.stylesLanguage === 'sass') {
     dependencies.push(
       'gulp-sass',
       'sass',
@@ -92,7 +101,7 @@ const dependencies = generator => {
 const files = generator => {
   generator.renderTemplate('gulp/tasks/styles.js', 'gulp/tasks/styles.js', generator.answers);
 
-  if (generator.answers.sass) {
+  if (generator.answers.stylesLanguage === 'sass') {
     generator.renderTemplate('src/styles/sass/main.sass', 'src/styles/main.sass', generator.answers);
 
     if (generator.answers.stylesArchitecture.some(directory => directory.startsWith('abstracts'))) {
