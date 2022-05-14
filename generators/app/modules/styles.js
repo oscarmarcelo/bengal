@@ -24,8 +24,8 @@ const prompts = generator =>
     },
     {
       type: 'checkbox',
-      name: 'sevenOnePattern',
-      message: '7-1 Pattern directories:',
+      name: 'stylesArchitecture',
+      message: 'Architecture:',
       choices: sevenOnePattern(),
       when: answers => answers.sass,
       pageSize: sevenOnePattern().length,
@@ -36,7 +36,7 @@ const prompts = generator =>
         styles: undefined,
         sass: undefined,
         maro: undefined,
-        sevenOnePattern: [],
+        stylesArchitecture: [],
       };
 
       if (generator.answers.type === 'website' || answers.sass) {
@@ -95,12 +95,12 @@ const files = generator => {
   if (generator.answers.sass) {
     generator.renderTemplate('src/styles/sass/main.sass', 'src/styles/main.sass', generator.answers);
 
-    if (generator.answers.sevenOnePattern) {
-      if (generator.answers.sevenOnePattern.some(directory => directory.startsWith('abstracts'))) {
+    if (generator.answers.stylesArchitecture) {
+      if (generator.answers.stylesArchitecture.some(directory => directory.startsWith('abstracts'))) {
         generator.renderTemplate('src/styles/sass/abstracts/_index.sass', 'src/styles/abstracts/_index.sass', generator.answers);
       }
 
-      if (generator.answers.sevenOnePattern.includes('abstracts/settings')) {
+      if (generator.answers.stylesArchitecture.includes('abstracts/settings')) {
         generator.copyTemplate('src/styles/sass/abstracts/settings/_tokens.scss', 'src/styles/abstracts/settings/_tokens.scss');
 
         const settingsDirectories = [
@@ -113,13 +113,13 @@ const files = generator => {
 
         for (const directory of settingsDirectories) {
           // eslint-disable-next-line max-depth
-          if (generator.answers.sevenOnePattern.includes(directory)) {
+          if (generator.answers.stylesArchitecture.includes(directory)) {
             generator.copyTemplate(`src/styles/sass/abstracts/settings/${directory}/**`, `src/styles/abstracts/settings/${directory}`);
           }
         }
       }
 
-      if (generator.answers.sevenOnePattern.includes('base')) {
+      if (generator.answers.stylesArchitecture.includes('base')) {
         const exceptions = {
           symbols: 'svg',
           fonts: 'font-face',
@@ -146,7 +146,7 @@ const files = generator => {
       ];
 
       for (const directory of remainingDirectories) {
-        if (generator.answers.sevenOnePattern.includes(directory)) {
+        if (generator.answers.stylesArchitecture.includes(directory)) {
           generator.copyTemplate(`src/styles/sass/${directory}/**`, `src/styles/${directory}`);
         }
       }
