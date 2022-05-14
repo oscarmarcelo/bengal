@@ -95,60 +95,56 @@ const files = generator => {
   if (generator.answers.sass) {
     generator.renderTemplate('src/styles/sass/main.sass', 'src/styles/main.sass', generator.answers);
 
-    if (generator.answers.stylesArchitecture) {
-      if (generator.answers.stylesArchitecture.some(directory => directory.startsWith('abstracts'))) {
-        generator.renderTemplate('src/styles/sass/abstracts/_index.sass', 'src/styles/abstracts/_index.sass', generator.answers);
-      }
+    if (generator.answers.stylesArchitecture.some(directory => directory.startsWith('abstracts'))) {
+      generator.renderTemplate('src/styles/sass/abstracts/_index.sass', 'src/styles/abstracts/_index.sass', generator.answers);
+    }
 
-      if (generator.answers.stylesArchitecture.includes('abstracts/settings')) {
-        generator.copyTemplate('src/styles/sass/abstracts/settings/_tokens.scss', 'src/styles/abstracts/settings/_tokens.scss');
+    if (generator.answers.stylesArchitecture.includes('abstracts/settings')) {
+      generator.copyTemplate('src/styles/sass/abstracts/settings/_tokens.scss', 'src/styles/abstracts/settings/_tokens.scss');
 
-        const settingsDirectories = [
-          'base',
-          'components',
-          'layout',
-          'pages',
-          'themes',
-        ];
-
-        for (const directory of settingsDirectories) {
-          // eslint-disable-next-line max-depth
-          if (generator.answers.stylesArchitecture.includes(directory)) {
-            generator.copyTemplate(`src/styles/sass/abstracts/settings/${directory}/**`, `src/styles/abstracts/settings/${directory}`);
-          }
-        }
-      }
-
-      if (generator.answers.stylesArchitecture.includes('base')) {
-        const exceptions = {
-          symbols: 'svg',
-          fonts: 'font-face',
-        };
-
-        generator.renderTemplate(`src/styles/sass/base/**/_!(${Object.values(exceptions).join('|')}).sass`, 'src/styles/base', generator.answers);
-
-        for (const [answer, filename] of Object.entries(exceptions)) {
-          // eslint-disable-next-line max-depth
-          if (generator.answers[answer]) {
-            generator.renderTemplate(`src/styles/sass/base/_${filename}.sass`, `src/styles/base/_${filename}.sass`, generator.answers);
-          }
-        }
-      }
-
-      const remainingDirectories = [
-        'abstracts/functions',
-        'abstracts/mixins',
+      const settingsDirectories = [
+        'base',
         'components',
         'layout',
         'pages',
         'themes',
-        'vendors',
       ];
 
-      for (const directory of remainingDirectories) {
+      for (const directory of settingsDirectories) {
         if (generator.answers.stylesArchitecture.includes(directory)) {
-          generator.copyTemplate(`src/styles/sass/${directory}/**`, `src/styles/${directory}`);
+          generator.copyTemplate(`src/styles/sass/abstracts/settings/${directory}/**`, `src/styles/abstracts/settings/${directory}`);
         }
+      }
+    }
+
+    if (generator.answers.stylesArchitecture.includes('base')) {
+      const exceptions = {
+        symbols: 'svg',
+        fonts: 'font-face',
+      };
+
+      generator.renderTemplate(`src/styles/sass/base/**/_!(${Object.values(exceptions).join('|')}).sass`, 'src/styles/base', generator.answers);
+
+      for (const [answer, filename] of Object.entries(exceptions)) {
+        if (generator.answers[answer]) {
+          generator.renderTemplate(`src/styles/sass/base/_${filename}.sass`, `src/styles/base/_${filename}.sass`, generator.answers);
+        }
+      }
+    }
+
+    const remainingDirectories = [
+      'abstracts/functions',
+      'abstracts/mixins',
+      'components',
+      'layout',
+      'pages',
+      'themes',
+      'vendors',
+    ];
+
+    for (const directory of remainingDirectories) {
+      if (generator.answers.stylesArchitecture.includes(directory)) {
+        generator.copyTemplate(`src/styles/sass/${directory}/**`, `src/styles/${directory}`);
       }
     }
   } else {
