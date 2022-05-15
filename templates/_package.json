@@ -2,9 +2,27 @@
   "name": "<%= package %>",
   "version": "<%= version %>",
   "description": "<%= description %>",
+  "keywords": <%- keywords %>,
+  "homepage": "<% if (homepage) { %><%= homepage %><% } else { %>https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>#readme<% } %>",
+  "author": {
+    "name": "<%= author %>"<% if (email) { %>,
+    "email": "<%= email %>"<% } %><% if (website) { %>,
+    "url": "<%= website %>"<% } %>
+  },
+  "license": "<%# Managed by generator-license %>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>/issues"
+  },
+  <%_ if (type !== 'package') { -%>
+  "private": true,
+  <%_ } -%>
   "type": "module",
-  "exports": "./index.js",
   <%_ if (type === 'package') { -%>
+  "exports": "./index.js",
   "files": [],
   <%_ } -%>
   "engines": {
@@ -28,24 +46,6 @@
     <%_ } -%>
     "clean": "gulp clean"
   },
-  "keywords": <%- keywords %>,
-  "author": {
-    "name": "<%= author %>"<% if (email) { %>,
-    "email": "<%= email %>"<% } %><% if (website) { %>,
-    "url": "<%= website %>"<% } %>
-  },
-  "homepage": "<% if (homepage) { %><%= homepage %><% } else { %>https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>#readme<% } %>",
-  "license": "<%# Managed by generator-license %>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>.git"
-  },
-  "bugs": {
-    "url": "https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>/issues"
-  },
-  <%_ if (type !== 'package') { -%>
-  "private": true,
-  <%_ } -%>
   "dependencies": {},
   "devDependencies": {},
   "browserslist": [
@@ -59,7 +59,8 @@
     "last 2 ChromeAndroid versions",
     "last 2 iOS versions"
     <%_ } -%>
-  ]<% if (babel) { %>,
+  ],
+  <%_ if (babel) { -%>
   "babel": {
     "presets": [
       "@babel/env"
@@ -67,7 +68,9 @@
     "only": [
       "./src/**"
     ]
-  }<% } %><% if (xo) { %>,
+  },
+  <%_ } -%>
+  <%_ if (xo) { -%>
   "xo": {
     "space": 2,
     "envs": [
@@ -86,7 +89,8 @@
       "build/**",
       "dist/**"
     ]
-  }<% } %>,
+  },
+  <%_ } -%>
   "bengal": {
     "version": "<%= bengalVersion %>"
   }
