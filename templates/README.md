@@ -56,6 +56,9 @@ To run a NPM script, type in the terminal `npm run` followed by one of the scrip
 <% if (type === 'website') { -%>
 - `deploy`: Deploys the project using the server configurations in the `.env` file;
 <% } -%>
+<% if (type === 'package') { -%>
+- `release`: Releases a new version and publishes the package to NPM;
+<% } -%>
 <% if (xo) { -%>
 - `lint`: Runs linters in the code and reports their results;
 <% } -%>

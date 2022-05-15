@@ -41,6 +41,9 @@
     <%_ if (type === 'website') { -%>
     "deploy": "gulp deploy",
     <%_ } -%>
+    <%_ if (type === 'package') { -%>
+    "release": "np",
+    <%_ } -%>
     <%_ if (xo) { -%>
     "lint": "xo",
     <%_ } -%>
@@ -89,6 +92,12 @@
       "build/**",
       "dist/**"
     ]
+  },
+  <%_ } -%>
+  <%_ if (type === 'package') { -%>
+  "np": {
+    "tests": false,
+    "message": "🎉 Release %s"
   },
   <%_ } -%>
   "bengal": {

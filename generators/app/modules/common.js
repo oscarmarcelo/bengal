@@ -30,6 +30,12 @@ const dependencies = generator => {
     );
   }
 
+  if (generator.answers.type === 'package') {
+    dependencies.push(
+      'np',
+    );
+  }
+
   return dependencies;
 };
 
