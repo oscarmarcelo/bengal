@@ -43,8 +43,8 @@ export const say = text =>
 
 export const parseList = list => {
   list = list
-    .split(',')
-    .map(item => item.trim())
+    .split(/[,\r\n\f]+/)
+    .map(item => item.replace(/\s+/g, ' ').trim())
     .filter(item => item.length > 0);
 
   return [...new Set(list)];
