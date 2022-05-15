@@ -55,12 +55,7 @@
     <%_ if (type === 'electron') { -%>
       "Electron <%= electronVersion %>"
     <%_ } else { -%>
-    "last 2 Chrome versions",
-    "last 2 Firefox versions",
-    "last 2 Safari versions",
-    "last 2 Edge versions",
-    "last 2 ChromeAndroid versions",
-    "last 2 iOS versions"
+    "defaults and last 2 years"
     <%_ } -%>
   ],
   <%_ if (babel) { -%>
