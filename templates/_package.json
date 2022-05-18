@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/<%= scope || username %>/<%= unscopedPackage || package %>/issues"
   },
-  <%_ if (type !== 'package') { -%>
+  <%_ if (type !== 'package' || license === 'UNLICENSED') { -%>
   "private": true,
   <%_ } -%>
   "type": "module",
