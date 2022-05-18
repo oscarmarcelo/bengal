@@ -115,6 +115,41 @@ const prompts = generator =>
         return answer;
       },
     },
+    {
+      type: 'list',
+      name: 'attribution',
+      message: 'Attribution:',
+      choices() {
+        const author = {
+          name: `Author\n    ${chalk.dim(generator.answers.author)}`,
+          value: 'author',
+          short: 'Author',
+        };
+
+        if (generator.answers.email) {
+          author.name += chalk.dim(` <${generator.answers.email}>`);
+        }
+
+        if (generator.answers.website) {
+          author.name += chalk.dim(` (${generator.answers.website})`);
+        }
+
+        const project = {
+          name: `Project\n    ${chalk.dim(generator.answers.project)}`,
+          value: 'project',
+          short: 'Project',
+        };
+
+        if (generator.answers.homepage) {
+          project.name += chalk.dim(` (${generator.answers.homepage})`);
+        }
+
+        return [
+          author,
+          project,
+        ];
+      },
+    },
   ]);
 
 
@@ -127,9 +162,9 @@ const prompts = generator =>
 
 const configuration = generator => {
   generator.composeWith(createRequire(import.meta.url).resolve('generator-license'), {
-    name: generator.answers.author,
-    email: generator.answers.email,
-    website: generator.answers.website,
+    name: generator.answers.attribution === 'project' ? generator.answers.project : generator.answers.author,
+    email: generator.answers.attribution === 'author' ? generator.answers.email : '',
+    website: generator.answers.attribution === 'project' ? generator.answers.homepage : generator.answers.website,
     year: generator.answers.year,
     license: generator.answers.license,
   });
