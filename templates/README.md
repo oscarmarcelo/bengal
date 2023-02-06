@@ -1,6 +1,8 @@
 # <%= project %>
+<% if (description) { -%>
 
 > <%= description %>
+<% } -%>
 
 
 
