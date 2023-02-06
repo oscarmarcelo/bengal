@@ -12,10 +12,10 @@
 
 mixin symbol(file, id)
 
-  if id === false
-    - [id, file] = [file, undefined]
+  if typeof id === 'undefined'
+    - [file, id] = [undefined, file]
 
-  if file === false
+  if typeof file === 'undefined'
     - file = '/assets/images/<%= symbolsFile %>'
 
   if file.endsWith('.svg') === false
