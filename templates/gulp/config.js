@@ -18,7 +18,7 @@ const config = {
   src: {
     base: `${src.base}/*`,
     <%_ if (styles) { -%>
-    styles: `${src.base}/styles/**/*.<% if (stylesLanguage === 'sass') { %>s+(a|c)ss<% } else { %>css<% } %>`,
+    styles: `${src.base}/styles/**/*.<% if (stylesLanguage === 'sass') { %>s@(a|c)ss<% } else { %>css<% } %>`,
     <%_ } -%>
     <%_ if (symbols) { -%>
     symbols: `${src.base}/symbols`,
