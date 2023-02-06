@@ -141,6 +141,20 @@ const files = generator => {
       }
     }
 
+    if (generator.answers.stylesArchitecture.includes('overrides')) {
+      const overridesDirectories = [
+        'base',
+        'components',
+        'layout',
+      ];
+
+      for (const directory of overridesDirectories) {
+        if (generator.answers.stylesArchitecture.includes(directory)) {
+          generator.copyTemplate(`src/styles/sass/overrides/${directory}/**`, `src/styles/overrides/${directory}`);
+        }
+      }
+    }
+
     const remainingDirectories = [
       'abstracts/functions',
       'abstracts/mixins',

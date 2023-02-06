@@ -44,6 +44,7 @@ const prompts = async generator =>
       message: 'Architecture:',
       choices: architecture([
         'base',
+        'overrides',
         'pages',
         'themes',
         'utilities',

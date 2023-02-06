@@ -30,6 +30,35 @@
 // layout
 // =============================================================================
 <% } -%>
+<% if (stylesArchitecture.includes('overrides')) { -%>
+
+
+
+// =============================================================================
+// overrides
+// =============================================================================
+<% if (stylesArchitecture.includes('base')) { -%>
+
+// overrides/base
+// -----------------------------------------------------------------------------
+<% } -%>
+<% if (stylesArchitecture.includes('components')) { -%>
+<% if (stylesArchitecture.includes('base')) { -%>
+
+<% } -%>
+
+// overrides/components
+// -----------------------------------------------------------------------------
+<% } -%>
+<% if (stylesArchitecture.includes('layout')) { -%>
+<% if (stylesArchitecture.includes('base') || stylesArchitecture.includes('components')) { -%>
+
+<% } -%>
+
+// overrides/layout
+// -----------------------------------------------------------------------------
+<% } -%>
+<% } -%>
 <% if (stylesArchitecture.includes('utilities')) { -%>
 
 

@@ -105,6 +105,11 @@ export const architecture = (exclude = []) => {
       checked: true,
     },
     {
+      name: 'Overrides',
+      value: 'overrides',
+      checked: true,
+    },
+    {
       name: 'Pages',
       value: 'pages',
     },
