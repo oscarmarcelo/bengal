@@ -45,7 +45,8 @@ export const parseList = list => {
   list = list
     .split(/[,\r\n\f]+/)
     .map(item => item.replace(/\s+/g, ' ').trim())
-    .filter(item => item.length > 0);
+    .filter(item => item.length > 0)
+    .sort();
 
   return [...new Set(list)];
 };
