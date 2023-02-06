@@ -7,7 +7,7 @@ import Generator from 'yeoman-generator';
 import ConfigStore from 'configstore';
 import chalk from 'chalk';
 import semver from 'semver';
-import rimraf from 'rimraf';
+import {deleteSync} from 'del';
 
 import * as utils from './utils.js';
 import * as common from './modules/common.js';
@@ -25,7 +25,6 @@ import * as deploy from './modules/deploy.js';
 
 
 
-const {sync: rmSync} = rimraf;
 const pkg = createRequire(import.meta.url)('../../package.json');
 const notifier = updateNotifier({pkg});
 const store = new ConfigStore(pkg.name);
@@ -239,10 +238,10 @@ export default class Bengal extends Generator {
 
   end() {
     // Remove Yeoman Storage file. Not needed for the project.
-    rmSync(this.destinationPath('.yo-rc.json'));
+    deleteSync(this.destinationPath('.yo-rc.json'));
 
     // Remove placeholder files used to create directories.
-    rmSync(this.destinationPath('src/**/_placeholder'));
+    deleteSync(this.destinationPath('src/**/_placeholder'));
 
     // Create a Git repository.
     this.spawnCommandSync('git', ['init', '--quiet']);
