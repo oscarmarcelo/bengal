@@ -5,7 +5,7 @@ import plumber from 'gulp-plumber';
 <% if (overflow) { -%>
 import cheerio from 'gulp-cheerio';
 <% } -%>
-import imagemin from 'gulp-imagemin';
+import imagemin, {svgo} from 'gulp-imagemin';
 import svgSprite from 'gulp-svg-sprite';
 import slugify from '@sindresorhus/slugify';
 import notify, {onError} from 'gulp-notify';
@@ -42,11 +42,16 @@ const build = () => {
         $('svg').attr('overflow', 'visible');
       }))
       <%_ } -%>
-      .pipe(imagemin({
-        svgoPlugins: [{
-          removeViewBox: false,
-        }],
-      }))
+      .pipe(imagemin([
+        svgo({
+          plugins: [
+            {
+              name: 'removeViewBox',
+              active: true
+            },
+          ]
+        })
+      ]))
       .pipe(svgSprite({
         mode: {
           symbol: {
