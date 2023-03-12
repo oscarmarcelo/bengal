@@ -1,4 +1,4 @@
-import {deleteSync as del} from 'del';
+import {deleteAsync as del} from 'del';
 
 import config from '../config.js';
 
