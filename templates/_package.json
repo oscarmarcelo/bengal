@@ -87,11 +87,7 @@
           "max": 3
         }
       ]
-    },
-    "ignores": [
-      "build/**",
-      "dist/**"
-    ]
+    }
   },
   <%_ } -%>
   <%_ if (type === 'package') { -%>
