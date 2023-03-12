@@ -31,14 +31,11 @@ const prompts = generator =>
       when: answers => answers.symbols,
     },
   ])
-    .then(answers => {
-      const defaults = {
-        overflow: undefined,
-        symbolsFile: undefined,
-      };
-
-      return Object.assign(defaults, answers);
-    });
+    .then(answers => ({
+      overflow: undefined,
+      symbolsFile: undefined,
+      ...answers,
+    }));
 
 
 

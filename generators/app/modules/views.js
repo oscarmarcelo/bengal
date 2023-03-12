@@ -84,20 +84,13 @@ const prompts = async generator =>
       when: answers => answers.viewsLanguage === 'php',
     },
   ])
-    .then(answers => {
-      const defaults = {
-        views: undefined,
-        viewsLanguage: undefined,
-        viewsArchitecture: [],
-        port: undefined,
-      };
-
-      if (answers.viewsLanguage) {
-        defaults.views = true;
-      }
-
-      return Object.assign(defaults, answers);
-    });
+    .then(answers => ({
+      views: answers.viewsLanguage ? true : undefined,
+      viewsLanguage: undefined,
+      viewsArchitecture: [],
+      port: undefined,
+      ...answers,
+    }));
 
 
 

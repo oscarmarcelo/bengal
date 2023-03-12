@@ -132,12 +132,13 @@ const prompts = generator =>
         ? currentNodeVersion.major + (currentNodeVersion.minor > 0 ? `.${currentNodeVersion.minor}` : '')
         : minNodeVersion;
 
-      return Object.assign(answers, {
+      return {
+        ...answers,
         scope,
         unscopedPackage,
         camelCasePackage,
         nodeVersion,
-      });
+      };
     });
 
 

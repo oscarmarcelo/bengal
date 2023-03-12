@@ -24,14 +24,11 @@ const prompts = generator =>
       when: answers => answers.scripts,
     },
   ])
-    .then(answers => {
-      const defaults = {
-        babel: undefined,
-        xo: undefined,
-      };
-
-      return Object.assign(defaults, answers);
-    });
+    .then(answers => ({
+      babel: undefined,
+      xo: undefined,
+      ...answers,
+    }));
 
 
 

@@ -41,19 +41,12 @@ const prompts = generator =>
       pageSize: architecture().length,
     },
   ])
-    .then(answers => {
-      const defaults = {
-        styles: undefined,
-        stylesLanguage: undefined,
-        stylesArchitecture: [],
-      };
-
-      if (answers.stylesLanguage) {
-        defaults.styles = true;
-      }
-
-      return Object.assign(defaults, answers);
-    });
+    .then(answers => ({
+      styles: answers.stylesLanguage ? true : undefined,
+      stylesLanguage: undefined,
+      stylesArchitecture: [],
+      ...answers,
+    }));
 
 
 
