@@ -162,9 +162,21 @@ const prompts = generator =>
 
 const configuration = generator => {
   generator.composeWith(createRequire(import.meta.url).resolve('generator-license'), {
-    name: generator.answers.attribution === 'project' ? generator.answers.project : generator.answers.author,
-    email: generator.answers.attribution === 'author' ? generator.answers.email : '',
-    website: generator.answers.attribution === 'project' ? generator.answers.homepage : generator.answers.website,
+    name: (
+      generator.answers.attribution === 'project'
+        ? generator.answers.project
+        : generator.answers.author
+    ),
+    email: (
+      generator.answers.attribution === 'author'
+        ? generator.answers.email
+        : ''
+    ),
+    website: (
+      generator.answers.attribution === 'project'
+        ? generator.answers.homepage
+        : generator.answers.website
+    ),
     year: generator.answers.year,
     license: generator.answers.license,
   });
