@@ -44,7 +44,7 @@
     "semver": "^7.3.8",
     "update-notifier": "^6.0.2",
     "validate-npm-package-name": "^5.0.0",
-    "yeoman-generator": "^5.7.0",
+    "yeoman-generator": "^5.8.0",
     "yosay": "^2.0.2"
   },
   "devDependencies": {
