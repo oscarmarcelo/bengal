@@ -1,6 +1,6 @@
 import {validate as validateEmail} from 'email-validator';
 
-import {validateUrl} from '../utils.js';
+import {validateUrl, isPrivateEmail} from '../utils.js';
 
 
 
@@ -43,7 +43,11 @@ const prompts = (generator, defaults) =>
       validate: validateUrl,
       filter: answer => answer.trim(),
     },
-  ]);
+  ])
+    .then(answers => ({
+      ...answers,
+      privateEmail: isPrivateEmail(answers.email),
+    }));
 
 
 

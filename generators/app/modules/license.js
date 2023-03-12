@@ -126,7 +126,10 @@ const prompts = generator =>
           short: 'Author',
         };
 
-        if (generator.answers.email) {
+        if (
+          generator.answers.email
+          && generator.answers.privateEmail === false
+        ) {
           author.name += chalk.dim(` <${generator.answers.email}>`);
         }
 
@@ -168,7 +171,10 @@ const configuration = generator => {
         : generator.answers.author
     ),
     email: (
-      generator.answers.attribution === 'author'
+      (
+        generator.answers.attribution === 'author'
+        && generator.answers.privateEmail === false
+      )
         ? generator.answers.email
         : ''
     ),

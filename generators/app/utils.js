@@ -161,3 +161,9 @@ export const error = lines =>
   lines
     .map((line, index) => (index > 0 ? `${chalk.red('>>')} ` : '') + line)
     .join('\n');
+
+
+
+export const isPrivateEmail = email =>
+  /@users\.noreply\.git(hub|lab)\.com$/
+    .test(email);
