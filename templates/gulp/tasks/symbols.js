@@ -47,10 +47,10 @@ const build = () => {
           plugins: [
             {
               name: 'removeViewBox',
-              active: true
+              active: true,
             },
-          ]
-        })
+          ],
+        }),
       ]))
       .pipe(svgSprite({
         mode: {
