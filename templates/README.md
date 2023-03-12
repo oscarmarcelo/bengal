@@ -46,10 +46,10 @@ import <%= camelCasePackage %> from '<%= package %>';
 
 To run a NPM script, type in the terminal `npm run` followed by one of the scripts below:
 
-- `start`: Builds the project<% if (views) { %>, serves it,<% } %> and watches for changes;
+- `start`: Builds the project<% if (views) { %>, runs the local server it,<% } %> and watches for changes;
 <% if (views) { -%>
-- `build`: Builds the project (without serving it), and watches for changes;
-- `serve`: Serves the project (without building it), and watches for changes;
+- `build`: Builds the project (without running the local server), and watches for changes;
+- `serve`: Runs the project's local server (without building it), and watches for changes;
 <% } -%>
 <% if (viewsLanguage === 'php') { -%>
 - `container`: Starts the back-end server in a Docker container;
