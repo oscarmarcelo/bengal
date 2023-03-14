@@ -9,7 +9,7 @@ import chalk from 'chalk';
 import semver from 'semver';
 import {deleteSync} from 'del';
 
-import * as utils from './utils.js';
+import * as utilities from './utilities.js';
 import * as common from './modules/common.js';
 import * as project from './modules/project.js';
 import * as author from './modules/author.js';
@@ -65,7 +65,7 @@ export default class Bengal extends Generator {
       ? `${chalk.green('There is an update you might want to check before continuing.')}\n\n`
       : '';
 
-    this.log(utils.say(
+    this.log(utilities.say(
       chalk.red(`Welcome to ${chalk.yellow.bold('Bengal')}!`) + '\n\n'
       + updateMessage
       + 'Let me start by asking a few questions about your project.',
@@ -138,7 +138,7 @@ export default class Bengal extends Generator {
     const runSections = async (list, level = 1) => {
       for (const [index, {heading, sections, module, defaults, when}] of list.entries()) {
         if (typeof when === 'undefined' || (when && when())) {
-          this.log(utils[`h${level}`](heading, index === 0));
+          this.log(utilities[`h${level}`](heading, index === 0));
 
           if (sections) {
             await runSections(sections, level + 1); // eslint-disable-line no-await-in-loop
@@ -153,7 +153,7 @@ export default class Bengal extends Generator {
 
     this.log(
       '\n'
-      + utils.say(
+      + utilities.say(
         chalk.green('All questions asked!') + '\n\n'
         + 'Preparing files now.',
       )
@@ -246,7 +246,7 @@ export default class Bengal extends Generator {
     // Create a Git repository.
     this.spawnCommandSync('git', ['init', '--quiet']);
 
-    this.log(utils.say(
+    this.log(utilities.say(
       chalk.green('Configuration is ready!') + '\n\n'
       + 'You can start by committing these newly added files.\n\n'
       + chalk.yellow(' Good work! '), // FIXME: Spacings are a workaround for an issue in yosay causing chalk to not color X letters when `\n` is present X+1 times before them.

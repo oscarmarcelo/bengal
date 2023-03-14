@@ -1,6 +1,6 @@
 import {validate as validateEmail} from 'email-validator';
 
-import {validateUrl, isPrivateEmail} from '../utils.js';
+import {validateUrl, isPrivateEmail} from '../utilities.js';
 
 
 

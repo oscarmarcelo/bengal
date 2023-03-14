@@ -7,7 +7,7 @@ import notify from 'gulp-notify';
 
 import config from '../config.js';
 <% if (styles || scripts) { -%>
-import {path} from '../utils.js';
+import {path} from '../utilities.js';
 <% } -%>
 
 

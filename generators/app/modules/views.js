@@ -1,6 +1,6 @@
 import getPort from 'get-port';
 
-import {architecture, checkAvailablePort} from '../utils.js';
+import {architecture, checkAvailablePort} from '../utilities.js';
 
 
 

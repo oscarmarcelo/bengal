@@ -12,7 +12,7 @@ import notify, {onError} from 'gulp-notify';
 import merge from 'merge-stream';
 
 import config from '../config.js';
-import {getDirs, path} from '../utils.js';
+import {getDirs, path} from '../utilities.js';
 
 
 

@@ -16,7 +16,7 @@ import cssnano from 'cssnano';
 
 import config from '../config.js';
 <% if (stylesLanguage === 'sass') { -%>
-import {dirToFile} from '../utils.js';
+import {dirToFile} from '../utilities.js';
 <% } -%>
 
 

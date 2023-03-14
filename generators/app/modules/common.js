@@ -59,7 +59,7 @@ const files = generator => {
   generator.renderTemplate('gulp/tasks/(copy|watch|clean).js', 'gulp/tasks', generator.answers);
 
   if (generator.answers.styles || generator.answers.symbols || generator.answers.scripts) {
-    generator.renderTemplate('gulp/utils.js', 'gulp/utils.js', generator.answers);
+    generator.renderTemplate('gulp/utilities.js', 'gulp/utilities.js', generator.answers);
   }
 
   generator.copyTemplate('src/_placeholder', 'src/_placeholder');

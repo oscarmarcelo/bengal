@@ -4,7 +4,7 @@ import isValidHostname from 'is-valid-hostname';
 import chalk from 'chalk';
 import figures from 'figures';
 
-import {error} from '../utils.js';
+import {error} from '../utilities.js';
 
 
 

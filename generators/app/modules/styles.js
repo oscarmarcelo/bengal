@@ -1,4 +1,4 @@
-import {architecture} from '../utils.js';
+import {architecture} from '../utilities.js';
 
 
 

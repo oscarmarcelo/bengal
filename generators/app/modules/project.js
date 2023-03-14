@@ -5,7 +5,7 @@ import validatePackageName from 'validate-npm-package-name';
 import chalk from 'chalk';
 import semver from 'semver';
 
-import {parseList, validateUrl, error} from '../utils.js';
+import {parseList, validateUrl, error} from '../utilities.js';
 
 
 
