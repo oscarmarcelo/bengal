@@ -9,14 +9,11 @@ import autoprefixer from 'autoprefixer';
 <% if (stylesLanguage === 'sass') { -%>
 import rename from 'gulp-rename';
 <% } -%>
-<% if (views) { -%>
-import {reload} from 'browser-sync';
-<% } -%>
 import cssnano from 'cssnano';
 
 import config from '../config.js';
-<% if (stylesLanguage === 'sass') { -%>
-import {dirToFile} from '../utilities.js';
+<% if (stylesLanguage === 'sass' || views) { -%>
+import {<% if (stylesLanguage === 'sass') { %>dirToFile<% } %><% if (stylesLanguage === 'sass' && views) { %>, <% } %><% if (views) { %>getBrowserSync<% } %>} from '../utilities.js';
 <% } -%>
 
 
@@ -24,6 +21,9 @@ import {dirToFile} from '../utilities.js';
 const {src, dest} = gulp;
 <% if (stylesLanguage === 'sass') { -%>
 const sass = gulpSass(dartSass);
+<% } -%>
+<% if (views) { -%>
+const {reload} = getBrowserSync();
 <% } -%>
 
 

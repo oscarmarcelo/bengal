@@ -1,8 +1,11 @@
-import {init, reload as bsReload} from 'browser-sync';
 <% if (viewsLanguage !== 'php') { -%>
-
 import config from '../config.js';
 <% } -%>
+import {getBrowserSync} from '../utilities.js';
+
+
+
+const browserSyncInstance = getBrowserSync();
 
 
 
@@ -13,7 +16,7 @@ import config from '../config.js';
  */
 
 const serve = done => {
-  init({
+  browserSyncInstance.init({
     <%_ if (viewsLanguage === 'php') { -%>
     proxy: 'localhost:<%= port %>',
     <%_ } else { -%>
@@ -34,7 +37,7 @@ const serve = done => {
  */
 
 const reload = done => {
-  bsReload();
+  browserSyncInstance.reload();
 
   done();
 };

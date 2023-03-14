@@ -1,15 +1,17 @@
 import gulp from 'gulp';
-<% if (views) { -%>
-import {reload} from 'browser-sync';
-<% } -%>
 import notify from 'gulp-notify';
 
 import config from '../config.js';
+<% if (views) { -%>
+import {getBrowserSync} from '../utilities.js';
+<% } -%>
 
 
 
 const {src, dest} = gulp;
-
+<% if (views) { -%>
+const {reload} = getBrowserSync();
+<% } -%>
 
 
 /*
