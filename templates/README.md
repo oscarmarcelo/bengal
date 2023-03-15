@@ -71,3 +71,9 @@ To run a NPM script, type in the terminal `npm run` followed by one of the scrip
 ## Versioning
 
 This project adheres to [Semantic Versioning](https://semver.org).
+
+
+
+---
+
+Project generated using [Bengal](https://github.com/oscarmarcelo/bengal).
