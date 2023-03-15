@@ -1,4 +1,4 @@
-import net from 'node:net';
+import {createServer} from 'node:net';
 
 import chalk from 'chalk';
 import yosay from 'yosay';
@@ -10,6 +10,7 @@ const counters = {
   h1: 0,
   h2: 0,
 };
+const {circleFilled, lineUpDownRight, lineUpRight} = figures;
 
 
 
@@ -69,22 +70,22 @@ export const architecture = (exclude = []) => {
   const choices = [
     {
       type: 'separator',
-      line: `${figures.circleFilled} ${chalk.reset('Abstracts')} ${chalk.dim('(Added if there are nested folders selected)')}`,
+      line: `${circleFilled} ${chalk.reset('Abstracts')} ${chalk.dim('(Added if there are nested folders selected)')}`,
     },
     {
-      name: `${chalk.white.dim(figures.lineUpDownRight)} Settings`,
+      name: `${chalk.white.dim(lineUpDownRight)} Settings`,
       value: 'abstracts/settings',
       short: '\n  Abstracts/Settings',
       checked: true,
     },
     {
-      name: `${chalk.white.dim(figures.lineUpDownRight)} Functions`,
+      name: `${chalk.white.dim(lineUpDownRight)} Functions`,
       value: 'abstracts/functions',
       short: '\n  Abstracts/Functions',
       checked: true,
     },
     {
-      name: `${chalk.white.dim(figures.lineUpRight)} Mixins`,
+      name: `${chalk.white.dim(lineUpRight)} Mixins`,
       value: 'abstracts/mixins',
       short: '\n  Abstracts/Mixins',
       checked: true,
@@ -151,7 +152,7 @@ export const architecture = (exclude = []) => {
 
 export const checkAvailablePort = options =>
   new Promise((resolve, reject) => {
-    const server = net.createServer();
+    const server = createServer();
     server.unref();
     server.on('error', reject);
 

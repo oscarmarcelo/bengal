@@ -82,8 +82,8 @@ const prompts = generator =>
     {
       name: 'keywords',
       message: 'Keywords:',
-      transformer(answer, _answers, options) {
-        if (options.isFinal) {
+      transformer(answer, _, {isFinal}) {
+        if (isFinal) {
           answer = parseList(answer)
             .map(keyword => chalk.cyan(keyword))
             .join(', ');

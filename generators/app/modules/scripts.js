@@ -15,19 +15,19 @@ const prompts = generator =>
       type: 'confirm',
       name: 'esm',
       message: 'Use ES modules?',
-      when: answers => answers.scripts,
+      when: ({scripts}) => scripts,
     },
     {
       type: 'confirm',
       name: 'babel',
       message: 'Use Babel?',
-      when: answers => answers.scripts,
+      when: ({scripts}) => scripts,
     },
     {
       type: 'confirm',
       name: 'xo',
       message: 'Use XO?',
-      when: answers => answers.scripts,
+      when: ({scripts}) => scripts,
     },
   ])
     .then(answers => ({

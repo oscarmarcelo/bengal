@@ -36,7 +36,7 @@ const prompts = async generator =>
           value: 'html',
         },
       ],
-      when: answers => generator.answers.type !== 'package' || answers.views,
+      when: ({views}) => generator.answers.type !== 'package' || views,
     },
     {
       type: 'checkbox',
@@ -49,7 +49,7 @@ const prompts = async generator =>
         'themes',
         'utilities',
       ]),
-      when: answers => answers.viewsLanguage === 'pug',
+      when: ({viewsLanguage}) => viewsLanguage === 'pug',
       pageSize: architecture().length,
     },
     {
@@ -81,7 +81,7 @@ const prompts = async generator =>
 
         return Number.isInteger(number) && number > 1024 && number < 65_535 ? number : answer;
       },
-      when: answers => answers.viewsLanguage === 'php',
+      when: ({viewsLanguage}) => viewsLanguage === 'php',
     },
   ])
     .then(answers => ({

@@ -19,7 +19,7 @@ const prompts = generator =>
       type: 'confirm',
       name: 'overflow',
       message: 'Should symbols overflow viewbox?',
-      when: answers => answers.symbols,
+      when: ({symbols}) => symbols,
     },
     {
       name: 'symbolsFile',
@@ -28,7 +28,7 @@ const prompts = generator =>
       store: true,
       filter: answer => answer.trim(),
       transformer: answer => chalk.cyan(answer) + chalk.dim('.svg'),
-      when: answers => answers.symbols,
+      when: ({symbols}) => symbols,
     },
   ])
     .then(answers => ({

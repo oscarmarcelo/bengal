@@ -1,6 +1,6 @@
 import {createRequire} from 'node:module';
 
-import license from 'generator-license';
+import {licenses} from 'generator-license';
 import chalk from 'chalk';
 import figures from 'figures';
 
@@ -22,8 +22,8 @@ const prompts = generator =>
       message: 'License:',
       default: 'ISC',
       store: true,
-      choices: license.licenses,
-      pageSize: license.licenses.length,
+      choices: licenses,
+      pageSize: licenses.length,
     },
     {
       name: 'year',
@@ -82,7 +82,7 @@ const prompts = generator =>
                 if (item.length > 2) {
                   item = [
                     item[0],
-                    item[item.length - 1],
+                    item.at(-1),
                   ];
                 }
               }
@@ -97,7 +97,7 @@ const prompts = generator =>
           ];
 
           for (const range of answer.slice(1)) {
-            const lastRange = newAnswer[newAnswer.length - 1];
+            const lastRange = newAnswer.at(-1);
 
             if (range[0] > lastRange[1]) {
               newAnswer.push(range);

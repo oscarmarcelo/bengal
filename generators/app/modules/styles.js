@@ -30,14 +30,14 @@ const prompts = generator =>
           value: 'css',
         },
       ],
-      when: answers => generator.answers.type !== 'package' || answers.styles,
+      when: ({styles}) => generator.answers.type !== 'package' || styles,
     },
     {
       type: 'checkbox',
       name: 'stylesArchitecture',
       message: 'Architecture:',
       choices: architecture(),
-      when: answers => answers.stylesLanguage === 'sass',
+      when: ({stylesLanguage}) => stylesLanguage === 'sass',
       pageSize: architecture().length,
     },
   ])
