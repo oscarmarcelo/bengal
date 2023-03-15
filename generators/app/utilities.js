@@ -74,57 +74,65 @@ export const architecture = (exclude = []) => {
     {
       name: `${chalk.white.dim(figures.lineUpDownRight)} Settings`,
       value: 'abstracts/settings',
-      short: 'Abstracts/Settings',
+      short: '\n  Abstracts/Settings',
       checked: true,
     },
     {
       name: `${chalk.white.dim(figures.lineUpDownRight)} Functions`,
       value: 'abstracts/functions',
-      short: 'Abstracts/Functions',
+      short: '\n  Abstracts/Functions',
       checked: true,
     },
     {
       name: `${chalk.white.dim(figures.lineUpRight)} Mixins`,
       value: 'abstracts/mixins',
-      short: 'Abstracts/Mixins',
+      short: '\n  Abstracts/Mixins',
       checked: true,
     },
     {
       name: 'Base',
       value: 'base',
+      short: '\n  Base',
       checked: true,
     },
     {
       name: 'Components',
       value: 'components',
+      short: '\n  Components',
       checked: true,
     },
     {
       name: 'Layout',
       value: 'layout',
+      short: '\n  Layout',
       checked: true,
     },
     {
       name: 'Overrides',
       value: 'overrides',
+      short: '\n  Overrides',
       checked: true,
     },
     {
       name: 'Pages',
       value: 'pages',
+      short: '\n  Pages',
     },
     {
       name: 'Themes',
       value: 'themes',
+      short: '\n  Themes',
     },
     {
       name: 'Utilities',
       value: 'utilities',
+      short: '\n  Utilities',
       checked: true,
     },
     {
       name: 'Vendors',
       value: 'vendors',
+      short: '\n  Vendors',
     },
   ];
 
