@@ -61,12 +61,16 @@
   <%_ if (babel) { -%>
   "babel": {
     "presets": [
+      <%_ if (esm) { -%>
       [
         "@babel/env",
         {
           "modules": false
         }
       ]
+      <%_ } else { -%>
+      "@babel/env"
+      <%_ } -%>
     ],
     "only": [
       "./src/**"

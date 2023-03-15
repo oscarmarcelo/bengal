@@ -12,7 +12,7 @@
   <h1>Welcome to <%= project %>!</h1>
   <%_ if (scripts) { -%>
 
-  <script src="/assets/scripts/main.js" type="module"></script>
+  <script src="/assets/scripts/main.js"<% if (esm) { %> type="module"<% } %>></script>
   <%_ } -%>
 </body>
 </html>

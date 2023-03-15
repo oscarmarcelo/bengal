@@ -25,6 +25,6 @@ html(lang="en")
     h1 Welcome to <%= project %>!
     <%_ if (scripts) { -%>
 
-    script(src="/assets/scripts/main.js" type="module")
+    script(src="/assets/scripts/main.js"<% if (esm) { %> type="module"<% } %>)
     <%_ } -%>
 <% } -%>

@@ -13,6 +13,12 @@ const prompts = generator =>
     },
     {
       type: 'confirm',
+      name: 'esm',
+      message: 'Use ES modules?',
+      when: answers => answers.scripts,
+    },
+    {
+      type: 'confirm',
       name: 'babel',
       message: 'Use Babel?',
       when: answers => answers.scripts,
