@@ -48,6 +48,7 @@ const dependencies = generator => {
  */
 
 const files = generator => {
+  generator.copyTemplate('_vscode', '.vscode');
   generator.copyTemplate('_editorconfig', '.editorconfig');
   generator.renderTemplate('_gitignore', '.gitignore', generator.answers);
   generator.renderTemplate('README.md', 'README.md', generator.answers);
