@@ -59,6 +59,12 @@
         {
           "max": 3
         }
+      ],
+      "import/order": [
+        "warn",
+        {
+          "newlines-between": "always"
+        }
       ]
     },
     "ignores": [
