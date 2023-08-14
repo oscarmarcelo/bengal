@@ -86,7 +86,7 @@
     ],
     "rules": {
       "no-multiple-empty-lines": [
-        1,
+        "warn",
         {
           "max": 3
         }
