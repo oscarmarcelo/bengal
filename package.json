@@ -1,6 +1,6 @@
 {
   "name": "generator-bengal",
-  "version": "1.0.0-6",
+  "version": "1.0.0-7",
   "description": "A scaffolding generator for front-end projects.",
   "type": "module",
   "exports": "./generators/app/index.js",
