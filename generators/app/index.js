@@ -137,7 +137,7 @@ export default class Bengal extends Generator {
 
     const runSections = async (list, level = 1) => {
       for (const [index, {heading, sections, module, defaults, when}] of list.entries()) {
-        if (typeof when === 'undefined' || (when && when())) {
+        if (when === undefined || (when && when())) {
           this.log(utilities[`h${level}`](heading, index === 0));
 
           if (sections) {
@@ -214,7 +214,7 @@ export default class Bengal extends Generator {
     let devDependencies = [];
 
     for (const {module, when} of modules) {
-      if (typeof when === 'undefined' || when) {
+      if (when === undefined || when) {
         if (module.files) {
           module.files(this);
         }
