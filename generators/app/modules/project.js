@@ -40,7 +40,7 @@ const prompts = generator =>
     {
       name: 'project',
       message: 'Project Name:',
-      default: generator.appname.replace(/(?:^|\s)\S/g, match => match.toUpperCase()),
+      default: generator.appname.replaceAll(/(?:^|\s)\S/g, match => match.toUpperCase()),
       validate: answer => answer.length > 0 ? true : 'Project Name is required!',
       filter: answer => answer.trim(),
     },
@@ -121,7 +121,7 @@ const prompts = generator =>
       }
 
       camelCasePackage = camelCasePackage
-        .replace(/[-_\s]+(.)?/g, (_, letter) => letter ? letter.toUpperCase() : '');
+        .replaceAll(/[-_\s]+(.)?/g, (_, letter) => letter ? letter.toUpperCase() : '');
 
       camelCasePackage = camelCasePackage.charAt(0).toLowerCase() + camelCasePackage.slice(1);
 
